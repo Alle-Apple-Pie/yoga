@@ -18,7 +18,7 @@ namespace yoga {
 
 namespace detail {
 
-// std::bitset with one bit for each option defined in YG_ENUM_SEQ_DECL
+// std::bitset with one bit for each option defined in FBYG_ENUM_SEQ_DECL
 template <typename Enum>
 using EnumBitset = std::bitset<facebook::yoga::enums::count<Enum>()>;
 
@@ -30,7 +30,7 @@ constexpr int mask(size_t bitWidth, size_t index) {
   return ((1 << bitWidth) - 1) << index;
 }
 
-// The number of bits necessary to represent enums defined with YG_ENUM_SEQ_DECL
+// The number of bits necessary to represent enums defined with FBYG_ENUM_SEQ_DECL
 template <typename Enum>
 constexpr size_t bitWidthFn() {
   static_assert(

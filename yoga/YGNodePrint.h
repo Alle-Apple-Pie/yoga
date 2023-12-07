@@ -16,10 +16,10 @@
 namespace facebook {
 namespace yoga {
 
-void YGNodeToString(
+void FBYGNodeToString(
     std::string& str,
-    YGNodeRef node,
-    YGPrintOptions options,
+    FBYGNodeRef node,
+    FBYGPrintOptions options,
     uint32_t level);
 
 } // namespace yoga

@@ -13,133 +13,133 @@
 // clang-format off
 
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-YG_ENUM_SEQ_DECL(
-    YGAlign,
-    YGAlignAuto,
-    YGAlignFlexStart,
-    YGAlignCenter,
-    YGAlignFlexEnd,
-    YGAlignStretch,
-    YGAlignBaseline,
-    YGAlignSpaceBetween,
-    YGAlignSpaceAround)
+FBYG_ENUM_SEQ_DECL(
+    FBYGAlign,
+    FBYGAlignAuto,
+    FBYGAlignFlexStart,
+    FBYGAlignCenter,
+    FBYGAlignFlexEnd,
+    FBYGAlignStretch,
+    FBYGAlignBaseline,
+    FBYGAlignSpaceBetween,
+    FBYGAlignSpaceAround)
 
-YG_ENUM_SEQ_DECL(
-    YGDimension,
-    YGDimensionWidth,
-    YGDimensionHeight)
+FBYG_ENUM_SEQ_DECL(
+    FBYGDimension,
+    FBYGDimensionWidth,
+    FBYGDimensionHeight)
 
-YG_ENUM_SEQ_DECL(
-    YGDirection,
-    YGDirectionInherit,
-    YGDirectionLTR,
-    YGDirectionRTL)
+FBYG_ENUM_SEQ_DECL(
+    FBYGDirection,
+    FBYGDirectionInherit,
+    FBYGDirectionLTR,
+    FBYGDirectionRTL)
 
-YG_ENUM_SEQ_DECL(
-    YGDisplay,
-    YGDisplayFlex,
-    YGDisplayNone)
+FBYG_ENUM_SEQ_DECL(
+    FBYGDisplay,
+    FBYGDisplayFlex,
+    FBYGDisplayNone)
 
-YG_ENUM_SEQ_DECL(
-    YGEdge,
-    YGEdgeLeft,
-    YGEdgeTop,
-    YGEdgeRight,
-    YGEdgeBottom,
-    YGEdgeStart,
-    YGEdgeEnd,
-    YGEdgeHorizontal,
-    YGEdgeVertical,
-    YGEdgeAll)
+FBYG_ENUM_SEQ_DECL(
+    FBYGEdge,
+    FBYGEdgeLeft,
+    FBYGEdgeTop,
+    FBYGEdgeRight,
+    FBYGEdgeBottom,
+    FBYGEdgeStart,
+    FBYGEdgeEnd,
+    FBYGEdgeHorizontal,
+    FBYGEdgeVertical,
+    FBYGEdgeAll)
 
-YG_ENUM_DECL(
-    YGErrata,
-    YGErrataNone = 0,
-    YGErrataStretchFlexBasis = 1,
-    YGErrataAll = 2147483647,
-    YGErrataClassic = 2147483646)
-YG_DEFINE_ENUM_FLAG_OPERATORS(YGErrata)
+FBYG_ENUM_DECL(
+    FBYGErrata,
+    FBYGErrataNone = 0,
+    FBYGErrataStretchFlexBasis = 1,
+    FBYGErrataAll = 2147483647,
+    FBYGErrataClassic = 2147483646)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(FBYGErrata)
 
-YG_ENUM_SEQ_DECL(
-    YGExperimentalFeature,
-    YGExperimentalFeatureWebFlexBasis,
-    YGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge,
-    YGExperimentalFeatureFixJNILocalRefOverflows)
+FBYG_ENUM_SEQ_DECL(
+    FBYGExperimentalFeature,
+    FBYGExperimentalFeatureWebFlexBasis,
+    FBYGExperimentalFeatureAbsolutePercentageAgainstPaddingEdge,
+    FBYGExperimentalFeatureFixJNILocalRefOverflows)
 
-YG_ENUM_SEQ_DECL(
-    YGFlexDirection,
-    YGFlexDirectionColumn,
-    YGFlexDirectionColumnReverse,
-    YGFlexDirectionRow,
-    YGFlexDirectionRowReverse)
+FBYG_ENUM_SEQ_DECL(
+    FBYGFlexDirection,
+    FBYGFlexDirectionColumn,
+    FBYGFlexDirectionColumnReverse,
+    FBYGFlexDirectionRow,
+    FBYGFlexDirectionRowReverse)
 
-YG_ENUM_SEQ_DECL(
-    YGGutter,
-    YGGutterColumn,
-    YGGutterRow,
-    YGGutterAll)
+FBYG_ENUM_SEQ_DECL(
+    FBYGGutter,
+    FBYGGutterColumn,
+    FBYGGutterRow,
+    FBYGGutterAll)
 
-YG_ENUM_SEQ_DECL(
-    YGJustify,
-    YGJustifyFlexStart,
-    YGJustifyCenter,
-    YGJustifyFlexEnd,
-    YGJustifySpaceBetween,
-    YGJustifySpaceAround,
-    YGJustifySpaceEvenly)
+FBYG_ENUM_SEQ_DECL(
+    FBYGJustify,
+    FBYGJustifyFlexStart,
+    FBYGJustifyCenter,
+    FBYGJustifyFlexEnd,
+    FBYGJustifySpaceBetween,
+    FBYGJustifySpaceAround,
+    FBYGJustifySpaceEvenly)
 
-YG_ENUM_SEQ_DECL(
-    YGLogLevel,
-    YGLogLevelError,
-    YGLogLevelWarn,
-    YGLogLevelInfo,
-    YGLogLevelDebug,
-    YGLogLevelVerbose,
-    YGLogLevelFatal)
+FBYG_ENUM_SEQ_DECL(
+    FBYGLogLevel,
+    FBYGLogLevelError,
+    FBYGLogLevelWarn,
+    FBYGLogLevelInfo,
+    FBYGLogLevelDebug,
+    FBYGLogLevelVerbose,
+    FBYGLogLevelFatal)
 
-YG_ENUM_SEQ_DECL(
-    YGMeasureMode,
-    YGMeasureModeUndefined,
-    YGMeasureModeExactly,
-    YGMeasureModeAtMost)
+FBYG_ENUM_SEQ_DECL(
+    FBYGMeasureMode,
+    FBYGMeasureModeUndefined,
+    FBYGMeasureModeExactly,
+    FBYGMeasureModeAtMost)
 
-YG_ENUM_SEQ_DECL(
-    YGNodeType,
-    YGNodeTypeDefault,
-    YGNodeTypeText)
+FBYG_ENUM_SEQ_DECL(
+    FBYGNodeType,
+    FBYGNodeTypeDefault,
+    FBYGNodeTypeText)
 
-YG_ENUM_SEQ_DECL(
-    YGOverflow,
-    YGOverflowVisible,
-    YGOverflowHidden,
-    YGOverflowScroll)
+FBYG_ENUM_SEQ_DECL(
+    FBYGOverflow,
+    FBYGOverflowVisible,
+    FBYGOverflowHidden,
+    FBYGOverflowScroll)
 
-YG_ENUM_SEQ_DECL(
-    YGPositionType,
-    YGPositionTypeStatic,
-    YGPositionTypeRelative,
-    YGPositionTypeAbsolute)
+FBYG_ENUM_SEQ_DECL(
+    FBYGPositionType,
+    FBYGPositionTypeStatic,
+    FBYGPositionTypeRelative,
+    FBYGPositionTypeAbsolute)
 
-YG_ENUM_DECL(
-    YGPrintOptions,
-    YGPrintOptionsLayout = 1,
-    YGPrintOptionsStyle = 2,
-    YGPrintOptionsChildren = 4)
-YG_DEFINE_ENUM_FLAG_OPERATORS(YGPrintOptions)
+FBYG_ENUM_DECL(
+    FBYGPrintOptions,
+    FBYGPrintOptionsLayout = 1,
+    FBYGPrintOptionsStyle = 2,
+    FBYGPrintOptionsChildren = 4)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(FBYGPrintOptions)
 
-YG_ENUM_SEQ_DECL(
-    YGUnit,
-    YGUnitUndefined,
-    YGUnitPoint,
-    YGUnitPercent,
-    YGUnitAuto)
+FBYG_ENUM_SEQ_DECL(
+    FBYGUnit,
+    FBYGUnitUndefined,
+    FBYGUnitPoint,
+    FBYGUnitPercent,
+    FBYGUnitAuto)
 
-YG_ENUM_SEQ_DECL(
-    YGWrap,
-    YGWrapNoWrap,
-    YGWrapWrap,
-    YGWrapWrapReverse)
+FBYG_ENUM_SEQ_DECL(
+    FBYGWrap,
+    FBYGWrapNoWrap,
+    FBYGWrapWrap,
+    FBYGWrapWrapReverse)
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END

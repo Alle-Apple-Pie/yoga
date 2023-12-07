@@ -37,13 +37,13 @@
 // - relativeChildren: Maintain a vector of the child nodes that can shrink
 //   and/or grow.
 
-struct YGCollectFlexItemsRowValues {
+struct FBYGCollectFlexItemsRowValues {
   uint32_t itemsOnLine;
   float sizeConsumedOnCurrentLine;
   float totalFlexGrowFactors;
   float totalFlexShrinkScaledFactors;
   uint32_t endOfLineIndex;
-  std::vector<YGNodeRef> relativeChildren;
+  std::vector<FBYGNodeRef> relativeChildren;
   float remainingFreeSpace;
   // The size of the mainDim for the row after considering size, padding, margin
   // and border of flex items. This is used to calculate maxLineDim after going
@@ -54,93 +54,93 @@ struct YGCollectFlexItemsRowValues {
   float crossDim;
 };
 
-bool YGValueEqual(const YGValue& a, const YGValue& b);
-inline bool YGValueEqual(
+bool FBYGValueEqual(const FBYGValue& a, const FBYGValue& b);
+inline bool FBYGValueEqual(
     facebook::yoga::detail::CompactValue a,
     facebook::yoga::detail::CompactValue b) {
-  return YGValueEqual((YGValue) a, (YGValue) b);
+  return FBYGValueEqual((FBYGValue) a, (FBYGValue) b);
 }
 
 // This custom float equality function returns true if either absolute
 // difference between two floats is less than 0.0001f or both are undefined.
-bool YGFloatsEqual(const float a, const float b);
+bool FBYGFloatsEqual(const float a, const float b);
 
-bool YGDoubleEqual(const double a, const double b);
+bool FBYGDoubleEqual(const double a, const double b);
 
-float YGFloatMax(const float a, const float b);
+float FBYGFloatMax(const float a, const float b);
 
-YGFloatOptional YGFloatOptionalMax(
-    const YGFloatOptional op1,
-    const YGFloatOptional op2);
+FBYGFloatOptional FBYGFloatOptionalMax(
+    const FBYGFloatOptional op1,
+    const FBYGFloatOptional op2);
 
-float YGFloatMin(const float a, const float b);
+float FBYGFloatMin(const float a, const float b);
 
 // This custom float comparison function compares the array of float with
-// YGFloatsEqual, as the default float comparison operator will not work(Look
-// at the comments of YGFloatsEqual function).
+// FBYGFloatsEqual, as the default float comparison operator will not work(Look
+// at the comments of FBYGFloatsEqual function).
 template <std::size_t size>
-bool YGFloatArrayEqual(
+bool FBYGFloatArrayEqual(
     const std::array<float, size>& val1,
     const std::array<float, size>& val2) {
   bool areEqual = true;
   for (std::size_t i = 0; i < size && areEqual; ++i) {
-    areEqual = YGFloatsEqual(val1[i], val2[i]);
+    areEqual = FBYGFloatsEqual(val1[i], val2[i]);
   }
   return areEqual;
 }
 
-// This function returns 0 if YGFloatIsUndefined(val) is true and val otherwise
-float YGFloatSanitize(const float val);
+// This function returns 0 if FBYGFloatIsUndefined(val) is true and val otherwise
+float FBYGFloatSanitize(const float val);
 
-YGFlexDirection YGFlexDirectionCross(
-    const YGFlexDirection flexDirection,
-    const YGDirection direction);
+FBYGFlexDirection FBYGFlexDirectionCross(
+    const FBYGFlexDirection flexDirection,
+    const FBYGDirection direction);
 
-inline bool YGFlexDirectionIsRow(const YGFlexDirection flexDirection) {
-  return flexDirection == YGFlexDirectionRow ||
-      flexDirection == YGFlexDirectionRowReverse;
+inline bool FBYGFlexDirectionIsRow(const FBYGFlexDirection flexDirection) {
+  return flexDirection == FBYGFlexDirectionRow ||
+      flexDirection == FBYGFlexDirectionRowReverse;
 }
 
-inline YGFloatOptional YGResolveValue(
-    const YGValue value,
+inline FBYGFloatOptional FBYGResolveValue(
+    const FBYGValue value,
     const float ownerSize) {
   switch (value.unit) {
-    case YGUnitPoint:
-      return YGFloatOptional{value.value};
-    case YGUnitPercent:
-      return YGFloatOptional{value.value * ownerSize * 0.01f};
+    case FBYGUnitPoint:
+      return FBYGFloatOptional{value.value};
+    case FBYGUnitPercent:
+      return FBYGFloatOptional{value.value * ownerSize * 0.01f};
     default:
-      return YGFloatOptional{};
+      return FBYGFloatOptional{};
   }
 }
 
-inline YGFloatOptional YGResolveValue(
+inline FBYGFloatOptional FBYGResolveValue(
     facebook::yoga::detail::CompactValue value,
     float ownerSize) {
-  return YGResolveValue((YGValue) value, ownerSize);
+  return FBYGResolveValue((FBYGValue) value, ownerSize);
 }
 
-inline bool YGFlexDirectionIsColumn(const YGFlexDirection flexDirection) {
-  return flexDirection == YGFlexDirectionColumn ||
-      flexDirection == YGFlexDirectionColumnReverse;
+inline bool FBYGFlexDirectionIsColumn(const FBYGFlexDirection flexDirection) {
+  return flexDirection == FBYGFlexDirectionColumn ||
+      flexDirection == FBYGFlexDirectionColumnReverse;
 }
 
-inline YGFlexDirection YGResolveFlexDirection(
-    const YGFlexDirection flexDirection,
-    const YGDirection direction) {
-  if (direction == YGDirectionRTL) {
-    if (flexDirection == YGFlexDirectionRow) {
-      return YGFlexDirectionRowReverse;
-    } else if (flexDirection == YGFlexDirectionRowReverse) {
-      return YGFlexDirectionRow;
+inline FBYGFlexDirection FBYGResolveFlexDirection(
+    const FBYGFlexDirection flexDirection,
+    const FBYGDirection direction) {
+  if (direction == FBYGDirectionRTL) {
+    if (flexDirection == FBYGFlexDirectionRow) {
+      return FBYGFlexDirectionRowReverse;
+    } else if (flexDirection == FBYGFlexDirectionRowReverse) {
+      return FBYGFlexDirectionRow;
     }
   }
 
   return flexDirection;
 }
 
-inline YGFloatOptional YGResolveValueMargin(
+inline FBYGFloatOptional FBYGResolveValueMargin(
     facebook::yoga::detail::CompactValue value,
     const float ownerSize) {
-  return value.isAuto() ? YGFloatOptional{0} : YGResolveValue(value, ownerSize);
+  return value.isAuto() ? FBYGFloatOptional{0} : FBYGResolveValue(value, ownerSize);
 }

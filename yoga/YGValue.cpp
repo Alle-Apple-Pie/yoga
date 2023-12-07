@@ -7,6 +7,6 @@
 
 #include <yoga/YGValue.h>
 
-const YGValue YGValueZero = {0, YGUnitPoint};
-const YGValue YGValueUndefined = {YGUndefined, YGUnitUndefined};
-const YGValue YGValueAuto = {YGUndefined, YGUnitAuto};
+const FBYGValue FBYGValueZero = {0, FBYGUnitPoint};
+const FBYGValue FBYGValueUndefined = {FBYGUndefined, FBYGUnitUndefined};
+const FBYGValue FBYGValueAuto = {FBYGUndefined, FBYGUnitAuto};

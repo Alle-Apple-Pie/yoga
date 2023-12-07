@@ -11,7 +11,7 @@ using namespace facebook::yoga;
 
 namespace facebook {
 namespace yoga {
-bool configUpdateInvalidatesLayout(YGConfigRef a, YGConfigRef b) {
+bool configUpdateInvalidatesLayout(FBYGConfigRef a, FBYGConfigRef b) {
   return a->getErrata() != b->getErrata() ||
       a->getEnabledExperiments() != b->getEnabledExperiments() ||
       a->getPointScaleFactor() != b->getPointScaleFactor() ||
@@ -20,95 +20,95 @@ bool configUpdateInvalidatesLayout(YGConfigRef a, YGConfigRef b) {
 } // namespace yoga
 } // namespace facebook
 
-YGConfig::YGConfig(YGLogger logger) : cloneNodeCallback_{nullptr} {
+FBYGConfig::FBYGConfig(FBYGLogger logger) : cloneNodeCallback_{nullptr} {
   setLogger(logger);
 }
 
-void YGConfig::setUseWebDefaults(bool useWebDefaults) {
+void FBYGConfig::setUseWebDefaults(bool useWebDefaults) {
   flags_.useWebDefaults = useWebDefaults;
 }
 
-bool YGConfig::useWebDefaults() const {
+bool FBYGConfig::useWebDefaults() const {
   return flags_.useWebDefaults;
 }
 
-void YGConfig::setShouldPrintTree(bool printTree) {
+void FBYGConfig::setShouldPrintTree(bool printTree) {
   flags_.printTree = printTree;
 }
 
-bool YGConfig::shouldPrintTree() const {
+bool FBYGConfig::shouldPrintTree() const {
   return flags_.printTree;
 }
 
-void YGConfig::setExperimentalFeatureEnabled(
-    YGExperimentalFeature feature,
+void FBYGConfig::setExperimentalFeatureEnabled(
+    FBYGExperimentalFeature feature,
     bool enabled) {
   experimentalFeatures_.set(feature, enabled);
 }
 
-bool YGConfig::isExperimentalFeatureEnabled(
-    YGExperimentalFeature feature) const {
+bool FBYGConfig::isExperimentalFeatureEnabled(
+    FBYGExperimentalFeature feature) const {
   return experimentalFeatures_.test(feature);
 }
 
-ExperimentalFeatureSet YGConfig::getEnabledExperiments() const {
+ExperimentalFeatureSet FBYGConfig::getEnabledExperiments() const {
   return experimentalFeatures_;
 }
 
-void YGConfig::setErrata(YGErrata errata) {
+void FBYGConfig::setErrata(FBYGErrata errata) {
   errata_ = errata;
 }
 
-void YGConfig::addErrata(YGErrata errata) {
+void FBYGConfig::addErrata(FBYGErrata errata) {
   errata_ |= errata;
 }
 
-void YGConfig::removeErrata(YGErrata errata) {
+void FBYGConfig::removeErrata(FBYGErrata errata) {
   errata_ &= (~errata);
 }
 
-YGErrata YGConfig::getErrata() const {
+FBYGErrata FBYGConfig::getErrata() const {
   return errata_;
 }
 
-bool YGConfig::hasErrata(YGErrata errata) const {
-  return (errata_ & errata) != YGErrataNone;
+bool FBYGConfig::hasErrata(FBYGErrata errata) const {
+  return (errata_ & errata) != FBYGErrataNone;
 }
 
-void YGConfig::setPointScaleFactor(float pointScaleFactor) {
+void FBYGConfig::setPointScaleFactor(float pointScaleFactor) {
   pointScaleFactor_ = pointScaleFactor;
 }
 
-float YGConfig::getPointScaleFactor() const {
+float FBYGConfig::getPointScaleFactor() const {
   return pointScaleFactor_;
 }
 
-void YGConfig::setContext(void* context) {
+void FBYGConfig::setContext(void* context) {
   context_ = context;
 }
 
-void* YGConfig::getContext() const {
+void* FBYGConfig::getContext() const {
   return context_;
 }
 
-void YGConfig::setLogger(YGLogger logger) {
+void FBYGConfig::setLogger(FBYGLogger logger) {
   logger_.noContext = logger;
   flags_.loggerUsesContext = false;
 }
 
-void YGConfig::setLogger(LogWithContextFn logger) {
+void FBYGConfig::setLogger(LogWithContextFn logger) {
   logger_.withContext = logger;
   flags_.loggerUsesContext = true;
 }
 
-void YGConfig::setLogger(std::nullptr_t) {
-  setLogger(YGLogger{nullptr});
+void FBYGConfig::setLogger(std::nullptr_t) {
+  setLogger(FBYGLogger{nullptr});
 }
 
-void YGConfig::log(
-    YGConfig* config,
-    YGNode* node,
-    YGLogLevel logLevel,
+void FBYGConfig::log(
+    FBYGConfig* config,
+    FBYGNode* node,
+    FBYGLogLevel logLevel,
     void* logContext,
     const char* format,
     va_list args) const {
@@ -119,33 +119,33 @@ void YGConfig::log(
   }
 }
 
-void YGConfig::setCloneNodeCallback(YGCloneNodeFunc cloneNode) {
+void FBYGConfig::setCloneNodeCallback(FBYGCloneNodeFunc cloneNode) {
   cloneNodeCallback_.noContext = cloneNode;
   flags_.cloneNodeUsesContext = false;
 }
 
-void YGConfig::setCloneNodeCallback(CloneWithContextFn cloneNode) {
+void FBYGConfig::setCloneNodeCallback(CloneWithContextFn cloneNode) {
   cloneNodeCallback_.withContext = cloneNode;
   flags_.cloneNodeUsesContext = true;
 }
 
-void YGConfig::setCloneNodeCallback(std::nullptr_t) {
-  setCloneNodeCallback(YGCloneNodeFunc{nullptr});
+void FBYGConfig::setCloneNodeCallback(std::nullptr_t) {
+  setCloneNodeCallback(FBYGCloneNodeFunc{nullptr});
 }
 
-YGNodeRef YGConfig::cloneNode(
-    YGNodeRef node,
-    YGNodeRef owner,
+FBYGNodeRef FBYGConfig::cloneNode(
+    FBYGNodeRef node,
+    FBYGNodeRef owner,
     int childIndex,
     void* cloneContext) const {
-  YGNodeRef clone = nullptr;
+  FBYGNodeRef clone = nullptr;
   if (cloneNodeCallback_.noContext != nullptr) {
     clone = flags_.cloneNodeUsesContext
         ? cloneNodeCallback_.withContext(node, owner, childIndex, cloneContext)
         : cloneNodeCallback_.noContext(node, owner, childIndex);
   }
   if (clone == nullptr) {
-    clone = YGNodeClone(node);
+    clone = FBYGNodeClone(node);
   }
   return clone;
 }

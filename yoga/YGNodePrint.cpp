@@ -26,9 +26,9 @@ static void indent(string& base, uint32_t level) {
   }
 }
 
-static bool areFourValuesEqual(const YGStyle::Edges& four) {
-  return YGValueEqual(four[0], four[1]) && YGValueEqual(four[0], four[2]) &&
-      YGValueEqual(four[0], four[3]);
+static bool areFourValuesEqual(const FBYGStyle::Edges& four) {
+  return FBYGValueEqual(four[0], four[1]) && FBYGValueEqual(four[0], four[2]) &&
+      FBYGValueEqual(four[0], four[3]);
 }
 
 static void appendFormattedString(string& str, const char* fmt, ...) {
@@ -47,7 +47,7 @@ static void appendFormattedString(string& str, const char* fmt, ...) {
 static void appendFloatOptionalIfDefined(
     string& base,
     const string key,
-    const YGFloatOptional num) {
+    const FBYGFloatOptional num) {
   if (!num.isUndefined()) {
     appendFormattedString(base, "%s: %g; ", key.c_str(), num.unwrap());
   }
@@ -56,12 +56,12 @@ static void appendFloatOptionalIfDefined(
 static void appendNumberIfNotUndefined(
     string& base,
     const string key,
-    const YGValue number) {
-  if (number.unit != YGUnitUndefined) {
-    if (number.unit == YGUnitAuto) {
+    const FBYGValue number) {
+  if (number.unit != FBYGUnitUndefined) {
+    if (number.unit == FBYGUnitAuto) {
       base.append(key + ": auto; ");
     } else {
-      string unit = number.unit == YGUnitPoint ? "px" : "%%";
+      string unit = number.unit == FBYGUnitPoint ? "px" : "%%";
       appendFormattedString(
           base, "%s: %g%s; ", key.c_str(), number.value, unit.c_str());
     }
@@ -71,8 +71,8 @@ static void appendNumberIfNotUndefined(
 static void appendNumberIfNotAuto(
     string& base,
     const string& key,
-    const YGValue number) {
-  if (number.unit != YGUnitAuto) {
+    const FBYGValue number) {
+  if (number.unit != FBYGUnitAuto) {
     appendNumberIfNotUndefined(base, key, number);
   }
 }
@@ -80,10 +80,10 @@ static void appendNumberIfNotAuto(
 static void appendNumberIfNotZero(
     string& base,
     const string& str,
-    const YGValue number) {
-  if (number.unit == YGUnitAuto) {
+    const FBYGValue number) {
+  if (number.unit == FBYGUnitAuto) {
     base.append(str + ": auto; ");
-  } else if (!YGFloatsEqual(number.value, 0)) {
+  } else if (!FBYGFloatsEqual(number.value, 0)) {
     appendNumberIfNotUndefined(base, str, number);
   }
 }
@@ -91,14 +91,14 @@ static void appendNumberIfNotZero(
 static void appendEdges(
     string& base,
     const string& key,
-    const YGStyle::Edges& edges) {
+    const FBYGStyle::Edges& edges) {
   if (areFourValuesEqual(edges)) {
-    auto edgeValue = YGNode::computeEdgeValueForColumn(
-        edges, YGEdgeLeft, detail::CompactValue::ofZero());
+    auto edgeValue = FBYGNode::computeEdgeValueForColumn(
+        edges, FBYGEdgeLeft, detail::CompactValue::ofZero());
     appendNumberIfNotZero(base, key, edgeValue);
   } else {
-    for (int edge = YGEdgeLeft; edge != YGEdgeAll; ++edge) {
-      string str = key + "-" + YGEdgeToString(static_cast<YGEdge>(edge));
+    for (int edge = FBYGEdgeLeft; edge != FBYGEdgeAll; ++edge) {
+      string str = key + "-" + FBYGEdgeToString(static_cast<FBYGEdge>(edge));
       appendNumberIfNotZero(base, str, edges[edge]);
     }
   }
@@ -107,122 +107,122 @@ static void appendEdges(
 static void appendEdgeIfNotUndefined(
     string& base,
     const string& str,
-    const YGStyle::Edges& edges,
-    const YGEdge edge) {
-  // TODO: this doesn't take RTL / YGEdgeStart / YGEdgeEnd into account
-  auto value = (edge == YGEdgeLeft || edge == YGEdgeRight)
-      ? YGNode::computeEdgeValueForRow(
+    const FBYGStyle::Edges& edges,
+    const FBYGEdge edge) {
+  // TODO: this doesn't take RTL / FBYGEdgeStart / FBYGEdgeEnd into account
+  auto value = (edge == FBYGEdgeLeft || edge == FBYGEdgeRight)
+      ? FBYGNode::computeEdgeValueForRow(
             edges, edge, edge, detail::CompactValue::ofUndefined())
-      : YGNode::computeEdgeValueForColumn(
+      : FBYGNode::computeEdgeValueForColumn(
             edges, edge, detail::CompactValue::ofUndefined());
   appendNumberIfNotUndefined(base, str, value);
 }
 
-void YGNodeToString(
+void FBYGNodeToString(
     std::string& str,
-    YGNodeRef node,
-    YGPrintOptions options,
+    FBYGNodeRef node,
+    FBYGPrintOptions options,
     uint32_t level) {
   indent(str, level);
   appendFormattedString(str, "<div ");
 
-  if (options & YGPrintOptionsLayout) {
+  if (options & FBYGPrintOptionsLayout) {
     appendFormattedString(str, "layout=\"");
     appendFormattedString(
-        str, "width: %g; ", node->getLayout().dimensions[YGDimensionWidth]);
+        str, "width: %g; ", node->getLayout().dimensions[FBYGDimensionWidth]);
     appendFormattedString(
-        str, "height: %g; ", node->getLayout().dimensions[YGDimensionHeight]);
+        str, "height: %g; ", node->getLayout().dimensions[FBYGDimensionHeight]);
     appendFormattedString(
-        str, "top: %g; ", node->getLayout().position[YGEdgeTop]);
+        str, "top: %g; ", node->getLayout().position[FBYGEdgeTop]);
     appendFormattedString(
-        str, "left: %g;", node->getLayout().position[YGEdgeLeft]);
+        str, "left: %g;", node->getLayout().position[FBYGEdgeLeft]);
     appendFormattedString(str, "\" ");
   }
 
-  if (options & YGPrintOptionsStyle) {
+  if (options & FBYGPrintOptionsStyle) {
     appendFormattedString(str, "style=\"");
     const auto& style = node->getStyle();
-    if (style.flexDirection() != YGNode().getStyle().flexDirection()) {
+    if (style.flexDirection() != FBYGNode().getStyle().flexDirection()) {
       appendFormattedString(
           str,
           "flex-direction: %s; ",
-          YGFlexDirectionToString(style.flexDirection()));
+          FBYGFlexDirectionToString(style.flexDirection()));
     }
-    if (style.justifyContent() != YGNode().getStyle().justifyContent()) {
+    if (style.justifyContent() != FBYGNode().getStyle().justifyContent()) {
       appendFormattedString(
           str,
           "justify-content: %s; ",
-          YGJustifyToString(style.justifyContent()));
+          FBYGJustifyToString(style.justifyContent()));
     }
-    if (style.alignItems() != YGNode().getStyle().alignItems()) {
+    if (style.alignItems() != FBYGNode().getStyle().alignItems()) {
       appendFormattedString(
-          str, "align-items: %s; ", YGAlignToString(style.alignItems()));
+          str, "align-items: %s; ", FBYGAlignToString(style.alignItems()));
     }
-    if (style.alignContent() != YGNode().getStyle().alignContent()) {
+    if (style.alignContent() != FBYGNode().getStyle().alignContent()) {
       appendFormattedString(
-          str, "align-content: %s; ", YGAlignToString(style.alignContent()));
+          str, "align-content: %s; ", FBYGAlignToString(style.alignContent()));
     }
-    if (style.alignSelf() != YGNode().getStyle().alignSelf()) {
+    if (style.alignSelf() != FBYGNode().getStyle().alignSelf()) {
       appendFormattedString(
-          str, "align-self: %s; ", YGAlignToString(style.alignSelf()));
+          str, "align-self: %s; ", FBYGAlignToString(style.alignSelf()));
     }
     appendFloatOptionalIfDefined(str, "flex-grow", style.flexGrow());
     appendFloatOptionalIfDefined(str, "flex-shrink", style.flexShrink());
     appendNumberIfNotAuto(str, "flex-basis", style.flexBasis());
     appendFloatOptionalIfDefined(str, "flex", style.flex());
 
-    if (style.flexWrap() != YGNode().getStyle().flexWrap()) {
+    if (style.flexWrap() != FBYGNode().getStyle().flexWrap()) {
       appendFormattedString(
-          str, "flex-wrap: %s; ", YGWrapToString(style.flexWrap()));
+          str, "flex-wrap: %s; ", FBYGWrapToString(style.flexWrap()));
     }
 
-    if (style.overflow() != YGNode().getStyle().overflow()) {
+    if (style.overflow() != FBYGNode().getStyle().overflow()) {
       appendFormattedString(
-          str, "overflow: %s; ", YGOverflowToString(style.overflow()));
+          str, "overflow: %s; ", FBYGOverflowToString(style.overflow()));
     }
 
-    if (style.display() != YGNode().getStyle().display()) {
+    if (style.display() != FBYGNode().getStyle().display()) {
       appendFormattedString(
-          str, "display: %s; ", YGDisplayToString(style.display()));
+          str, "display: %s; ", FBYGDisplayToString(style.display()));
     }
     appendEdges(str, "margin", style.margin());
     appendEdges(str, "padding", style.padding());
     appendEdges(str, "border", style.border());
 
-    if (YGNode::computeColumnGap(
+    if (FBYGNode::computeColumnGap(
             style.gap(), detail::CompactValue::ofUndefined()) !=
-        YGNode::computeColumnGap(
-            YGNode().getStyle().gap(), detail::CompactValue::ofUndefined())) {
+        FBYGNode::computeColumnGap(
+            FBYGNode().getStyle().gap(), detail::CompactValue::ofUndefined())) {
       appendNumberIfNotUndefined(
-          str, "column-gap", style.gap()[YGGutterColumn]);
+          str, "column-gap", style.gap()[FBYGGutterColumn]);
     }
-    if (YGNode::computeRowGap(
+    if (FBYGNode::computeRowGap(
             style.gap(), detail::CompactValue::ofUndefined()) !=
-        YGNode::computeRowGap(
-            YGNode().getStyle().gap(), detail::CompactValue::ofUndefined())) {
-      appendNumberIfNotUndefined(str, "row-gap", style.gap()[YGGutterRow]);
+        FBYGNode::computeRowGap(
+            FBYGNode().getStyle().gap(), detail::CompactValue::ofUndefined())) {
+      appendNumberIfNotUndefined(str, "row-gap", style.gap()[FBYGGutterRow]);
     }
 
-    appendNumberIfNotAuto(str, "width", style.dimensions()[YGDimensionWidth]);
-    appendNumberIfNotAuto(str, "height", style.dimensions()[YGDimensionHeight]);
+    appendNumberIfNotAuto(str, "width", style.dimensions()[FBYGDimensionWidth]);
+    appendNumberIfNotAuto(str, "height", style.dimensions()[FBYGDimensionHeight]);
     appendNumberIfNotAuto(
-        str, "max-width", style.maxDimensions()[YGDimensionWidth]);
+        str, "max-width", style.maxDimensions()[FBYGDimensionWidth]);
     appendNumberIfNotAuto(
-        str, "max-height", style.maxDimensions()[YGDimensionHeight]);
+        str, "max-height", style.maxDimensions()[FBYGDimensionHeight]);
     appendNumberIfNotAuto(
-        str, "min-width", style.minDimensions()[YGDimensionWidth]);
+        str, "min-width", style.minDimensions()[FBYGDimensionWidth]);
     appendNumberIfNotAuto(
-        str, "min-height", style.minDimensions()[YGDimensionHeight]);
+        str, "min-height", style.minDimensions()[FBYGDimensionHeight]);
 
-    if (style.positionType() != YGNode().getStyle().positionType()) {
+    if (style.positionType() != FBYGNode().getStyle().positionType()) {
       appendFormattedString(
-          str, "position: %s; ", YGPositionTypeToString(style.positionType()));
+          str, "position: %s; ", FBYGPositionTypeToString(style.positionType()));
     }
 
-    appendEdgeIfNotUndefined(str, "left", style.position(), YGEdgeLeft);
-    appendEdgeIfNotUndefined(str, "right", style.position(), YGEdgeRight);
-    appendEdgeIfNotUndefined(str, "top", style.position(), YGEdgeTop);
-    appendEdgeIfNotUndefined(str, "bottom", style.position(), YGEdgeBottom);
+    appendEdgeIfNotUndefined(str, "left", style.position(), FBYGEdgeLeft);
+    appendEdgeIfNotUndefined(str, "right", style.position(), FBYGEdgeRight);
+    appendEdgeIfNotUndefined(str, "top", style.position(), FBYGEdgeTop);
+    appendEdgeIfNotUndefined(str, "bottom", style.position(), FBYGEdgeBottom);
     appendFormattedString(str, "\" ");
 
     if (node->hasMeasureFunc()) {
@@ -232,10 +232,10 @@ void YGNodeToString(
   appendFormattedString(str, ">");
 
   const uint32_t childCount = static_cast<uint32_t>(node->getChildren().size());
-  if (options & YGPrintOptionsChildren && childCount > 0) {
+  if (options & FBYGPrintOptionsChildren && childCount > 0) {
     for (uint32_t i = 0; i < childCount; i++) {
       appendFormattedString(str, "\n");
-      YGNodeToString(str, YGNodeGetChild(node, i), options, level + 1);
+      FBYGNodeToString(str, FBYGNodeGetChild(node, i), options, level + 1);
     }
     appendFormattedString(str, "\n");
     indent(str, level);

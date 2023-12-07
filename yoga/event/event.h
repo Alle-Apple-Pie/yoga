@@ -13,8 +13,8 @@
 #include <yoga/YGEnums.h>
 #include <stdint.h>
 
-struct YGConfig;
-struct YGNode;
+struct FBYGConfig;
+struct FBYGNode;
 
 namespace facebook {
 namespace yoga {
@@ -64,7 +64,7 @@ struct YOGA_EXPORT Event {
     NodeBaselineEnd,
   };
   class Data;
-  using Subscriber = void(const YGNode&, Type, Data);
+  using Subscriber = void(const FBYGNode&, Type, Data);
   using Subscribers = std::vector<std::function<Subscriber>>;
 
   template <Type E>
@@ -88,27 +88,27 @@ struct YOGA_EXPORT Event {
   static void subscribe(std::function<Subscriber>&& subscriber);
 
   template <Type E>
-  static void publish(const YGNode& node, const TypedData<E>& eventData = {}) {
+  static void publish(const FBYGNode& node, const TypedData<E>& eventData = {}) {
     publish(node, E, Data{eventData});
   }
 
   template <Type E>
-  static void publish(const YGNode* node, const TypedData<E>& eventData = {}) {
+  static void publish(const FBYGNode* node, const TypedData<E>& eventData = {}) {
     publish<E>(*node, eventData);
   }
 
 private:
-  static void publish(const YGNode&, Type, const Data&);
+  static void publish(const FBYGNode&, Type, const Data&);
 };
 
 template <>
 struct Event::TypedData<Event::NodeAllocation> {
-  YGConfig* config;
+  FBYGConfig* config;
 };
 
 template <>
 struct Event::TypedData<Event::NodeDeallocation> {
-  YGConfig* config;
+  FBYGConfig* config;
 };
 
 template <>
@@ -126,9 +126,9 @@ template <>
 struct Event::TypedData<Event::MeasureCallbackEnd> {
   void* layoutContext;
   float width;
-  YGMeasureMode widthMeasureMode;
+  FBYGMeasureMode widthMeasureMode;
   float height;
-  YGMeasureMode heightMeasureMode;
+  FBYGMeasureMode heightMeasureMode;
   float measuredWidth;
   float measuredHeight;
   const LayoutPassReason reason;

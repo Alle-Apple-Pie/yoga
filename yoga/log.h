@@ -9,8 +9,8 @@
 
 #include <yoga/YGEnums.h>
 
-struct YGNode;
-struct YGConfig;
+struct FBYGNode;
+struct FBYGConfig;
 
 namespace facebook {
 namespace yoga {
@@ -19,15 +19,15 @@ namespace detail {
 
 struct Log {
   static void log(
-      YGNode* node,
-      YGLogLevel level,
+      FBYGNode* node,
+      FBYGLogLevel level,
       void*,
       const char* message,
       ...) noexcept;
 
   static void log(
-      YGConfig* config,
-      YGLogLevel level,
+      FBYGConfig* config,
+      FBYGLogLevel level,
       void*,
       const char* format,
       ...) noexcept;

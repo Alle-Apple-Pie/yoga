@@ -42,7 +42,7 @@ namespace facebook {
 namespace yoga {
 namespace detail {
 
-// This class stores YGValue in 32 bits.
+// This class stores FBYGValue in 32 bits.
 // - The value does not matter for Undefined and Auto. NaNs are used for their
 //   representation.
 // - To differentiate between Point and Percent, one exponent bit is used.
@@ -63,28 +63,28 @@ public:
   static constexpr auto UPPER_BOUND_POINT = 36893485948395847680.0f;
   static constexpr auto UPPER_BOUND_PERCENT = 18446742974197923840.0f;
 
-  template <YGUnit Unit>
+  template <FBYGUnit Unit>
   static CompactValue of(float value) noexcept {
     if (value == 0.0f || (value < LOWER_BOUND && value > -LOWER_BOUND)) {
       constexpr auto zero =
-          Unit == YGUnitPercent ? ZERO_BITS_PERCENT : ZERO_BITS_POINT;
+          Unit == FBYGUnitPercent ? ZERO_BITS_PERCENT : ZERO_BITS_POINT;
       return {zero};
     }
 
     constexpr auto upperBound =
-        Unit == YGUnitPercent ? UPPER_BOUND_PERCENT : UPPER_BOUND_POINT;
+        Unit == FBYGUnitPercent ? UPPER_BOUND_PERCENT : UPPER_BOUND_POINT;
     if (value > upperBound || value < -upperBound) {
       value = copysignf(upperBound, value);
     }
 
-    uint32_t unitBit = Unit == YGUnitPercent ? PERCENT_BIT : 0;
+    uint32_t unitBit = Unit == FBYGUnitPercent ? PERCENT_BIT : 0;
     auto data = asU32(value);
     data -= BIAS;
     data |= unitBit;
     return {data};
   }
 
-  template <YGUnit Unit>
+  template <FBYGUnit Unit>
   static CompactValue ofMaybe(float value) noexcept {
     return std::isnan(value) || std::isinf(value) ? ofUndefined()
                                                   : of<Unit>(value);
@@ -104,43 +104,43 @@ public:
 
   constexpr CompactValue() noexcept : repr_(0x7FC00000) {}
 
-  CompactValue(const YGValue& x) noexcept : repr_(uint32_t{0}) {
+  CompactValue(const FBYGValue& x) noexcept : repr_(uint32_t{0}) {
     switch (x.unit) {
-      case YGUnitUndefined:
+      case FBYGUnitUndefined:
         *this = ofUndefined();
         break;
-      case YGUnitAuto:
+      case FBYGUnitAuto:
         *this = ofAuto();
         break;
-      case YGUnitPoint:
-        *this = of<YGUnitPoint>(x.value);
+      case FBYGUnitPoint:
+        *this = of<FBYGUnitPoint>(x.value);
         break;
-      case YGUnitPercent:
-        *this = of<YGUnitPercent>(x.value);
+      case FBYGUnitPercent:
+        *this = of<FBYGUnitPercent>(x.value);
         break;
     }
   }
 
-  operator YGValue() const noexcept {
+  operator FBYGValue() const noexcept {
     switch (repr_) {
       case AUTO_BITS:
-        return YGValueAuto;
+        return FBYGValueAuto;
       case ZERO_BITS_POINT:
-        return YGValue{0.0f, YGUnitPoint};
+        return FBYGValue{0.0f, FBYGUnitPoint};
       case ZERO_BITS_PERCENT:
-        return YGValue{0.0f, YGUnitPercent};
+        return FBYGValue{0.0f, FBYGUnitPercent};
     }
 
     if (std::isnan(asFloat(repr_))) {
-      return YGValueUndefined;
+      return FBYGValueUndefined;
     }
 
     auto data = repr_;
     data &= ~PERCENT_BIT;
     data += BIAS;
 
-    return YGValue{
-        asFloat(data), repr_ & 0x40000000 ? YGUnitPercent : YGUnitPoint};
+    return FBYGValue{
+        asFloat(data), repr_ & 0x40000000 ? FBYGUnitPercent : FBYGUnitPoint};
   }
 
   bool isUndefined() const noexcept {
@@ -193,13 +193,13 @@ private:
 };
 
 template <>
-CompactValue CompactValue::of<YGUnitUndefined>(float) noexcept = delete;
+CompactValue CompactValue::of<FBYGUnitUndefined>(float) noexcept = delete;
 template <>
-CompactValue CompactValue::of<YGUnitAuto>(float) noexcept = delete;
+CompactValue CompactValue::of<FBYGUnitAuto>(float) noexcept = delete;
 template <>
-CompactValue CompactValue::ofMaybe<YGUnitUndefined>(float) noexcept = delete;
+CompactValue CompactValue::ofMaybe<FBYGUnitUndefined>(float) noexcept = delete;
 template <>
-CompactValue CompactValue::ofMaybe<YGUnitAuto>(float) noexcept = delete;
+CompactValue CompactValue::ofMaybe<FBYGUnitAuto>(float) noexcept = delete;
 
 constexpr bool operator==(CompactValue a, CompactValue b) noexcept {
   return a.repr_ == b.repr_;

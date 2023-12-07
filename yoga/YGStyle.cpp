@@ -9,7 +9,7 @@
 #include "Utils.h"
 
 // Yoga specific properties, not compatible with flexbox specification
-bool operator==(const YGStyle& lhs, const YGStyle& rhs) {
+bool operator==(const FBYGStyle& lhs, const FBYGStyle& rhs) {
   bool areNonFloatValuesEqual = lhs.direction() == rhs.direction() &&
       lhs.flexDirection() == rhs.flexDirection() &&
       lhs.justifyContent() == rhs.justifyContent() &&
@@ -19,7 +19,7 @@ bool operator==(const YGStyle& lhs, const YGStyle& rhs) {
       lhs.positionType() == rhs.positionType() &&
       lhs.flexWrap() == rhs.flexWrap() && lhs.overflow() == rhs.overflow() &&
       lhs.display() == rhs.display() &&
-      YGValueEqual(lhs.flexBasis(), rhs.flexBasis()) &&
+      FBYGValueEqual(lhs.flexBasis(), rhs.flexBasis()) &&
       lhs.margin() == rhs.margin() && lhs.position() == rhs.position() &&
       lhs.padding() == rhs.padding() && lhs.border() == rhs.border() &&
       lhs.gap() == rhs.gap() && lhs.dimensions() == rhs.dimensions() &&

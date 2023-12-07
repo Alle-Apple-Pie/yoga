@@ -12,19 +12,19 @@
 #endif
 
 #ifdef __cplusplus
-#define YG_EXTERN_C_BEGIN extern "C" {
-#define YG_EXTERN_C_END }
+#define FBYG_EXTERN_C_BEGIN extern "C" {
+#define FBYG_EXTERN_C_END }
 #else
-#define YG_EXTERN_C_BEGIN
-#define YG_EXTERN_C_END
+#define FBYG_EXTERN_C_BEGIN
+#define FBYG_EXTERN_C_END
 #endif
 
 #if defined(__cplusplus)
-#define YG_DEPRECATED(message) [[deprecated(message)]]
+#define FBYG_DEPRECATED(message) [[deprecated(message)]]
 #elif defined(_MSC_VER)
-#define YG_DEPRECATED(message) __declspec(deprecated(message))
+#define FBYG_DEPRECATED(message) __declspec(deprecated(message))
 #else
-#define YG_DEPRECATED(message) __attribute__((deprecated(message)))
+#define FBYG_DEPRECATED(message) __attribute__((deprecated(message)))
 #endif
 
 #ifdef _WINDLL
@@ -45,15 +45,15 @@
 // Cannot use NSInteger as NSInteger has a different size than int (which is the
 // default type of a enum). Therefor when linking the Yoga C library into obj-c
 // the header is a mismatch for the Yoga ABI.
-#define YG_ENUM_BEGIN(name) NS_ENUM(int, name)
-#define YG_ENUM_END(name)
+#define FBYG_ENUM_BEGIN(name) NS_ENUM(int, name)
+#define FBYG_ENUM_END(name)
 #else
-#define YG_ENUM_BEGIN(name) enum name
-#define YG_ENUM_END(name) name
+#define FBYG_ENUM_BEGIN(name) enum name
+#define FBYG_ENUM_END(name) name
 #endif
 
 #ifdef __cplusplus
-#define YG_DEFINE_ENUM_FLAG_OPERATORS(name)                       \
+#define FBYG_DEFINE_ENUM_FLAG_OPERATORS(name)                       \
   extern "C++" {                                                  \
   constexpr inline name operator~(name a) {                       \
     return static_cast<name>(                                     \
@@ -91,7 +91,7 @@
   }                                                               \
   }
 #else
-#define YG_DEFINE_ENUM_FLAG_OPERATORS(name)
+#define FBYG_DEFINE_ENUM_FLAG_OPERATORS(name)
 #endif
 
 #ifdef __cplusplus
@@ -114,14 +114,14 @@ constexpr int n() {
 } // namespace facebook
 #endif
 
-#define YG_ENUM_DECL(NAME, ...)                               \
-  typedef YG_ENUM_BEGIN(NAME){__VA_ARGS__} YG_ENUM_END(NAME); \
+#define FBYG_ENUM_DECL(NAME, ...)                               \
+  typedef FBYG_ENUM_BEGIN(NAME){__VA_ARGS__} FBYG_ENUM_END(NAME); \
   WIN_EXPORT const char* NAME##ToString(NAME);
 
 #ifdef __cplusplus
-#define YG_ENUM_SEQ_DECL(NAME, ...)  \
-  YG_ENUM_DECL(NAME, __VA_ARGS__)    \
-  YG_EXTERN_C_END                    \
+#define FBYG_ENUM_SEQ_DECL(NAME, ...)  \
+  FBYG_ENUM_DECL(NAME, __VA_ARGS__)    \
+  FBYG_EXTERN_C_END                    \
   namespace facebook {               \
   namespace yoga {                   \
   namespace enums {                  \
@@ -132,7 +132,7 @@ constexpr int n() {
   }                                  \
   }                                  \
   }                                  \
-  YG_EXTERN_C_BEGIN
+  FBYG_EXTERN_C_BEGIN
 #else
-#define YG_ENUM_SEQ_DECL YG_ENUM_DECL
+#define FBYG_ENUM_SEQ_DECL FBYG_ENUM_DECL
 #endif

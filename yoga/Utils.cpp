@@ -10,22 +10,22 @@
 
 using namespace facebook;
 
-YGFlexDirection YGFlexDirectionCross(
-    const YGFlexDirection flexDirection,
-    const YGDirection direction) {
-  return YGFlexDirectionIsColumn(flexDirection)
-      ? YGResolveFlexDirection(YGFlexDirectionRow, direction)
-      : YGFlexDirectionColumn;
+FBYGFlexDirection FBYGFlexDirectionCross(
+    const FBYGFlexDirection flexDirection,
+    const FBYGDirection direction) {
+  return FBYGFlexDirectionIsColumn(flexDirection)
+      ? FBYGResolveFlexDirection(FBYGFlexDirectionRow, direction)
+      : FBYGFlexDirectionColumn;
 }
 
-float YGFloatMax(const float a, const float b) {
+float FBYGFloatMax(const float a, const float b) {
   if (!yoga::isUndefined(a) && !yoga::isUndefined(b)) {
     return fmaxf(a, b);
   }
   return yoga::isUndefined(a) ? b : a;
 }
 
-float YGFloatMin(const float a, const float b) {
+float FBYGFloatMin(const float a, const float b) {
   if (!yoga::isUndefined(a) && !yoga::isUndefined(b)) {
     return fminf(a, b);
   }
@@ -33,12 +33,12 @@ float YGFloatMin(const float a, const float b) {
   return yoga::isUndefined(a) ? b : a;
 }
 
-bool YGValueEqual(const YGValue& a, const YGValue& b) {
+bool FBYGValueEqual(const FBYGValue& a, const FBYGValue& b) {
   if (a.unit != b.unit) {
     return false;
   }
 
-  if (a.unit == YGUnitUndefined ||
+  if (a.unit == FBYGUnitUndefined ||
       (yoga::isUndefined(a.value) && yoga::isUndefined(b.value))) {
     return true;
   }
@@ -46,25 +46,25 @@ bool YGValueEqual(const YGValue& a, const YGValue& b) {
   return fabs(a.value - b.value) < 0.0001f;
 }
 
-bool YGFloatsEqual(const float a, const float b) {
+bool FBYGFloatsEqual(const float a, const float b) {
   if (!yoga::isUndefined(a) && !yoga::isUndefined(b)) {
     return fabs(a - b) < 0.0001f;
   }
   return yoga::isUndefined(a) && yoga::isUndefined(b);
 }
 
-bool YGDoubleEqual(const double a, const double b) {
+bool FBYGDoubleEqual(const double a, const double b) {
   if (!yoga::isUndefined(a) && !yoga::isUndefined(b)) {
     return fabs(a - b) < 0.0001;
   }
   return yoga::isUndefined(a) && yoga::isUndefined(b);
 }
 
-float YGFloatSanitize(const float val) {
+float FBYGFloatSanitize(const float val) {
   return yoga::isUndefined(val) ? 0 : val;
 }
 
-YGFloatOptional YGFloatOptionalMax(YGFloatOptional op1, YGFloatOptional op2) {
+FBYGFloatOptional FBYGFloatOptionalMax(FBYGFloatOptional op1, FBYGFloatOptional op2) {
   if (op1 >= op2) {
     return op1;
   }

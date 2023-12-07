@@ -18,20 +18,20 @@ namespace detail {
 namespace {
 
 void vlog(
-    YGConfig* config,
-    YGNode* node,
-    YGLogLevel level,
+    FBYGConfig* config,
+    FBYGNode* node,
+    FBYGLogLevel level,
     void* context,
     const char* format,
     va_list args) {
-  YGConfig* logConfig = config != nullptr ? config : YGConfigGetDefault();
+  FBYGConfig* logConfig = config != nullptr ? config : FBYGConfigGetDefault();
   logConfig->log(logConfig, node, level, context, format, args);
 }
 } // namespace
 
 YOGA_EXPORT void Log::log(
-    YGNode* node,
-    YGLogLevel level,
+    FBYGNode* node,
+    FBYGLogLevel level,
     void* context,
     const char* format,
     ...) noexcept {
@@ -48,8 +48,8 @@ YOGA_EXPORT void Log::log(
 }
 
 void Log::log(
-    YGConfig* config,
-    YGLogLevel level,
+    FBYGConfig* config,
+    FBYGLogLevel level,
     void* context,
     const char* format,
     ...) noexcept {

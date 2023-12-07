@@ -16,22 +16,22 @@
 
 #include "CompactValue.h"
 
-using YGVector = std::vector<YGNodeRef>;
+using FBYGVector = std::vector<FBYGNodeRef>;
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-void YGNodeCalculateLayoutWithContext(
-    YGNodeRef node,
+void FBYGNodeCalculateLayoutWithContext(
+    FBYGNodeRef node,
     float availableWidth,
     float availableHeight,
-    YGDirection ownerDirection,
+    FBYGDirection ownerDirection,
     void* layoutContext);
 
-// Deallocates a Yoga Node. Unlike YGNodeFree, does not remove the node from
+// Deallocates a Yoga Node. Unlike FBYGNodeFree, does not remove the node from
 // its parent or children.
-void YGNodeDeallocate(YGNodeRef node);
+void FBYGNodeDeallocate(FBYGNodeRef node);
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END
 
 namespace facebook {
 namespace yoga {
@@ -49,30 +49,30 @@ void throwLogicalErrorWithMessage(const char* message);
 } // namespace yoga
 } // namespace facebook
 
-extern const std::array<YGEdge, 4> trailing;
-extern const std::array<YGEdge, 4> leading;
-extern const YGValue YGValueUndefined;
-extern const YGValue YGValueAuto;
-extern const YGValue YGValueZero;
+extern const std::array<FBYGEdge, 4> trailing;
+extern const std::array<FBYGEdge, 4> leading;
+extern const FBYGValue FBYGValueUndefined;
+extern const FBYGValue FBYGValueAuto;
+extern const FBYGValue FBYGValueZero;
 
-struct YGCachedMeasurement {
+struct FBYGCachedMeasurement {
   float availableWidth;
   float availableHeight;
-  YGMeasureMode widthMeasureMode;
-  YGMeasureMode heightMeasureMode;
+  FBYGMeasureMode widthMeasureMode;
+  FBYGMeasureMode heightMeasureMode;
 
   float computedWidth;
   float computedHeight;
 
-  YGCachedMeasurement()
+  FBYGCachedMeasurement()
       : availableWidth(-1),
         availableHeight(-1),
-        widthMeasureMode(YGMeasureModeUndefined),
-        heightMeasureMode(YGMeasureModeUndefined),
+        widthMeasureMode(FBYGMeasureModeUndefined),
+        heightMeasureMode(FBYGMeasureModeUndefined),
         computedWidth(-1),
         computedHeight(-1) {}
 
-  bool operator==(YGCachedMeasurement measurement) const {
+  bool operator==(FBYGCachedMeasurement measurement) const {
     using namespace facebook;
 
     bool isEqual = widthMeasureMode == measurement.widthMeasureMode &&
@@ -101,7 +101,7 @@ struct YGCachedMeasurement {
 
 // This value was chosen based on empirical data:
 // 98% of analyzed layouts require less than 8 entries.
-#define YG_MAX_CACHED_RESULT_COUNT 8
+#define FBYG_MAX_CACHED_RESULT_COUNT 8
 
 namespace facebook {
 namespace yoga {
@@ -116,7 +116,7 @@ public:
   Values() = default;
   Values(const Values& other) = default;
 
-  explicit Values(const YGValue& defaultValue) noexcept {
+  explicit Values(const FBYGValue& defaultValue) noexcept {
     values_.fill(defaultValue);
   }
 
@@ -124,17 +124,17 @@ public:
   CompactValue& operator[](size_t i) noexcept { return values_[i]; }
 
   template <size_t I>
-  YGValue get() const noexcept {
+  FBYGValue get() const noexcept {
     return std::get<I>(values_);
   }
 
   template <size_t I>
-  void set(YGValue& value) noexcept {
+  void set(FBYGValue& value) noexcept {
     std::get<I>(values_) = value;
   }
 
   template <size_t I>
-  void set(YGValue&& value) noexcept {
+  void set(FBYGValue&& value) noexcept {
     set<I>(value);
   }
 
@@ -157,4 +157,4 @@ static const float kDefaultFlexGrow = 0.0f;
 static const float kDefaultFlexShrink = 0.0f;
 static const float kWebDefaultFlexShrink = 1.0f;
 
-extern bool YGFloatsEqual(const float a, const float b);
+extern bool FBYGFloatsEqual(const float a, const float b);

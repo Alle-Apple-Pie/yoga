@@ -10,50 +10,50 @@
 #include <yoga/YGEnums.h>
 #include <yoga/YGMacros.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-typedef struct YGValue {
+typedef struct FBYGValue {
   float value;
-  YGUnit unit;
-} YGValue;
+  FBYGUnit unit;
+} FBYGValue;
 
-YOGA_EXPORT extern const YGValue YGValueAuto;
-YOGA_EXPORT extern const YGValue YGValueUndefined;
-YOGA_EXPORT extern const YGValue YGValueZero;
+YOGA_EXPORT extern const FBYGValue FBYGValueAuto;
+YOGA_EXPORT extern const FBYGValue FBYGValueUndefined;
+YOGA_EXPORT extern const FBYGValue FBYGValueZero;
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END
 
 #ifdef __cplusplus
 #include <limits>
-constexpr float YGUndefined = std::numeric_limits<float>::quiet_NaN();
+constexpr float FBYGUndefined = std::numeric_limits<float>::quiet_NaN();
 #else
 #include <math.h>
-#define YGUndefined NAN
+#define FBYGUndefined NAN
 #endif
 
 #ifdef __cplusplus
-inline bool operator==(const YGValue& lhs, const YGValue& rhs) {
+inline bool operator==(const FBYGValue& lhs, const FBYGValue& rhs) {
   if (lhs.unit != rhs.unit) {
     return false;
   }
 
   switch (lhs.unit) {
-    case YGUnitUndefined:
-    case YGUnitAuto:
+    case FBYGUnitUndefined:
+    case FBYGUnitAuto:
       return true;
-    case YGUnitPoint:
-    case YGUnitPercent:
+    case FBYGUnitPoint:
+    case FBYGUnitPercent:
       return lhs.value == rhs.value;
   }
 
   return false;
 }
 
-inline bool operator!=(const YGValue& lhs, const YGValue& rhs) {
+inline bool operator!=(const FBYGValue& lhs, const FBYGValue& rhs) {
   return !(lhs == rhs);
 }
 
-inline YGValue operator-(const YGValue& value) {
+inline FBYGValue operator-(const FBYGValue& value) {
   return {-value.value, value.unit};
 }
 #endif
