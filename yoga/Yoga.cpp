@@ -946,7 +946,7 @@ FBYG_NODE_LAYOUT_RESOLVED_PROPERTY_IMPL(float, Margin, margin)
 FBYG_NODE_LAYOUT_RESOLVED_PROPERTY_IMPL(float, Border, border)
 FBYG_NODE_LAYOUT_RESOLVED_PROPERTY_IMPL(float, Padding, padding)
 
-std::atomic<uint32_t> gCurrentGenerationCount(0);
+std::atomic<uint32_t> fbygCurrentGenerationCount(0);
 
 bool FBYGLayoutNodeInternal(
     const FBYGNodeRef node,
@@ -4163,7 +4163,7 @@ YOGA_EXPORT void FBYGNodeCalculateLayoutWithContext(
   // Increment the generation count. This will force the recursive routine to
   // visit all dirty nodes at least once. Subsequent visits will be skipped if
   // the input parameters don't change.
-  gCurrentGenerationCount.fetch_add(1, std::memory_order_relaxed);
+  fbygCurrentGenerationCount.fetch_add(1, std::memory_order_relaxed);
   node->resolveDimension();
   float width = FBYGUndefined;
   FBYGMeasureMode widthMeasureMode = FBYGMeasureModeUndefined;
@@ -4220,7 +4220,7 @@ YOGA_EXPORT void FBYGNodeCalculateLayoutWithContext(
           markerData,
           layoutContext,
           0, // tree root
-          gCurrentGenerationCount.load(std::memory_order_relaxed))) {
+          fbygCurrentGenerationCount.load(std::memory_order_relaxed))) {
     node->setPosition(
         node->getLayout().direction(), ownerWidth, ownerHeight, ownerWidth);
     FBYGRoundToPixelGrid(
