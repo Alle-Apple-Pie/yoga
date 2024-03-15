@@ -13,10 +13,10 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class ExperimentalFeature : uint8_t {
-  WebFlexBasis = YGExperimentalFeatureWebFlexBasis,
+  WebFlexBasis = FBYGExperimentalFeatureWebFlexBasis,
 };
 
 template <>
@@ -24,16 +24,16 @@ constexpr int32_t ordinalCount<ExperimentalFeature>() {
   return 1;
 }
 
-constexpr ExperimentalFeature scopedEnum(YGExperimentalFeature unscoped) {
+constexpr ExperimentalFeature scopedEnum(FBYGExperimentalFeature unscoped) {
   return static_cast<ExperimentalFeature>(unscoped);
 }
 
-constexpr YGExperimentalFeature unscopedEnum(ExperimentalFeature scoped) {
-  return static_cast<YGExperimentalFeature>(scoped);
+constexpr FBYGExperimentalFeature unscopedEnum(ExperimentalFeature scoped) {
+  return static_cast<FBYGExperimentalFeature>(scoped);
 }
 
 inline const char* toString(ExperimentalFeature e) {
-  return YGExperimentalFeatureToString(unscopedEnum(e));
+  return FBYGExperimentalFeatureToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

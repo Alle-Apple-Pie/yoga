@@ -10,7 +10,7 @@
 #include <yoga/node/LayoutResults.h>
 #include <yoga/numeric/Comparison.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 bool LayoutResults::operator==(LayoutResults layout) const {
   bool isEqual = yoga::inexactEquals(position_, layout.position_) &&
@@ -44,4 +44,4 @@ bool LayoutResults::operator==(LayoutResults layout) const {
   return isEqual;
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

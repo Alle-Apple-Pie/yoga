@@ -17,68 +17,68 @@
  */
 #ifdef __cplusplus
 #include <limits>
-constexpr float YGUndefined = std::numeric_limits<float>::quiet_NaN();
+constexpr float FBYGUndefined = std::numeric_limits<float>::quiet_NaN();
 #else
 #include <math.h>
-#define YGUndefined NAN
+#define FBYGUndefined NAN
 #endif
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
 /**
  * Structure used to represent a dimension in a style.
  */
-typedef struct YGValue {
+typedef struct FBYGValue {
   float value;
-  YGUnit unit;
-} YGValue;
+  FBYGUnit unit;
+} FBYGValue;
 
 /**
  * Constant for a dimension of "auto".
  */
-YG_EXPORT extern const YGValue YGValueAuto;
+FBYG_EXPORT extern const FBYGValue FBYGValueAuto;
 
 /**
  * Constant for a dimension which is not defined.
  */
-YG_EXPORT extern const YGValue YGValueUndefined;
+FBYG_EXPORT extern const FBYGValue FBYGValueUndefined;
 
 /**
  * Constant for a dimension that is zero-length.
  */
-YG_EXPORT extern const YGValue YGValueZero;
+FBYG_EXPORT extern const FBYGValue FBYGValueZero;
 
 /**
  * Whether a dimension represented as a float is defined.
  */
-YG_EXPORT bool YGFloatIsUndefined(float value);
+FBYG_EXPORT bool FBYGFloatIsUndefined(float value);
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END
 
-// Equality operators for comparison of YGValue in C++
+// Equality operators for comparison of FBYGValue in C++
 #ifdef __cplusplus
-inline bool operator==(const YGValue& lhs, const YGValue& rhs) {
+inline bool operator==(const FBYGValue& lhs, const FBYGValue& rhs) {
   if (lhs.unit != rhs.unit) {
     return false;
   }
 
   switch (lhs.unit) {
-    case YGUnitUndefined:
-    case YGUnitAuto:
+    case FBYGUnitUndefined:
+    case FBYGUnitAuto:
       return true;
-    case YGUnitPoint:
-    case YGUnitPercent:
+    case FBYGUnitPoint:
+    case FBYGUnitPercent:
       return lhs.value == rhs.value;
   }
 
   return false;
 }
 
-inline bool operator!=(const YGValue& lhs, const YGValue& rhs) {
+inline bool operator!=(const FBYGValue& lhs, const FBYGValue& rhs) {
   return !(lhs == rhs);
 }
 
-inline YGValue operator-(const YGValue& value) {
+inline FBYGValue operator-(const FBYGValue& value) {
   return {-value.value, value.unit};
 }
 #endif

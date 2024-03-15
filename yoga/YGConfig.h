@@ -14,37 +14,37 @@
 #include <yoga/YGEnums.h>
 #include <yoga/YGMacros.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-typedef struct YGNode* YGNodeRef;
-typedef const struct YGNode* YGNodeConstRef;
+typedef struct FBYGNode* FBYGNodeRef;
+typedef const struct FBYGNode* FBYGNodeConstRef;
 
 /**
  * Handle to a mutable Yoga configuration.
  */
-typedef struct YGConfig* YGConfigRef;
+typedef struct FBYGConfig* FBYGConfigRef;
 
 /**
  * Handle to an immutable Yoga configruation.
  */
-typedef const struct YGConfig* YGConfigConstRef;
+typedef const struct FBYGConfig* FBYGConfigConstRef;
 
 /**
  * Allocates a set of configuration options. The configuration may be applied to
  * multiple nodes (i.e. a single global config), or can be applied more
  * granularly per-node.
  */
-YG_EXPORT YGConfigRef YGConfigNew(void);
+FBYG_EXPORT FBYGConfigRef FBYGConfigNew(void);
 
 /**
  * Frees the associated Yoga configuration.
  */
-YG_EXPORT void YGConfigFree(YGConfigRef config);
+FBYG_EXPORT void FBYGConfigFree(FBYGConfigRef config);
 
 /**
  * Returns the default config values set by Yoga.
  */
-YG_EXPORT YGConfigConstRef YGConfigGetDefault(void);
+FBYG_EXPORT FBYGConfigConstRef FBYGConfigGetDefault(void);
 
 /**
  * Yoga by default creates new nodes with style defaults different from flexbox
@@ -52,12 +52,14 @@ YG_EXPORT YGConfigConstRef YGConfigGetDefault(void);
  * `UseWebDefaults` instructs Yoga to instead use a default style consistent
  * with the web.
  */
-YG_EXPORT void YGConfigSetUseWebDefaults(YGConfigRef config, bool enabled);
+FBYG_EXPORT void FBYGConfigSetUseWebDefaults(
+    FBYGConfigRef config,
+    bool enabled);
 
 /**
  * Whether the configuration is set to use web defaults.
  */
-YG_EXPORT bool YGConfigGetUseWebDefaults(YGConfigConstRef config);
+FBYG_EXPORT bool FBYGConfigGetUseWebDefaults(FBYGConfigConstRef config);
 
 /**
  * Yoga will by deafult round final layout positions and dimensions to the
@@ -66,14 +68,14 @@ YG_EXPORT bool YGConfigGetUseWebDefaults(YGConfigConstRef config);
  *
  * May be set to 0.0f to avoid rounding the layout results.
  */
-YG_EXPORT void YGConfigSetPointScaleFactor(
-    YGConfigRef config,
+FBYG_EXPORT void FBYGConfigSetPointScaleFactor(
+    FBYGConfigRef config,
     float pixelsInPoint);
 
 /**
  * Get the currently set point scale factor.
  */
-YG_EXPORT float YGConfigGetPointScaleFactor(YGConfigConstRef config);
+FBYG_EXPORT float FBYGConfigGetPointScaleFactor(FBYGConfigConstRef config);
 
 /**
  * Configures how Yoga balances W3C conformance vs compatibility with layouts
@@ -81,29 +83,29 @@ YG_EXPORT float YGConfigGetPointScaleFactor(YGConfigConstRef config);
  *
  * By deafult Yoga will prioritize W3C conformance. `Errata` may be set to ask
  * Yoga to produce specific incorrect behaviors. E.g. `YGConfigSetErrata(config,
- * YGErrataStretchFlexBasis)`.
+ * FBYGErrataStretchFlexBasis)`.
  *
- * YGErrata is a bitmask, and multiple errata may be set at once. Predfined
+ * FBYGErrata is a bitmask, and multiple errata may be set at once. Predfined
  * constants exist for convenience:
- * 1. YGErrataNone: No errata
- * 2. YGErrataClassic: Match layout behaviors of Yoga 1.x
- * 3. YGErrataAll: Match layout behaviors of Yoga 1.x, including
+ * 1. FBYGErrataNone: No errata
+ * 2. FBYGErrataClassic: Match layout behaviors of Yoga 1.x
+ * 3. FBYGErrataAll: Match layout behaviors of Yoga 1.x, including
  * `UseLegacyStretchBehaviour`
  */
-YG_EXPORT void YGConfigSetErrata(YGConfigRef config, YGErrata errata);
+FBYG_EXPORT void FBYGConfigSetErrata(FBYGConfigRef config, FBYGErrata errata);
 
 /**
  * Get the currently set errata.
  */
-YG_EXPORT YGErrata YGConfigGetErrata(YGConfigConstRef config);
+FBYG_EXPORT FBYGErrata FBYGConfigGetErrata(FBYGConfigConstRef config);
 
 /**
- * Function pointer type for YGConfigSetLogger.
+ * Function pointer type for FBYGConfigSetLogger.
  */
-typedef int (*YGLogger)(
-    YGConfigConstRef config,
-    YGNodeConstRef node,
-    YGLogLevel level,
+typedef int (*FBYGLogger)(
+    FBYGConfigConstRef config,
+    FBYGNodeConstRef node,
+    FBYGLogLevel level,
     const char* format,
     va_list args);
 
@@ -111,48 +113,48 @@ typedef int (*YGLogger)(
  * Set a custom log function for to use when logging diagnostics or fatal.
  * errors.
  */
-YG_EXPORT void YGConfigSetLogger(YGConfigRef config, YGLogger logger);
+FBYG_EXPORT void FBYGConfigSetLogger(FBYGConfigRef config, FBYGLogger logger);
 
 /**
  * Sets an arbitrary context pointer on the config which may be read from during
  * callbacks.
  */
-YG_EXPORT void YGConfigSetContext(YGConfigRef config, void* context);
+FBYG_EXPORT void FBYGConfigSetContext(FBYGConfigRef config, void* context);
 
 /**
  * Gets the currently set context.
  */
-YG_EXPORT void* YGConfigGetContext(YGConfigConstRef config);
+FBYG_EXPORT void* FBYGConfigGetContext(FBYGConfigConstRef config);
 
 /**
- * Function pointer type for YGConfigSetCloneNodeFunc.
+ * Function pointer type for FBYGConfigSetCloneNodeFunc.
  */
-typedef YGNodeRef (*YGCloneNodeFunc)(
-    YGNodeConstRef oldNode,
-    YGNodeConstRef owner,
+typedef FBYGNodeRef (*FBYGCloneNodeFunc)(
+    FBYGNodeConstRef oldNode,
+    FBYGNodeConstRef owner,
     size_t childIndex);
 
 /**
  * Enable an experimental/unsupported feature in Yoga.
  */
-YG_EXPORT void YGConfigSetExperimentalFeatureEnabled(
-    YGConfigRef config,
-    YGExperimentalFeature feature,
+FBYG_EXPORT void FBYGConfigSetExperimentalFeatureEnabled(
+    FBYGConfigRef config,
+    FBYGExperimentalFeature feature,
     bool enabled);
 
 /**
  * Whether an experimental feature is set.
  */
-YG_EXPORT bool YGConfigIsExperimentalFeatureEnabled(
-    YGConfigConstRef config,
-    YGExperimentalFeature feature);
+FBYG_EXPORT bool FBYGConfigIsExperimentalFeatureEnabled(
+    FBYGConfigConstRef config,
+    FBYGExperimentalFeature feature);
 
 /**
  * Sets a callback, called during layout, to create a new mutable Yoga node if
  * Yoga must write to it and its owner is not its parent observed during layout.
  */
-YG_EXPORT void YGConfigSetCloneNodeFunc(
-    YGConfigRef config,
-    YGCloneNodeFunc callback);
+FBYG_EXPORT void FBYGConfigSetCloneNodeFunc(
+    FBYGConfigRef config,
+    FBYGCloneNodeFunc callback);
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END

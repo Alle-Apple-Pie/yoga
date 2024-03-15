@@ -11,7 +11,7 @@
 #include <android/log.h>
 #endif
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 namespace {
 
@@ -59,44 +59,44 @@ void log(
   va_end(args);
 }
 
-YGLogger getDefaultLogger() {
-  return [](const YGConfigConstRef /*config*/,
-            const YGNodeConstRef /*node*/,
-            YGLogLevel level,
+FBYGLogger getDefaultLogger() {
+  return [](const FBYGConfigConstRef /*config*/,
+            const FBYGNodeConstRef /*node*/,
+            FBYGLogLevel level,
             const char* format,
             va_list args) -> int {
 #ifdef ANDROID
-    int androidLevel = YGLogLevelDebug;
+    int androidLevel = FBYGLogLevelDebug;
     switch (level) {
-      case YGLogLevelFatal:
+      case FBYGLogLevelFatal:
         androidLevel = ANDROID_LOG_FATAL;
         break;
-      case YGLogLevelError:
+      case FBYGLogLevelError:
         androidLevel = ANDROID_LOG_ERROR;
         break;
-      case YGLogLevelWarn:
+      case FBYGLogLevelWarn:
         androidLevel = ANDROID_LOG_WARN;
         break;
-      case YGLogLevelInfo:
+      case FBYGLogLevelInfo:
         androidLevel = ANDROID_LOG_INFO;
         break;
-      case YGLogLevelDebug:
+      case FBYGLogLevelDebug:
         androidLevel = ANDROID_LOG_DEBUG;
         break;
-      case YGLogLevelVerbose:
+      case FBYGLogLevelVerbose:
         androidLevel = ANDROID_LOG_VERBOSE;
         break;
     }
     return __android_log_vprint(androidLevel, "yoga", format, args);
 #else
     switch (level) {
-      case YGLogLevelError:
-      case YGLogLevelFatal:
+      case FBYGLogLevelError:
+      case FBYGLogLevelFatal:
         return vfprintf(stderr, format, args);
-      case YGLogLevelWarn:
-      case YGLogLevelInfo:
-      case YGLogLevelDebug:
-      case YGLogLevelVerbose:
+      case FBYGLogLevelWarn:
+      case FBYGLogLevelInfo:
+      case FBYGLogLevelDebug:
+      case FBYGLogLevelVerbose:
       default:
         return vprintf(format, args);
     }
@@ -104,4 +104,4 @@ YGLogger getDefaultLogger() {
   };
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -11,7 +11,7 @@
 #include <iterator>
 #include <type_traits>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 /**
  * Concept for any enum/enum class
@@ -82,4 +82,4 @@ auto ordinals() {
   return Range{};
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

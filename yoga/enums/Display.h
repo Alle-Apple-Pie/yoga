@@ -13,11 +13,11 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Display : uint8_t {
-  Flex = YGDisplayFlex,
-  None = YGDisplayNone,
+  Flex = FBYGDisplayFlex,
+  None = FBYGDisplayNone,
 };
 
 template <>
@@ -25,16 +25,16 @@ constexpr int32_t ordinalCount<Display>() {
   return 2;
 }
 
-constexpr Display scopedEnum(YGDisplay unscoped) {
+constexpr Display scopedEnum(FBYGDisplay unscoped) {
   return static_cast<Display>(unscoped);
 }
 
-constexpr YGDisplay unscopedEnum(Display scoped) {
-  return static_cast<YGDisplay>(scoped);
+constexpr FBYGDisplay unscopedEnum(Display scoped) {
+  return static_cast<FBYGDisplay>(scoped);
 }
 
 inline const char* toString(Display e) {
-  return YGDisplayToString(unscopedEnum(e));
+  return FBYGDisplayToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

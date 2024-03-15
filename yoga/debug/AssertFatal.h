@@ -9,7 +9,7 @@
 
 #include <yoga/Yoga.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 class Node;
 class Config;
@@ -26,4 +26,4 @@ void assertFatalWithConfig(
     bool condition,
     const char* message);
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -14,7 +14,7 @@
 #include <functional>
 #include <vector>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum struct LayoutType : int {
   kLayout = 0,
@@ -48,7 +48,7 @@ struct LayoutData {
 
 const char* LayoutPassReasonToString(const LayoutPassReason value);
 
-struct YG_EXPORT Event {
+struct FBYG_EXPORT Event {
   enum Type {
     NodeAllocation,
     NodeDeallocation,
@@ -61,7 +61,7 @@ struct YG_EXPORT Event {
     NodeBaselineEnd,
   };
   class Data;
-  using Subscriber = void(YGNodeConstRef, Type, Data);
+  using Subscriber = void(FBYGNodeConstRef, Type, Data);
   using Subscribers = std::vector<std::function<Subscriber>>;
 
   template <Type E>
@@ -85,22 +85,24 @@ struct YG_EXPORT Event {
   static void subscribe(std::function<Subscriber>&& subscriber);
 
   template <Type E>
-  static void publish(YGNodeConstRef node, const TypedData<E>& eventData = {}) {
+  static void publish(
+      FBYGNodeConstRef node,
+      const TypedData<E>& eventData = {}) {
     publish(node, E, Data{eventData});
   }
 
  private:
-  static void publish(YGNodeConstRef, Type, const Data&);
+  static void publish(FBYGNodeConstRef, Type, const Data&);
 };
 
 template <>
 struct Event::TypedData<Event::NodeAllocation> {
-  YGConfigConstRef config;
+  FBYGConfigConstRef config;
 };
 
 template <>
 struct Event::TypedData<Event::NodeDeallocation> {
-  YGConfigConstRef config;
+  FBYGConfigConstRef config;
 };
 
 template <>
@@ -111,9 +113,9 @@ struct Event::TypedData<Event::LayoutPassEnd> {
 template <>
 struct Event::TypedData<Event::MeasureCallbackEnd> {
   float width;
-  YGMeasureMode widthMeasureMode;
+  FBYGMeasureMode widthMeasureMode;
   float height;
-  YGMeasureMode heightMeasureMode;
+  FBYGMeasureMode heightMeasureMode;
   float measuredWidth;
   float measuredHeight;
   const LayoutPassReason reason;
@@ -124,4 +126,4 @@ struct Event::TypedData<Event::NodeLayout> {
   LayoutType layoutType;
 };
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

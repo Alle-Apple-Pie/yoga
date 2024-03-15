@@ -10,13 +10,15 @@
 #include <yoga/enums/Edge.h>
 #include <yoga/node/Node.h>
 
-using namespace facebook;
-using namespace facebook::yoga;
+using namespace facebookyg;
+using namespace facebookyg::yoga;
 
 namespace {
 
 template <auto LayoutMember>
-float getResolvedLayoutProperty(const YGNodeConstRef nodeRef, const Edge edge) {
+float getResolvedLayoutProperty(
+    const FBYGNodeConstRef nodeRef,
+    const Edge edge) {
   const auto node = resolveRef(nodeRef);
   yoga::assertFatalWithNode(
       node,
@@ -44,49 +46,49 @@ float getResolvedLayoutProperty(const YGNodeConstRef nodeRef, const Edge edge) {
 
 } // namespace
 
-float YGNodeLayoutGetLeft(const YGNodeConstRef node) {
+float FBYGNodeLayoutGetLeft(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().position(PhysicalEdge::Left);
 }
 
-float YGNodeLayoutGetTop(const YGNodeConstRef node) {
+float FBYGNodeLayoutGetTop(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().position(PhysicalEdge::Top);
 }
 
-float YGNodeLayoutGetRight(const YGNodeConstRef node) {
+float FBYGNodeLayoutGetRight(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().position(PhysicalEdge::Right);
 }
 
-float YGNodeLayoutGetBottom(const YGNodeConstRef node) {
+float FBYGNodeLayoutGetBottom(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().position(PhysicalEdge::Bottom);
 }
 
-float YGNodeLayoutGetWidth(const YGNodeConstRef node) {
+float FBYGNodeLayoutGetWidth(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().dimension(Dimension::Width);
 }
 
-float YGNodeLayoutGetHeight(const YGNodeConstRef node) {
+float FBYGNodeLayoutGetHeight(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().dimension(Dimension::Height);
 }
 
-YGDirection YGNodeLayoutGetDirection(const YGNodeConstRef node) {
+FBYGDirection FBYGNodeLayoutGetDirection(const FBYGNodeConstRef node) {
   return unscopedEnum(resolveRef(node)->getLayout().direction());
 }
 
-bool YGNodeLayoutGetHadOverflow(const YGNodeConstRef node) {
+bool FBYGNodeLayoutGetHadOverflow(const FBYGNodeConstRef node) {
   return resolveRef(node)->getLayout().hadOverflow();
 }
 
-float YGNodeLayoutGetMargin(YGNodeConstRef node, YGEdge edge) {
+float FBYGNodeLayoutGetMargin(FBYGNodeConstRef node, FBYGEdge edge) {
   return getResolvedLayoutProperty<&LayoutResults::margin>(
       node, scopedEnum(edge));
 }
 
-float YGNodeLayoutGetBorder(YGNodeConstRef node, YGEdge edge) {
+float FBYGNodeLayoutGetBorder(FBYGNodeConstRef node, FBYGEdge edge) {
   return getResolvedLayoutProperty<&LayoutResults::border>(
       node, scopedEnum(edge));
 }
 
-float YGNodeLayoutGetPadding(YGNodeConstRef node, YGEdge edge) {
+float FBYGNodeLayoutGetPadding(FBYGNodeConstRef node, FBYGEdge edge) {
   return getResolvedLayoutProperty<&LayoutResults::padding>(
       node, scopedEnum(edge));
 }

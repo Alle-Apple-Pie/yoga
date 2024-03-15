@@ -13,11 +13,11 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Dimension : uint8_t {
-  Width = YGDimensionWidth,
-  Height = YGDimensionHeight,
+  Width = FBYGDimensionWidth,
+  Height = FBYGDimensionHeight,
 };
 
 template <>
@@ -25,16 +25,16 @@ constexpr int32_t ordinalCount<Dimension>() {
   return 2;
 }
 
-constexpr Dimension scopedEnum(YGDimension unscoped) {
+constexpr Dimension scopedEnum(FBYGDimension unscoped) {
   return static_cast<Dimension>(unscoped);
 }
 
-constexpr YGDimension unscopedEnum(Dimension scoped) {
-  return static_cast<YGDimension>(scoped);
+constexpr FBYGDimension unscopedEnum(Dimension scoped) {
+  return static_cast<FBYGDimension>(scoped);
 }
 
 inline const char* toString(Dimension e) {
-  return YGDimensionToString(unscopedEnum(e));
+  return FBYGDimensionToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

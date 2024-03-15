@@ -13,15 +13,15 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class LogLevel : uint8_t {
-  Error = YGLogLevelError,
-  Warn = YGLogLevelWarn,
-  Info = YGLogLevelInfo,
-  Debug = YGLogLevelDebug,
-  Verbose = YGLogLevelVerbose,
-  Fatal = YGLogLevelFatal,
+  Error = FBYGLogLevelError,
+  Warn = FBYGLogLevelWarn,
+  Info = FBYGLogLevelInfo,
+  Debug = FBYGLogLevelDebug,
+  Verbose = FBYGLogLevelVerbose,
+  Fatal = FBYGLogLevelFatal,
 };
 
 template <>
@@ -29,16 +29,16 @@ constexpr int32_t ordinalCount<LogLevel>() {
   return 6;
 }
 
-constexpr LogLevel scopedEnum(YGLogLevel unscoped) {
+constexpr LogLevel scopedEnum(FBYGLogLevel unscoped) {
   return static_cast<LogLevel>(unscoped);
 }
 
-constexpr YGLogLevel unscopedEnum(LogLevel scoped) {
-  return static_cast<YGLogLevel>(scoped);
+constexpr FBYGLogLevel unscopedEnum(LogLevel scoped) {
+  return static_cast<FBYGLogLevel>(scoped);
 }
 
 inline const char* toString(LogLevel e) {
-  return YGLogLevelToString(unscopedEnum(e));
+  return FBYGLogLevelToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

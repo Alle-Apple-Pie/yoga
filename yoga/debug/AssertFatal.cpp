@@ -13,7 +13,7 @@
 #include <yoga/debug/Log.h>
 #include <yoga/node/Node.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 [[noreturn]] void fatalWithMessage(const char* message) {
 #if defined(__cpp_exceptions)
@@ -50,4 +50,4 @@ void assertFatalWithConfig(
   }
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

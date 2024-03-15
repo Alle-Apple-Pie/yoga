@@ -13,13 +13,13 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class FlexDirection : uint8_t {
-  Column = YGFlexDirectionColumn,
-  ColumnReverse = YGFlexDirectionColumnReverse,
-  Row = YGFlexDirectionRow,
-  RowReverse = YGFlexDirectionRowReverse,
+  Column = FBYGFlexDirectionColumn,
+  ColumnReverse = FBYGFlexDirectionColumnReverse,
+  Row = FBYGFlexDirectionRow,
+  RowReverse = FBYGFlexDirectionRowReverse,
 };
 
 template <>
@@ -27,16 +27,16 @@ constexpr int32_t ordinalCount<FlexDirection>() {
   return 4;
 }
 
-constexpr FlexDirection scopedEnum(YGFlexDirection unscoped) {
+constexpr FlexDirection scopedEnum(FBYGFlexDirection unscoped) {
   return static_cast<FlexDirection>(unscoped);
 }
 
-constexpr YGFlexDirection unscopedEnum(FlexDirection scoped) {
-  return static_cast<YGFlexDirection>(scoped);
+constexpr FBYGFlexDirection unscopedEnum(FlexDirection scoped) {
+  return static_cast<FBYGFlexDirection>(scoped);
 }
 
 inline const char* toString(FlexDirection e) {
-  return YGFlexDirectionToString(unscopedEnum(e));
+  return FBYGFlexDirectionToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

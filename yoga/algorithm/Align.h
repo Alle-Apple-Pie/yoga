@@ -12,7 +12,7 @@
 #include <yoga/algorithm/FlexDirection.h>
 #include <yoga/node/Node.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 inline Align resolveChildAlignment(
     const yoga::Node* node,
@@ -26,4 +26,4 @@ inline Align resolveChildAlignment(
   return align;
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

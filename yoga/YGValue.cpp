@@ -8,13 +8,13 @@
 #include <yoga/YGValue.h>
 #include <yoga/numeric/Comparison.h>
 
-using namespace facebook;
-using namespace facebook::yoga;
+using namespace facebookyg;
+using namespace facebookyg::yoga;
 
-const YGValue YGValueZero = {0, YGUnitPoint};
-const YGValue YGValueUndefined = {YGUndefined, YGUnitUndefined};
-const YGValue YGValueAuto = {YGUndefined, YGUnitAuto};
+const FBYGValue FBYGValueZero = {0, FBYGUnitPoint};
+const FBYGValue FBYGValueUndefined = {FBYGUndefined, FBYGUnitUndefined};
+const FBYGValue FBYGValueAuto = {FBYGUndefined, FBYGUnitAuto};
 
-bool YGFloatIsUndefined(const float value) {
+bool FBYGFloatIsUndefined(const float value) {
   return yoga::isUndefined(value);
 }

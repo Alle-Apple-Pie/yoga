@@ -13,15 +13,15 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Justify : uint8_t {
-  FlexStart = YGJustifyFlexStart,
-  Center = YGJustifyCenter,
-  FlexEnd = YGJustifyFlexEnd,
-  SpaceBetween = YGJustifySpaceBetween,
-  SpaceAround = YGJustifySpaceAround,
-  SpaceEvenly = YGJustifySpaceEvenly,
+  FlexStart = FBYGJustifyFlexStart,
+  Center = FBYGJustifyCenter,
+  FlexEnd = FBYGJustifyFlexEnd,
+  SpaceBetween = FBYGJustifySpaceBetween,
+  SpaceAround = FBYGJustifySpaceAround,
+  SpaceEvenly = FBYGJustifySpaceEvenly,
 };
 
 template <>
@@ -29,16 +29,16 @@ constexpr int32_t ordinalCount<Justify>() {
   return 6;
 }
 
-constexpr Justify scopedEnum(YGJustify unscoped) {
+constexpr Justify scopedEnum(FBYGJustify unscoped) {
   return static_cast<Justify>(unscoped);
 }
 
-constexpr YGJustify unscopedEnum(Justify scoped) {
-  return static_cast<YGJustify>(scoped);
+constexpr FBYGJustify unscopedEnum(Justify scoped) {
+  return static_cast<FBYGJustify>(scoped);
 }
 
 inline const char* toString(Justify e) {
-  return YGJustifyToString(unscopedEnum(e));
+  return FBYGJustifyToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

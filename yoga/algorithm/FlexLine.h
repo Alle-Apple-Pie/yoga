@@ -12,7 +12,7 @@
 #include <yoga/Yoga.h>
 #include <yoga/node/Node.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 struct FlexLineRunningLayout {
   // Total flex grow factors of flex items which are to be laid in the current
@@ -71,4 +71,4 @@ FlexLine calculateFlexLine(
     size_t startOfLineIndex,
     size_t lineCount);
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

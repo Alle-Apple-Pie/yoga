@@ -12,7 +12,7 @@
 #include <yoga/event/event.h>
 #include <yoga/node/Node.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 // Given an offset to an edge, returns the offset to the opposite edge on the
 // same axis. This assumes that the width/height of both nodes is determined at
@@ -41,4 +41,4 @@ inline bool needsTrailingPosition(const FlexDirection axis) {
       axis == FlexDirection::ColumnReverse;
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -24,12 +24,12 @@
 #include <yoga/node/LayoutResults.h>
 #include <yoga/style/Style.h>
 
-// Tag struct used to form the opaque YGNodeRef for the public C API
-struct YGNode {};
+// Tag struct used to form the opaque FBYGNodeRef for the public C API
+struct FBYGNode {};
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
-class YG_EXPORT Node : public ::YGNode {
+class FBYG_EXPORT Node : public ::FBYGNode {
  public:
   Node();
   explicit Node(const Config* config);
@@ -65,7 +65,7 @@ class YG_EXPORT Node : public ::YGNode {
     return measureFunc_ != nullptr;
   }
 
-  YGSize measure(float, MeasureMode, float, MeasureMode);
+  FBYGSize measure(float, MeasureMode, float, MeasureMode);
 
   bool hasBaselineFunc() const noexcept {
     return baselineFunc_ != nullptr;
@@ -90,7 +90,7 @@ class YG_EXPORT Node : public ::YGNode {
     return config_->hasErrata(errata);
   }
 
-  YGDirtiedFunc getDirtiedFunc() const {
+  FBYGDirtiedFunc getDirtiedFunc() const {
     return dirtiedFunc_;
   }
 
@@ -174,13 +174,13 @@ class YG_EXPORT Node : public ::YGNode {
     nodeType_ = nodeType;
   }
 
-  void setMeasureFunc(YGMeasureFunc measureFunc);
+  void setMeasureFunc(FBYGMeasureFunc measureFunc);
 
-  void setBaselineFunc(YGBaselineFunc baseLineFunc) {
+  void setBaselineFunc(FBYGBaselineFunc baseLineFunc) {
     baselineFunc_ = baseLineFunc;
   }
 
-  void setDirtiedFunc(YGDirtiedFunc dirtiedFunc) {
+  void setDirtiedFunc(FBYGDirtiedFunc dirtiedFunc) {
     dirtiedFunc_ = dirtiedFunc;
   }
 
@@ -271,9 +271,9 @@ class YG_EXPORT Node : public ::YGNode {
   bool alwaysFormsContainingBlock_ : 1 = false;
   NodeType nodeType_ : bitCount<NodeType>() = NodeType::Default;
   void* context_ = nullptr;
-  YGMeasureFunc measureFunc_ = nullptr;
-  YGBaselineFunc baselineFunc_ = nullptr;
-  YGDirtiedFunc dirtiedFunc_ = nullptr;
+  FBYGMeasureFunc measureFunc_ = nullptr;
+  FBYGBaselineFunc baselineFunc_ = nullptr;
+  FBYGDirtiedFunc dirtiedFunc_ = nullptr;
   Style style_;
   LayoutResults layout_;
   size_t lineIndex_ = 0;
@@ -284,12 +284,12 @@ class YG_EXPORT Node : public ::YGNode {
       {value::undefined(), value::undefined()}};
 };
 
-inline Node* resolveRef(const YGNodeRef ref) {
+inline Node* resolveRef(const FBYGNodeRef ref) {
   return static_cast<Node*>(ref);
 }
 
-inline const Node* resolveRef(const YGNodeConstRef ref) {
+inline const Node* resolveRef(const FBYGNodeConstRef ref) {
   return static_cast<const Node*>(ref);
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

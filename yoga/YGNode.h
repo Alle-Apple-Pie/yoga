@@ -14,253 +14,263 @@
 #include <yoga/YGEnums.h>
 #include <yoga/YGMacros.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
 /**
  * Handle to a mutable Yoga Node.
  */
-typedef struct YGNode* YGNodeRef;
+typedef struct FBYGNode* FBYGNodeRef;
 
 /**
  * Handle to an immutable Yoga Node.
  */
-typedef const struct YGNode* YGNodeConstRef;
+typedef const struct FBYGNode* FBYGNodeConstRef;
 
 /**
  * Heap allocates and returns a new Yoga node using Yoga settings.
  */
-YG_EXPORT YGNodeRef YGNodeNew(void);
+FBYG_EXPORT FBYGNodeRef FBYGNodeNew(void);
 
 /**
  * Heap allocates and returns a new Yoga node, with customized settings.
  */
-YG_EXPORT YGNodeRef YGNodeNewWithConfig(YGConfigConstRef config);
+FBYG_EXPORT FBYGNodeRef FBYGNodeNewWithConfig(FBYGConfigConstRef config);
 
 /**
  * Returns a mutable copy of an existing node, with the same context and
  * children, but no owner set. Does not call the function set by
- * YGConfigSetCloneNodeFunc().
+ * FBYGConfigSetCloneNodeFunc().
  */
-YG_EXPORT YGNodeRef YGNodeClone(YGNodeConstRef node);
+FBYG_EXPORT FBYGNodeRef FBYGNodeClone(FBYGNodeConstRef node);
 
 /**
  * Frees the Yoga node, disconnecting it from its owner and children.
  */
-YG_EXPORT void YGNodeFree(YGNodeRef node);
+FBYG_EXPORT void FBYGNodeFree(FBYGNodeRef node);
 
 /**
  * Frees the subtree of Yoga nodes rooted at the given node.
  */
-YG_EXPORT void YGNodeFreeRecursive(YGNodeRef node);
+FBYG_EXPORT void FBYGNodeFreeRecursive(FBYGNodeRef node);
 
 /**
  * Frees the Yoga node without disconnecting it from its owner or children.
  * Allows garbage collecting Yoga nodes in parallel when the entire tree is
  * unrechable.
  */
-YG_EXPORT void YGNodeFinalize(YGNodeRef node);
+FBYG_EXPORT void FBYGNodeFinalize(FBYGNodeRef node);
 
 /**
  * Resets the node to its default state.
  */
-YG_EXPORT void YGNodeReset(YGNodeRef node);
+FBYG_EXPORT void FBYGNodeReset(FBYGNodeRef node);
 
 /**
  * Calculates the layout of the tree rooted at the given node.
  *
- * Layout results may be read after calling YGNodeCalculateLayout() using
- * functions like YGNodeLayoutGetLeft(), YGNodeLayoutGetTop(), etc.
+ * Layout results may be read after calling FBYGNodeCalculateLayout() using
+ * functions like FBYGNodeLayoutGetLeft(), FBYGNodeLayoutGetTop(), etc.
  *
- * YGNodeGetHasNewLayout() may be read to know if the layout of the node or its
- * subtrees may have changed since the last time YGNodeCalculate() was called.
+ * FBYGNodeGetHasNewLayout() may be read to know if the layout of the node or
+ * its subtrees may have changed since the last time FBYGNodeCalculate() was
+ * called.
  */
-YG_EXPORT void YGNodeCalculateLayout(
-    YGNodeRef node,
+FBYG_EXPORT void FBYGNodeCalculateLayout(
+    FBYGNodeRef node,
     float availableWidth,
     float availableHeight,
-    YGDirection ownerDirection);
+    FBYGDirection ownerDirection);
 
 /**
  * Whether the given node may have new layout results. Must be reset by calling
- * YGNodeSetHasNewLayout().
+ * FBYGNodeSetHasNewLayout().
  */
-YG_EXPORT bool YGNodeGetHasNewLayout(YGNodeConstRef node);
+FBYG_EXPORT bool FBYGNodeGetHasNewLayout(FBYGNodeConstRef node);
 
 /**
  * Sets whether a nodes layout is considered new.
  */
-YG_EXPORT void YGNodeSetHasNewLayout(YGNodeRef node, bool hasNewLayout);
+FBYG_EXPORT void FBYGNodeSetHasNewLayout(FBYGNodeRef node, bool hasNewLayout);
 
 /**
  * Whether the node's layout results are dirty due to it or its children
  * changing.
  */
-YG_EXPORT bool YGNodeIsDirty(YGNodeConstRef node);
+FBYG_EXPORT bool FBYGNodeIsDirty(FBYGNodeConstRef node);
 
 /**
  * Marks a node with custom measure function as dirty.
  */
-YG_EXPORT void YGNodeMarkDirty(YGNodeRef node);
+FBYG_EXPORT void FBYGNodeMarkDirty(FBYGNodeRef node);
 
-typedef void (*YGDirtiedFunc)(YGNodeConstRef node);
+typedef void (*FBYGDirtiedFunc)(FBYGNodeConstRef node);
 
 /**
  * Called when a change is made to the Yoga tree which dirties this node.
  */
-YG_EXPORT void YGNodeSetDirtiedFunc(YGNodeRef node, YGDirtiedFunc dirtiedFunc);
+FBYG_EXPORT void FBYGNodeSetDirtiedFunc(
+    FBYGNodeRef node,
+    FBYGDirtiedFunc dirtiedFunc);
 
 /**
  * Returns a dirtied func if set.
  */
-YG_EXPORT YGDirtiedFunc YGNodeGetDirtiedFunc(YGNodeConstRef node);
+FBYG_EXPORT FBYGDirtiedFunc FBYGNodeGetDirtiedFunc(FBYGNodeConstRef node);
 
 /**
  * Inserts a child node at the given index.
  */
-YG_EXPORT void YGNodeInsertChild(YGNodeRef node, YGNodeRef child, size_t index);
+FBYG_EXPORT void
+FBYGNodeInsertChild(FBYGNodeRef node, FBYGNodeRef child, size_t index);
 
 /**
  * Replaces the child node at a given index with a new one.
  */
-YG_EXPORT void YGNodeSwapChild(YGNodeRef node, YGNodeRef child, size_t index);
+FBYG_EXPORT void
+FBYGNodeSwapChild(FBYGNodeRef node, FBYGNodeRef child, size_t index);
 
 /**
  * Removes the given child node.
  */
-YG_EXPORT void YGNodeRemoveChild(YGNodeRef node, YGNodeRef child);
+FBYG_EXPORT void FBYGNodeRemoveChild(FBYGNodeRef node, FBYGNodeRef child);
 
 /**
  * Removes all children nodes.
  */
-YG_EXPORT void YGNodeRemoveAllChildren(YGNodeRef node);
+FBYG_EXPORT void FBYGNodeRemoveAllChildren(FBYGNodeRef node);
 
 /**
  * Sets children according to the given list of nodes.
  */
-YG_EXPORT void
-YGNodeSetChildren(YGNodeRef owner, const YGNodeRef* children, size_t count);
+FBYG_EXPORT void FBYGNodeSetChildren(
+    FBYGNodeRef owner,
+    const FBYGNodeRef* children,
+    size_t count);
 
 /**
  * Get the child node at a given index.
  */
-YG_EXPORT YGNodeRef YGNodeGetChild(YGNodeRef node, size_t index);
+FBYG_EXPORT FBYGNodeRef FBYGNodeGetChild(FBYGNodeRef node, size_t index);
 
 /**
  * The number of child nodes.
  */
-YG_EXPORT size_t YGNodeGetChildCount(YGNodeConstRef node);
+FBYG_EXPORT size_t FBYGNodeGetChildCount(FBYGNodeConstRef node);
 
 /**
  * Get the parent/owner currently set for a node.
  */
-YG_EXPORT YGNodeRef YGNodeGetOwner(YGNodeRef node);
+FBYG_EXPORT FBYGNodeRef FBYGNodeGetOwner(FBYGNodeRef node);
 
 /**
  * Get the parent/owner currently set for a node.
  */
-YG_EXPORT YGNodeRef YGNodeGetParent(YGNodeRef node);
+FBYG_EXPORT FBYGNodeRef FBYGNodeGetParent(FBYGNodeRef node);
 
 /**
  * Set a new config for the node after creation.
  */
-YG_EXPORT void YGNodeSetConfig(YGNodeRef node, YGConfigRef config);
+FBYG_EXPORT void FBYGNodeSetConfig(FBYGNodeRef node, FBYGConfigRef config);
 
 /**
  * Get the config currently set on the node.
  */
-YG_EXPORT YGConfigConstRef YGNodeGetConfig(YGNodeRef node);
+FBYG_EXPORT FBYGConfigConstRef FBYGNodeGetConfig(FBYGNodeRef node);
 
 /**
  * Sets extra data on the Yoga node which may be read from during callbacks.
  */
-YG_EXPORT void YGNodeSetContext(YGNodeRef node, void* context);
+FBYG_EXPORT void FBYGNodeSetContext(FBYGNodeRef node, void* context);
 
 /**
  * Returns the context or NULL if no context has been set.
  */
-YG_EXPORT void* YGNodeGetContext(YGNodeConstRef node);
+FBYG_EXPORT void* FBYGNodeGetContext(FBYGNodeConstRef node);
 
-typedef struct YGSize {
+typedef struct FBYGSize {
   float width;
   float height;
-} YGSize;
+} FBYGSize;
 
 /**
  * Returns the computed dimensions of the node, following the contraints of
  * `widthMode` and `heightMode`:
  *
- * YGMeasureModeUndefined: The parent has not imposed any constraint on the
+ * FBYGMeasureModeUndefined: The parent has not imposed any constraint on the
  * child. It can be whatever size it wants.
  *
- * YGMeasureModeAtMost: The child can be as large as it wants up to the
+ * FBYGMeasureModeAtMost: The child can be as large as it wants up to the
  * specified size.
  *
- * YGMeasureModeExactly: The parent has determined an exact size for the
+ * FBYGMeasureModeExactly: The parent has determined an exact size for the
  * child. The child is going to be given those bounds regardless of how big it
  * wants to be.
  *
  * @returns the size of the leaf node, measured under the given contraints.
  */
-typedef YGSize (*YGMeasureFunc)(
-    YGNodeConstRef node,
+typedef FBYGSize (*FBYGMeasureFunc)(
+    FBYGNodeConstRef node,
     float width,
-    YGMeasureMode widthMode,
+    FBYGMeasureMode widthMode,
     float height,
-    YGMeasureMode heightMode);
+    FBYGMeasureMode heightMode);
 
 /**
  * Allows providing custom measurements for a Yoga leaf node (usually for
- * measuring text). YGNodeMarkDirty() must be set if content effecting the
+ * measuring text). FBYGNodeMarkDirty() must be set if content effecting the
  * measurements of the node changes.
  */
-YG_EXPORT void YGNodeSetMeasureFunc(YGNodeRef node, YGMeasureFunc measureFunc);
+FBYG_EXPORT void FBYGNodeSetMeasureFunc(
+    FBYGNodeRef node,
+    FBYGMeasureFunc measureFunc);
 
 /**
  * Whether a measure function is set.
  */
-YG_EXPORT bool YGNodeHasMeasureFunc(YGNodeConstRef node);
+FBYG_EXPORT bool FBYGNodeHasMeasureFunc(FBYGNodeConstRef node);
 
 /**
  * @returns a defined offet to baseline (ascent).
  */
-typedef float (*YGBaselineFunc)(YGNodeConstRef node, float width, float height);
+typedef float (
+    *FBYGBaselineFunc)(FBYGNodeConstRef node, float width, float height);
 
 /**
  * Set a custom function for determining the text baseline for use in baseline
  * alignment.
  */
-YG_EXPORT void YGNodeSetBaselineFunc(
-    YGNodeRef node,
-    YGBaselineFunc baselineFunc);
+FBYG_EXPORT void FBYGNodeSetBaselineFunc(
+    FBYGNodeRef node,
+    FBYGBaselineFunc baselineFunc);
 
 /**
  * Whether a baseline function is set.
  */
-YG_EXPORT bool YGNodeHasBaselineFunc(YGNodeConstRef node);
+FBYG_EXPORT bool FBYGNodeHasBaselineFunc(FBYGNodeConstRef node);
 
 /**
  * Sets this node should be considered the reference baseline among siblings.
  */
-YG_EXPORT void YGNodeSetIsReferenceBaseline(
-    YGNodeRef node,
+FBYG_EXPORT void FBYGNodeSetIsReferenceBaseline(
+    FBYGNodeRef node,
     bool isReferenceBaseline);
 
 /**
  * Whether this node is set as the reference baseline.
  */
-YG_EXPORT bool YGNodeIsReferenceBaseline(YGNodeConstRef node);
+FBYG_EXPORT bool FBYGNodeIsReferenceBaseline(FBYGNodeConstRef node);
 
 /**
  * Sets whether a leaf node's layout results may be truncated during layout
  * rounding.
  */
-YG_EXPORT void YGNodeSetNodeType(YGNodeRef node, YGNodeType nodeType);
+FBYG_EXPORT void FBYGNodeSetNodeType(FBYGNodeRef node, FBYGNodeType nodeType);
 
 /**
  * Wwhether a leaf node's layout results may be truncated during layout
  * rounding.
  */
-YG_EXPORT YGNodeType YGNodeGetNodeType(YGNodeConstRef node);
+FBYG_EXPORT FBYGNodeType FBYGNodeGetNodeType(FBYGNodeConstRef node);
 
 /**
  * Make it so that this node will always form a containing block for any
@@ -269,8 +279,8 @@ YG_EXPORT YGNodeType YGNodeGetNodeType(YGNodeConstRef node);
  * the others listed in
  * https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block
  */
-YG_EXPORT void YGNodeSetAlwaysFormsContainingBlock(
-    YGNodeRef node,
+FBYG_EXPORT void FBYGNodeSetAlwaysFormsContainingBlock(
+    FBYGNodeRef node,
     bool alwaysFormsContainingBlock);
 
 /**
@@ -279,26 +289,26 @@ YG_EXPORT void YGNodeSetAlwaysFormsContainingBlock(
  * transform that can affect containing blocks but is not handled by Yoga
  * directly.
  */
-YG_EXPORT bool YGNodeGetAlwaysFormsContainingBlock(YGNodeConstRef node);
+FBYG_EXPORT bool FBYGNodeGetAlwaysFormsContainingBlock(FBYGNodeConstRef node);
 
 /**
  * @deprecated
  */
-YG_DEPRECATED(
-    "YGNodeCanUseCachedMeasurement may be removed in a future version of Yoga")
-YG_EXPORT bool YGNodeCanUseCachedMeasurement(
-    YGMeasureMode widthMode,
+FBYG_DEPRECATED(
+    "FBYGNodeCanUseCachedMeasurement may be removed in a future version of Yoga")
+FBYG_EXPORT bool FBYGNodeCanUseCachedMeasurement(
+    FBYGMeasureMode widthMode,
     float availableWidth,
-    YGMeasureMode heightMode,
+    FBYGMeasureMode heightMode,
     float availableHeight,
-    YGMeasureMode lastWidthMode,
+    FBYGMeasureMode lastWidthMode,
     float lastAvailableWidth,
-    YGMeasureMode lastHeightMode,
+    FBYGMeasureMode lastHeightMode,
     float lastAvailableHeight,
     float lastComputedWidth,
     float lastComputedHeight,
     float marginRow,
     float marginColumn,
-    YGConfigRef config);
+    FBYGConfigRef config);
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END

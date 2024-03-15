@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
 
   spec.authors = {'Meta Open Source' => 'opensource@meta.com'}
   spec.source = {
-    :git => 'https://github.com/facebook/yoga.git',
+    :git => 'https://github.com/Alle-Apple-Pie/yoga.git',
     :tag => "v#{spec.version.to_s}",
   }
 

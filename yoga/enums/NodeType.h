@@ -13,11 +13,11 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class NodeType : uint8_t {
-  Default = YGNodeTypeDefault,
-  Text = YGNodeTypeText,
+  Default = FBYGNodeTypeDefault,
+  Text = FBYGNodeTypeText,
 };
 
 template <>
@@ -25,16 +25,16 @@ constexpr int32_t ordinalCount<NodeType>() {
   return 2;
 }
 
-constexpr NodeType scopedEnum(YGNodeType unscoped) {
+constexpr NodeType scopedEnum(FBYGNodeType unscoped) {
   return static_cast<NodeType>(unscoped);
 }
 
-constexpr YGNodeType unscopedEnum(NodeType scoped) {
-  return static_cast<YGNodeType>(scoped);
+constexpr FBYGNodeType unscopedEnum(NodeType scoped) {
+  return static_cast<FBYGNodeType>(scoped);
 }
 
 inline const char* toString(NodeType e) {
-  return YGNodeTypeToString(unscopedEnum(e));
+  return FBYGNodeTypeToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

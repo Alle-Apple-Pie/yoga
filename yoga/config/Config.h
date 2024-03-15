@@ -14,10 +14,10 @@
 #include <yoga/enums/ExperimentalFeature.h>
 #include <yoga/enums/LogLevel.h>
 
-// Tag struct used to form the opaque YGConfigRef for the public C API
-struct YGConfig {};
+// Tag struct used to form the opaque FBYGConfigRef for the public C API
+struct FBYGConfig {};
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 class Config;
 class Node;
@@ -30,9 +30,9 @@ bool configUpdateInvalidatesLayout(
     const Config& oldConfig,
     const Config& newConfig);
 
-class YG_EXPORT Config : public ::YGConfig {
+class FBYG_EXPORT Config : public ::FBYGConfig {
  public:
-  Config(YGLogger logger);
+  Config(FBYGLogger logger);
 
   void setUseWebDefaults(bool useWebDefaults);
   bool useWebDefaults() const;
@@ -53,22 +53,24 @@ class YG_EXPORT Config : public ::YGConfig {
   void setContext(void* context);
   void* getContext() const;
 
-  void setLogger(YGLogger logger);
+  void setLogger(FBYGLogger logger);
   void log(
       const yoga::Node* node,
       LogLevel logLevel,
       const char* format,
       va_list args) const;
 
-  void setCloneNodeCallback(YGCloneNodeFunc cloneNode);
-  YGNodeRef
-  cloneNode(YGNodeConstRef node, YGNodeConstRef owner, size_t childIndex) const;
+  void setCloneNodeCallback(FBYGCloneNodeFunc cloneNode);
+  FBYGNodeRef cloneNode(
+      FBYGNodeConstRef node,
+      FBYGNodeConstRef owner,
+      size_t childIndex) const;
 
   static const Config& getDefault();
 
  private:
-  YGCloneNodeFunc cloneNodeCallback_;
-  YGLogger logger_;
+  FBYGCloneNodeFunc cloneNodeCallback_;
+  FBYGLogger logger_;
 
   bool useWebDefaults_ : 1 = false;
 
@@ -78,12 +80,12 @@ class YG_EXPORT Config : public ::YGConfig {
   void* context_ = nullptr;
 };
 
-inline Config* resolveRef(const YGConfigRef ref) {
+inline Config* resolveRef(const FBYGConfigRef ref) {
   return static_cast<Config*>(ref);
 }
 
-inline const Config* resolveRef(const YGConfigConstRef ref) {
+inline const Config* resolveRef(const FBYGConfigConstRef ref) {
   return static_cast<const Config*>(ref);
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -10,7 +10,7 @@
 #include <yoga/algorithm/PixelGrid.h>
 #include <yoga/numeric/Comparison.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 float roundValueToPixelGrid(
     const double value,
@@ -58,7 +58,7 @@ float roundValueToPixelGrid(
              : 0.0);
   }
   return (std::isnan(scaledValue) || std::isnan(pointScaleFactor))
-      ? YGUndefined
+      ? FBYGUndefined
       : (float)(scaledValue / pointScaleFactor);
 }
 
@@ -129,4 +129,4 @@ void roundLayoutResultsToPixelGrid(
   }
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

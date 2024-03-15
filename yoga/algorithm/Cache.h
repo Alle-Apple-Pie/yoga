@@ -10,7 +10,7 @@
 #include <yoga/algorithm/SizingMode.h>
 #include <yoga/config/Config.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 bool canUseCachedMeasurement(
     SizingMode widthMode,
@@ -27,4 +27,4 @@ bool canUseCachedMeasurement(
     float marginColumn,
     const yoga::Config* config);
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -13,12 +13,12 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Overflow : uint8_t {
-  Visible = YGOverflowVisible,
-  Hidden = YGOverflowHidden,
-  Scroll = YGOverflowScroll,
+  Visible = FBYGOverflowVisible,
+  Hidden = FBYGOverflowHidden,
+  Scroll = FBYGOverflowScroll,
 };
 
 template <>
@@ -26,16 +26,16 @@ constexpr int32_t ordinalCount<Overflow>() {
   return 3;
 }
 
-constexpr Overflow scopedEnum(YGOverflow unscoped) {
+constexpr Overflow scopedEnum(FBYGOverflow unscoped) {
   return static_cast<Overflow>(unscoped);
 }
 
-constexpr YGOverflow unscopedEnum(Overflow scoped) {
-  return static_cast<YGOverflow>(scoped);
+constexpr FBYGOverflow unscopedEnum(Overflow scoped) {
+  return static_cast<FBYGOverflow>(scoped);
 }
 
 inline const char* toString(Overflow e) {
-  return YGOverflowToString(unscopedEnum(e));
+  return FBYGOverflowToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

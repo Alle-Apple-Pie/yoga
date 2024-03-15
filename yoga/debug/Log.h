@@ -13,7 +13,7 @@
 #include <yoga/enums/LogLevel.h>
 #include <yoga/node/Node.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 void log(LogLevel level, const char* format, ...) noexcept;
 
@@ -29,6 +29,6 @@ void log(
     const char* format,
     ...) noexcept;
 
-YGLogger getDefaultLogger();
+FBYGLogger getDefaultLogger();
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -15,7 +15,7 @@
 #include <yoga/style/StyleLength.h>
 #include <yoga/style/StyleValueHandle.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 /**
  * StyleValuePool allows compact storage for a sparse collection of assigned
@@ -124,4 +124,4 @@ class StyleValuePool {
   SmallValueBuffer<4> buffer_;
 };
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

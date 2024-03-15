@@ -9,241 +9,241 @@
 // clang-format off
 #include <yoga/YGEnums.h>
 
-const char* YGAlignToString(const YGAlign value) {
+const char* FBYGAlignToString(const FBYGAlign value) {
   switch (value) {
-    case YGAlignAuto:
+    case FBYGAlignAuto:
       return "auto";
-    case YGAlignFlexStart:
+    case FBYGAlignFlexStart:
       return "flex-start";
-    case YGAlignCenter:
+    case FBYGAlignCenter:
       return "center";
-    case YGAlignFlexEnd:
+    case FBYGAlignFlexEnd:
       return "flex-end";
-    case YGAlignStretch:
+    case FBYGAlignStretch:
       return "stretch";
-    case YGAlignBaseline:
+    case FBYGAlignBaseline:
       return "baseline";
-    case YGAlignSpaceBetween:
+    case FBYGAlignSpaceBetween:
       return "space-between";
-    case YGAlignSpaceAround:
+    case FBYGAlignSpaceAround:
       return "space-around";
-    case YGAlignSpaceEvenly:
+    case FBYGAlignSpaceEvenly:
       return "space-evenly";
   }
   return "unknown";
 }
 
-const char* YGDimensionToString(const YGDimension value) {
+const char* FBYGDimensionToString(const FBYGDimension value) {
   switch (value) {
-    case YGDimensionWidth:
+    case FBYGDimensionWidth:
       return "width";
-    case YGDimensionHeight:
+    case FBYGDimensionHeight:
       return "height";
   }
   return "unknown";
 }
 
-const char* YGDirectionToString(const YGDirection value) {
+const char* FBYGDirectionToString(const FBYGDirection value) {
   switch (value) {
-    case YGDirectionInherit:
+    case FBYGDirectionInherit:
       return "inherit";
-    case YGDirectionLTR:
+    case FBYGDirectionLTR:
       return "ltr";
-    case YGDirectionRTL:
+    case FBYGDirectionRTL:
       return "rtl";
   }
   return "unknown";
 }
 
-const char* YGDisplayToString(const YGDisplay value) {
+const char* FBYGDisplayToString(const FBYGDisplay value) {
   switch (value) {
-    case YGDisplayFlex:
+    case FBYGDisplayFlex:
       return "flex";
-    case YGDisplayNone:
+    case FBYGDisplayNone:
       return "none";
   }
   return "unknown";
 }
 
-const char* YGEdgeToString(const YGEdge value) {
+const char* FBYGEdgeToString(const FBYGEdge value) {
   switch (value) {
-    case YGEdgeLeft:
+    case FBYGEdgeLeft:
       return "left";
-    case YGEdgeTop:
+    case FBYGEdgeTop:
       return "top";
-    case YGEdgeRight:
+    case FBYGEdgeRight:
       return "right";
-    case YGEdgeBottom:
+    case FBYGEdgeBottom:
       return "bottom";
-    case YGEdgeStart:
+    case FBYGEdgeStart:
       return "start";
-    case YGEdgeEnd:
+    case FBYGEdgeEnd:
       return "end";
-    case YGEdgeHorizontal:
+    case FBYGEdgeHorizontal:
       return "horizontal";
-    case YGEdgeVertical:
+    case FBYGEdgeVertical:
       return "vertical";
-    case YGEdgeAll:
+    case FBYGEdgeAll:
       return "all";
   }
   return "unknown";
 }
 
-const char* YGErrataToString(const YGErrata value) {
+const char* FBYGErrataToString(const FBYGErrata value) {
   switch (value) {
-    case YGErrataNone:
+    case FBYGErrataNone:
       return "none";
-    case YGErrataStretchFlexBasis:
+    case FBYGErrataStretchFlexBasis:
       return "stretch-flex-basis";
-    case YGErrataAbsolutePositioningIncorrect:
+    case FBYGErrataAbsolutePositioningIncorrect:
       return "absolute-positioning-incorrect";
-    case YGErrataAbsolutePercentAgainstInnerSize:
+    case FBYGErrataAbsolutePercentAgainstInnerSize:
       return "absolute-percent-against-inner-size";
-    case YGErrataAll:
+    case FBYGErrataAll:
       return "all";
-    case YGErrataClassic:
+    case FBYGErrataClassic:
       return "classic";
   }
   return "unknown";
 }
 
-const char* YGExperimentalFeatureToString(const YGExperimentalFeature value) {
+const char* FBYGExperimentalFeatureToString(const FBYGExperimentalFeature value) {
   switch (value) {
-    case YGExperimentalFeatureWebFlexBasis:
+    case FBYGExperimentalFeatureWebFlexBasis:
       return "web-flex-basis";
   }
   return "unknown";
 }
 
-const char* YGFlexDirectionToString(const YGFlexDirection value) {
+const char* FBYGFlexDirectionToString(const FBYGFlexDirection value) {
   switch (value) {
-    case YGFlexDirectionColumn:
+    case FBYGFlexDirectionColumn:
       return "column";
-    case YGFlexDirectionColumnReverse:
+    case FBYGFlexDirectionColumnReverse:
       return "column-reverse";
-    case YGFlexDirectionRow:
+    case FBYGFlexDirectionRow:
       return "row";
-    case YGFlexDirectionRowReverse:
+    case FBYGFlexDirectionRowReverse:
       return "row-reverse";
   }
   return "unknown";
 }
 
-const char* YGGutterToString(const YGGutter value) {
+const char* FBYGGutterToString(const FBYGGutter value) {
   switch (value) {
-    case YGGutterColumn:
+    case FBYGGutterColumn:
       return "column";
-    case YGGutterRow:
+    case FBYGGutterRow:
       return "row";
-    case YGGutterAll:
+    case FBYGGutterAll:
       return "all";
   }
   return "unknown";
 }
 
-const char* YGJustifyToString(const YGJustify value) {
+const char* FBYGJustifyToString(const FBYGJustify value) {
   switch (value) {
-    case YGJustifyFlexStart:
+    case FBYGJustifyFlexStart:
       return "flex-start";
-    case YGJustifyCenter:
+    case FBYGJustifyCenter:
       return "center";
-    case YGJustifyFlexEnd:
+    case FBYGJustifyFlexEnd:
       return "flex-end";
-    case YGJustifySpaceBetween:
+    case FBYGJustifySpaceBetween:
       return "space-between";
-    case YGJustifySpaceAround:
+    case FBYGJustifySpaceAround:
       return "space-around";
-    case YGJustifySpaceEvenly:
+    case FBYGJustifySpaceEvenly:
       return "space-evenly";
   }
   return "unknown";
 }
 
-const char* YGLogLevelToString(const YGLogLevel value) {
+const char* FBYGLogLevelToString(const FBYGLogLevel value) {
   switch (value) {
-    case YGLogLevelError:
+    case FBYGLogLevelError:
       return "error";
-    case YGLogLevelWarn:
+    case FBYGLogLevelWarn:
       return "warn";
-    case YGLogLevelInfo:
+    case FBYGLogLevelInfo:
       return "info";
-    case YGLogLevelDebug:
+    case FBYGLogLevelDebug:
       return "debug";
-    case YGLogLevelVerbose:
+    case FBYGLogLevelVerbose:
       return "verbose";
-    case YGLogLevelFatal:
+    case FBYGLogLevelFatal:
       return "fatal";
   }
   return "unknown";
 }
 
-const char* YGMeasureModeToString(const YGMeasureMode value) {
+const char* FBYGMeasureModeToString(const FBYGMeasureMode value) {
   switch (value) {
-    case YGMeasureModeUndefined:
+    case FBYGMeasureModeUndefined:
       return "undefined";
-    case YGMeasureModeExactly:
+    case FBYGMeasureModeExactly:
       return "exactly";
-    case YGMeasureModeAtMost:
+    case FBYGMeasureModeAtMost:
       return "at-most";
   }
   return "unknown";
 }
 
-const char* YGNodeTypeToString(const YGNodeType value) {
+const char* FBYGNodeTypeToString(const FBYGNodeType value) {
   switch (value) {
-    case YGNodeTypeDefault:
+    case FBYGNodeTypeDefault:
       return "default";
-    case YGNodeTypeText:
+    case FBYGNodeTypeText:
       return "text";
   }
   return "unknown";
 }
 
-const char* YGOverflowToString(const YGOverflow value) {
+const char* FBYGOverflowToString(const FBYGOverflow value) {
   switch (value) {
-    case YGOverflowVisible:
+    case FBYGOverflowVisible:
       return "visible";
-    case YGOverflowHidden:
+    case FBYGOverflowHidden:
       return "hidden";
-    case YGOverflowScroll:
+    case FBYGOverflowScroll:
       return "scroll";
   }
   return "unknown";
 }
 
-const char* YGPositionTypeToString(const YGPositionType value) {
+const char* FBYGPositionTypeToString(const FBYGPositionType value) {
   switch (value) {
-    case YGPositionTypeStatic:
+    case FBYGPositionTypeStatic:
       return "static";
-    case YGPositionTypeRelative:
+    case FBYGPositionTypeRelative:
       return "relative";
-    case YGPositionTypeAbsolute:
+    case FBYGPositionTypeAbsolute:
       return "absolute";
   }
   return "unknown";
 }
 
-const char* YGUnitToString(const YGUnit value) {
+const char* FBYGUnitToString(const FBYGUnit value) {
   switch (value) {
-    case YGUnitUndefined:
+    case FBYGUnitUndefined:
       return "undefined";
-    case YGUnitPoint:
+    case FBYGUnitPoint:
       return "point";
-    case YGUnitPercent:
+    case FBYGUnitPercent:
       return "percent";
-    case YGUnitAuto:
+    case FBYGUnitAuto:
       return "auto";
   }
   return "unknown";
 }
 
-const char* YGWrapToString(const YGWrap value) {
+const char* FBYGWrapToString(const FBYGWrap value) {
   switch (value) {
-    case YGWrapNoWrap:
+    case FBYGWrapNoWrap:
       return "no-wrap";
-    case YGWrapWrap:
+    case FBYGWrapWrap:
       return "wrap";
-    case YGWrapWrapReverse:
+    case FBYGWrapWrapReverse:
       return "wrap-reverse";
   }
   return "unknown";

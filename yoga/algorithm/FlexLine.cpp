@@ -11,7 +11,7 @@
 #include <yoga/algorithm/FlexDirection.h>
 #include <yoga/algorithm/FlexLine.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 FlexLine calculateFlexLine(
     yoga::Node* const node,
@@ -110,4 +110,4 @@ FlexLine calculateFlexLine(
       }};
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

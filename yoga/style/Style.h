@@ -31,9 +31,9 @@
 #include <yoga/style/StyleLength.h>
 #include <yoga/style/StyleValuePool.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
-class YG_EXPORT Style {
+class FBYG_EXPORT Style {
  public:
   using Length = StyleLength;
 
@@ -675,4 +675,4 @@ class YG_EXPORT Style {
   StyleValuePool pool_;
 };
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

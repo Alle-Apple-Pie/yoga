@@ -10,127 +10,127 @@
 #pragma once
 #include <yoga/YGMacros.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-YG_ENUM_DECL(
-    YGAlign,
-    YGAlignAuto,
-    YGAlignFlexStart,
-    YGAlignCenter,
-    YGAlignFlexEnd,
-    YGAlignStretch,
-    YGAlignBaseline,
-    YGAlignSpaceBetween,
-    YGAlignSpaceAround,
-    YGAlignSpaceEvenly)
+FBYG_ENUM_DECL(
+    FBYGAlign,
+    FBYGAlignAuto,
+    FBYGAlignFlexStart,
+    FBYGAlignCenter,
+    FBYGAlignFlexEnd,
+    FBYGAlignStretch,
+    FBYGAlignBaseline,
+    FBYGAlignSpaceBetween,
+    FBYGAlignSpaceAround,
+    FBYGAlignSpaceEvenly)
 
-YG_ENUM_DECL(
-    YGDimension,
-    YGDimensionWidth,
-    YGDimensionHeight)
+FBYG_ENUM_DECL(
+    FBYGDimension,
+    FBYGDimensionWidth,
+    FBYGDimensionHeight)
 
-YG_ENUM_DECL(
-    YGDirection,
-    YGDirectionInherit,
-    YGDirectionLTR,
-    YGDirectionRTL)
+FBYG_ENUM_DECL(
+    FBYGDirection,
+    FBYGDirectionInherit,
+    FBYGDirectionLTR,
+    FBYGDirectionRTL)
 
-YG_ENUM_DECL(
-    YGDisplay,
-    YGDisplayFlex,
-    YGDisplayNone)
+FBYG_ENUM_DECL(
+    FBYGDisplay,
+    FBYGDisplayFlex,
+    FBYGDisplayNone)
 
-YG_ENUM_DECL(
-    YGEdge,
-    YGEdgeLeft,
-    YGEdgeTop,
-    YGEdgeRight,
-    YGEdgeBottom,
-    YGEdgeStart,
-    YGEdgeEnd,
-    YGEdgeHorizontal,
-    YGEdgeVertical,
-    YGEdgeAll)
+FBYG_ENUM_DECL(
+    FBYGEdge,
+    FBYGEdgeLeft,
+    FBYGEdgeTop,
+    FBYGEdgeRight,
+    FBYGEdgeBottom,
+    FBYGEdgeStart,
+    FBYGEdgeEnd,
+    FBYGEdgeHorizontal,
+    FBYGEdgeVertical,
+    FBYGEdgeAll)
 
-YG_ENUM_DECL(
-    YGErrata,
-    YGErrataNone = 0,
-    YGErrataStretchFlexBasis = 1,
-    YGErrataAbsolutePositioningIncorrect = 2,
-    YGErrataAbsolutePercentAgainstInnerSize = 4,
-    YGErrataAll = 2147483647,
-    YGErrataClassic = 2147483646)
-YG_DEFINE_ENUM_FLAG_OPERATORS(YGErrata)
+FBYG_ENUM_DECL(
+    FBYGErrata,
+    FBYGErrataNone = 0,
+    FBYGErrataStretchFlexBasis = 1,
+    FBYGErrataAbsolutePositioningIncorrect = 2,
+    FBYGErrataAbsolutePercentAgainstInnerSize = 4,
+    FBYGErrataAll = 2147483647,
+    FBYGErrataClassic = 2147483646)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(FBYGErrata)
 
-YG_ENUM_DECL(
-    YGExperimentalFeature,
-    YGExperimentalFeatureWebFlexBasis)
+FBYG_ENUM_DECL(
+    FBYGExperimentalFeature,
+    FBYGExperimentalFeatureWebFlexBasis)
 
-YG_ENUM_DECL(
-    YGFlexDirection,
-    YGFlexDirectionColumn,
-    YGFlexDirectionColumnReverse,
-    YGFlexDirectionRow,
-    YGFlexDirectionRowReverse)
+FBYG_ENUM_DECL(
+    FBYGFlexDirection,
+    FBYGFlexDirectionColumn,
+    FBYGFlexDirectionColumnReverse,
+    FBYGFlexDirectionRow,
+    FBYGFlexDirectionRowReverse)
 
-YG_ENUM_DECL(
-    YGGutter,
-    YGGutterColumn,
-    YGGutterRow,
-    YGGutterAll)
+FBYG_ENUM_DECL(
+    FBYGGutter,
+    FBYGGutterColumn,
+    FBYGGutterRow,
+    FBYGGutterAll)
 
-YG_ENUM_DECL(
-    YGJustify,
-    YGJustifyFlexStart,
-    YGJustifyCenter,
-    YGJustifyFlexEnd,
-    YGJustifySpaceBetween,
-    YGJustifySpaceAround,
-    YGJustifySpaceEvenly)
+FBYG_ENUM_DECL(
+    FBYGJustify,
+    FBYGJustifyFlexStart,
+    FBYGJustifyCenter,
+    FBYGJustifyFlexEnd,
+    FBYGJustifySpaceBetween,
+    FBYGJustifySpaceAround,
+    FBYGJustifySpaceEvenly)
 
-YG_ENUM_DECL(
-    YGLogLevel,
-    YGLogLevelError,
-    YGLogLevelWarn,
-    YGLogLevelInfo,
-    YGLogLevelDebug,
-    YGLogLevelVerbose,
-    YGLogLevelFatal)
+FBYG_ENUM_DECL(
+    FBYGLogLevel,
+    FBYGLogLevelError,
+    FBYGLogLevelWarn,
+    FBYGLogLevelInfo,
+    FBYGLogLevelDebug,
+    FBYGLogLevelVerbose,
+    FBYGLogLevelFatal)
 
-YG_ENUM_DECL(
-    YGMeasureMode,
-    YGMeasureModeUndefined,
-    YGMeasureModeExactly,
-    YGMeasureModeAtMost)
+FBYG_ENUM_DECL(
+    FBYGMeasureMode,
+    FBYGMeasureModeUndefined,
+    FBYGMeasureModeExactly,
+    FBYGMeasureModeAtMost)
 
-YG_ENUM_DECL(
-    YGNodeType,
-    YGNodeTypeDefault,
-    YGNodeTypeText)
+FBYG_ENUM_DECL(
+    FBYGNodeType,
+    FBYGNodeTypeDefault,
+    FBYGNodeTypeText)
 
-YG_ENUM_DECL(
-    YGOverflow,
-    YGOverflowVisible,
-    YGOverflowHidden,
-    YGOverflowScroll)
+FBYG_ENUM_DECL(
+    FBYGOverflow,
+    FBYGOverflowVisible,
+    FBYGOverflowHidden,
+    FBYGOverflowScroll)
 
-YG_ENUM_DECL(
-    YGPositionType,
-    YGPositionTypeStatic,
-    YGPositionTypeRelative,
-    YGPositionTypeAbsolute)
+FBYG_ENUM_DECL(
+    FBYGPositionType,
+    FBYGPositionTypeStatic,
+    FBYGPositionTypeRelative,
+    FBYGPositionTypeAbsolute)
 
-YG_ENUM_DECL(
-    YGUnit,
-    YGUnitUndefined,
-    YGUnitPoint,
-    YGUnitPercent,
-    YGUnitAuto)
+FBYG_ENUM_DECL(
+    FBYGUnit,
+    FBYGUnitUndefined,
+    FBYGUnitPoint,
+    FBYGUnitPercent,
+    FBYGUnitAuto)
 
-YG_ENUM_DECL(
-    YGWrap,
-    YGWrapNoWrap,
-    YGWrapWrap,
-    YGWrapWrapReverse)
+FBYG_ENUM_DECL(
+    FBYGWrap,
+    FBYGWrapNoWrap,
+    FBYGWrapWrap,
+    FBYGWrapWrapReverse)
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END

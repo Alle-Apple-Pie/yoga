@@ -11,7 +11,7 @@
 #include <yoga/algorithm/CalculateLayout.h>
 #include <yoga/algorithm/TrailingPosition.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 static inline void setFlexStartLayoutPosition(
     const yoga::Node* const parent,
@@ -307,8 +307,8 @@ void layoutAbsoluteChild(
   const FlexDirection crossAxis = resolveCrossDirection(mainAxis, direction);
   const bool isMainAxisRow = isRow(mainAxis);
 
-  float childWidth = YGUndefined;
-  float childHeight = YGUndefined;
+  float childWidth = FBYGUndefined;
+  float childHeight = FBYGUndefined;
   SizingMode childWidthSizingMode = SizingMode::MaxContent;
   SizingMode childHeightSizingMode = SizingMode::MaxContent;
 
@@ -571,4 +571,4 @@ void layoutAbsoluteDescendants(
     }
   }
 }
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

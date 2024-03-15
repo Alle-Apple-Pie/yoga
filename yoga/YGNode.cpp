@@ -14,23 +14,23 @@
 #include <yoga/event/event.h>
 #include <yoga/node/Node.h>
 
-using namespace facebook;
-using namespace facebook::yoga;
+using namespace facebookyg;
+using namespace facebookyg::yoga;
 
-YGNodeRef YGNodeNew(void) {
-  return YGNodeNewWithConfig(YGConfigGetDefault());
+FBYGNodeRef FBYGNodeNew(void) {
+  return FBYGNodeNewWithConfig(FBYGConfigGetDefault());
 }
 
-YGNodeRef YGNodeNewWithConfig(const YGConfigConstRef config) {
+FBYGNodeRef FBYGNodeNewWithConfig(const FBYGConfigConstRef config) {
   auto* node = new yoga::Node{resolveRef(config)};
   yoga::assertFatal(
-      config != nullptr, "Tried to construct YGNode with null config");
+      config != nullptr, "Tried to construct FBYGNode with null config");
   Event::publish<Event::NodeAllocation>(node, {config});
 
   return node;
 }
 
-YGNodeRef YGNodeClone(YGNodeConstRef oldNodeRef) {
+FBYGNodeRef FBYGNodeClone(FBYGNodeConstRef oldNodeRef) {
   auto oldNode = resolveRef(oldNodeRef);
   const auto node = new yoga::Node(*oldNode);
   Event::publish<Event::NodeAllocation>(node, {node->getConfig()});
@@ -38,7 +38,7 @@ YGNodeRef YGNodeClone(YGNodeConstRef oldNodeRef) {
   return node;
 }
 
-void YGNodeFree(const YGNodeRef nodeRef) {
+void FBYGNodeFree(const FBYGNodeRef nodeRef) {
   const auto node = resolveRef(nodeRef);
 
   if (auto owner = node->getOwner()) {
@@ -54,11 +54,11 @@ void YGNodeFree(const YGNodeRef nodeRef) {
 
   node->clearChildren();
 
-  Event::publish<Event::NodeDeallocation>(node, {YGNodeGetConfig(node)});
+  Event::publish<Event::NodeDeallocation>(node, {FBYGNodeGetConfig(node)});
   delete resolveRef(node);
 }
 
-void YGNodeFreeRecursive(YGNodeRef rootRef) {
+void FBYGNodeFreeRecursive(FBYGNodeRef rootRef) {
   const auto root = resolveRef(rootRef);
 
   size_t skipped = 0;
@@ -68,44 +68,44 @@ void YGNodeFreeRecursive(YGNodeRef rootRef) {
       // Don't free shared nodes that we don't own.
       skipped += 1;
     } else {
-      YGNodeRemoveChild(root, child);
-      YGNodeFreeRecursive(child);
+      FBYGNodeRemoveChild(root, child);
+      FBYGNodeFreeRecursive(child);
     }
   }
-  YGNodeFree(root);
+  FBYGNodeFree(root);
 }
 
-void YGNodeFinalize(const YGNodeRef node) {
-  Event::publish<Event::NodeDeallocation>(node, {YGNodeGetConfig(node)});
+void FBYGNodeFinalize(const FBYGNodeRef node) {
+  Event::publish<Event::NodeDeallocation>(node, {FBYGNodeGetConfig(node)});
   delete resolveRef(node);
 }
 
-void YGNodeReset(YGNodeRef node) {
+void FBYGNodeReset(FBYGNodeRef node) {
   resolveRef(node)->reset();
 }
 
-void YGNodeCalculateLayout(
-    const YGNodeRef node,
+void FBYGNodeCalculateLayout(
+    const FBYGNodeRef node,
     const float ownerWidth,
     const float ownerHeight,
-    const YGDirection ownerDirection) {
+    const FBYGDirection ownerDirection) {
   yoga::calculateLayout(
       resolveRef(node), ownerWidth, ownerHeight, scopedEnum(ownerDirection));
 }
 
-bool YGNodeGetHasNewLayout(YGNodeConstRef node) {
+bool FBYGNodeGetHasNewLayout(FBYGNodeConstRef node) {
   return resolveRef(node)->getHasNewLayout();
 }
 
-void YGNodeSetHasNewLayout(YGNodeRef node, bool hasNewLayout) {
+void FBYGNodeSetHasNewLayout(FBYGNodeRef node, bool hasNewLayout) {
   resolveRef(node)->setHasNewLayout(hasNewLayout);
 }
 
-bool YGNodeIsDirty(YGNodeConstRef node) {
+bool FBYGNodeIsDirty(FBYGNodeConstRef node) {
   return resolveRef(node)->isDirty();
 }
 
-void YGNodeMarkDirty(const YGNodeRef nodeRef) {
+void FBYGNodeMarkDirty(const FBYGNodeRef nodeRef) {
   const auto node = resolveRef(nodeRef);
 
   yoga::assertFatalWithNode(
@@ -117,17 +117,17 @@ void YGNodeMarkDirty(const YGNodeRef nodeRef) {
   node->markDirtyAndPropagate();
 }
 
-void YGNodeSetDirtiedFunc(YGNodeRef node, YGDirtiedFunc dirtiedFunc) {
+void FBYGNodeSetDirtiedFunc(FBYGNodeRef node, FBYGDirtiedFunc dirtiedFunc) {
   resolveRef(node)->setDirtiedFunc(dirtiedFunc);
 }
 
-YGDirtiedFunc YGNodeGetDirtiedFunc(YGNodeConstRef node) {
+FBYGDirtiedFunc FBYGNodeGetDirtiedFunc(FBYGNodeConstRef node) {
   return resolveRef(node)->getDirtiedFunc();
 }
 
-void YGNodeInsertChild(
-    const YGNodeRef ownerRef,
-    const YGNodeRef childRef,
+void FBYGNodeInsertChild(
+    const FBYGNodeRef ownerRef,
+    const FBYGNodeRef childRef,
     const size_t index) {
   auto owner = resolveRef(ownerRef);
   auto child = resolveRef(childRef);
@@ -147,9 +147,9 @@ void YGNodeInsertChild(
   owner->markDirtyAndPropagate();
 }
 
-void YGNodeSwapChild(
-    const YGNodeRef ownerRef,
-    const YGNodeRef childRef,
+void FBYGNodeSwapChild(
+    const FBYGNodeRef ownerRef,
+    const FBYGNodeRef childRef,
     const size_t index) {
   auto owner = resolveRef(ownerRef);
   auto child = resolveRef(childRef);
@@ -158,9 +158,9 @@ void YGNodeSwapChild(
   child->setOwner(owner);
 }
 
-void YGNodeRemoveChild(
-    const YGNodeRef ownerRef,
-    const YGNodeRef excludedChildRef) {
+void FBYGNodeRemoveChild(
+    const FBYGNodeRef ownerRef,
+    const FBYGNodeRef excludedChildRef) {
   auto owner = resolveRef(ownerRef);
   auto excludedChild = resolveRef(excludedChildRef);
 
@@ -182,7 +182,7 @@ void YGNodeRemoveChild(
   }
 }
 
-void YGNodeRemoveAllChildren(const YGNodeRef ownerRef) {
+void FBYGNodeRemoveAllChildren(const FBYGNodeRef ownerRef) {
   auto owner = resolveRef(ownerRef);
 
   const size_t childCount = owner->getChildCount();
@@ -209,9 +209,9 @@ void YGNodeRemoveAllChildren(const YGNodeRef ownerRef) {
   owner->markDirtyAndPropagate();
 }
 
-void YGNodeSetChildren(
-    const YGNodeRef ownerRef,
-    const YGNodeRef* childrenRefs,
+void FBYGNodeSetChildren(
+    const FBYGNodeRef ownerRef,
+    const FBYGNodeRef* childrenRefs,
     const size_t count) {
   auto owner = resolveRef(ownerRef);
   auto children = reinterpret_cast<yoga::Node* const*>(childrenRefs);
@@ -250,7 +250,7 @@ void YGNodeSetChildren(
   }
 }
 
-YGNodeRef YGNodeGetChild(const YGNodeRef nodeRef, const size_t index) {
+FBYGNodeRef FBYGNodeGetChild(const FBYGNodeRef nodeRef, const size_t index) {
   const auto node = resolveRef(nodeRef);
 
   if (index < node->getChildren().size()) {
@@ -259,51 +259,53 @@ YGNodeRef YGNodeGetChild(const YGNodeRef nodeRef, const size_t index) {
   return nullptr;
 }
 
-size_t YGNodeGetChildCount(const YGNodeConstRef node) {
+size_t FBYGNodeGetChildCount(const FBYGNodeConstRef node) {
   return resolveRef(node)->getChildren().size();
 }
 
-YGNodeRef YGNodeGetOwner(const YGNodeRef node) {
+FBYGNodeRef FBYGNodeGetOwner(const FBYGNodeRef node) {
   return resolveRef(node)->getOwner();
 }
 
-YGNodeRef YGNodeGetParent(const YGNodeRef node) {
+FBYGNodeRef FBYGNodeGetParent(const FBYGNodeRef node) {
   return resolveRef(node)->getOwner();
 }
 
-void YGNodeSetConfig(YGNodeRef node, YGConfigRef config) {
+void FBYGNodeSetConfig(FBYGNodeRef node, FBYGConfigRef config) {
   resolveRef(node)->setConfig(resolveRef(config));
 }
 
-YGConfigConstRef YGNodeGetConfig(YGNodeRef node) {
+FBYGConfigConstRef FBYGNodeGetConfig(FBYGNodeRef node) {
   return resolveRef(node)->getConfig();
 }
 
-void YGNodeSetContext(YGNodeRef node, void* context) {
+void FBYGNodeSetContext(FBYGNodeRef node, void* context) {
   return resolveRef(node)->setContext(context);
 }
 
-void* YGNodeGetContext(YGNodeConstRef node) {
+void* FBYGNodeGetContext(FBYGNodeConstRef node) {
   return resolveRef(node)->getContext();
 }
 
-void YGNodeSetMeasureFunc(YGNodeRef node, YGMeasureFunc measureFunc) {
+void FBYGNodeSetMeasureFunc(FBYGNodeRef node, FBYGMeasureFunc measureFunc) {
   resolveRef(node)->setMeasureFunc(measureFunc);
 }
 
-bool YGNodeHasMeasureFunc(YGNodeConstRef node) {
+bool FBYGNodeHasMeasureFunc(FBYGNodeConstRef node) {
   return resolveRef(node)->hasMeasureFunc();
 }
 
-void YGNodeSetBaselineFunc(YGNodeRef node, YGBaselineFunc baselineFunc) {
+void FBYGNodeSetBaselineFunc(FBYGNodeRef node, FBYGBaselineFunc baselineFunc) {
   resolveRef(node)->setBaselineFunc(baselineFunc);
 }
 
-bool YGNodeHasBaselineFunc(YGNodeConstRef node) {
+bool FBYGNodeHasBaselineFunc(FBYGNodeConstRef node) {
   return resolveRef(node)->hasBaselineFunc();
 }
 
-void YGNodeSetIsReferenceBaseline(YGNodeRef nodeRef, bool isReferenceBaseline) {
+void FBYGNodeSetIsReferenceBaseline(
+    FBYGNodeRef nodeRef,
+    bool isReferenceBaseline) {
   const auto node = resolveRef(nodeRef);
   if (node->isReferenceBaseline() != isReferenceBaseline) {
     node->setIsReferenceBaseline(isReferenceBaseline);
@@ -311,44 +313,44 @@ void YGNodeSetIsReferenceBaseline(YGNodeRef nodeRef, bool isReferenceBaseline) {
   }
 }
 
-bool YGNodeIsReferenceBaseline(YGNodeConstRef node) {
+bool FBYGNodeIsReferenceBaseline(FBYGNodeConstRef node) {
   return resolveRef(node)->isReferenceBaseline();
 }
 
-void YGNodeSetNodeType(YGNodeRef node, YGNodeType nodeType) {
+void FBYGNodeSetNodeType(FBYGNodeRef node, FBYGNodeType nodeType) {
   return resolveRef(node)->setNodeType(scopedEnum(nodeType));
 }
 
-YGNodeType YGNodeGetNodeType(YGNodeConstRef node) {
+FBYGNodeType FBYGNodeGetNodeType(FBYGNodeConstRef node) {
   return unscopedEnum(resolveRef(node)->getNodeType());
 }
 
-void YGNodeSetAlwaysFormsContainingBlock(
-    YGNodeRef node,
+void FBYGNodeSetAlwaysFormsContainingBlock(
+    FBYGNodeRef node,
     bool alwaysFormsContainingBlock) {
   resolveRef(node)->setAlwaysFormsContainingBlock(alwaysFormsContainingBlock);
 }
 
-bool YGNodeGetAlwaysFormsContainingBlock(YGNodeConstRef node) {
+bool FBYGNodeGetAlwaysFormsContainingBlock(FBYGNodeConstRef node) {
   return resolveRef(node)->alwaysFormsContainingBlock();
 }
 
 // TODO: This leaks internal details to the public API. Remove after removing
 // ComponentKit usage of it.
-bool YGNodeCanUseCachedMeasurement(
-    YGMeasureMode widthMode,
+bool FBYGNodeCanUseCachedMeasurement(
+    FBYGMeasureMode widthMode,
     float availableWidth,
-    YGMeasureMode heightMode,
+    FBYGMeasureMode heightMode,
     float availableHeight,
-    YGMeasureMode lastWidthMode,
+    FBYGMeasureMode lastWidthMode,
     float lastAvailableWidth,
-    YGMeasureMode lastHeightMode,
+    FBYGMeasureMode lastHeightMode,
     float lastAvailableHeight,
     float lastComputedWidth,
     float lastComputedHeight,
     float marginRow,
     float marginColumn,
-    YGConfigRef config) {
+    FBYGConfigRef config) {
   return yoga::canUseCachedMeasurement(
       sizingMode(scopedEnum(widthMode)),
       availableWidth,

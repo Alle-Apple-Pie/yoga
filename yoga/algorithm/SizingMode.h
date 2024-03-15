@@ -10,7 +10,7 @@
 #include <yoga/debug/AssertFatal.h>
 #include <yoga/enums/MeasureMode.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 /**
  * Corresponds to a CSS auto box sizes. Missing "min-content", as Yoga does not
@@ -70,4 +70,4 @@ inline SizingMode sizingMode(MeasureMode mode) {
   fatalWithMessage("Invalid MeasureMode");
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

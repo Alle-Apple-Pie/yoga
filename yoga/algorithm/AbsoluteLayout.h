@@ -10,7 +10,7 @@
 #include <yoga/event/event.h>
 #include <yoga/node/Node.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 void layoutAbsoluteChild(
     const yoga::Node* const containingNode,
@@ -37,4 +37,4 @@ void layoutAbsoluteDescendants(
     float containingNodeAvailableInnerWidth,
     float containingNodeAvailableInnerHeight);
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

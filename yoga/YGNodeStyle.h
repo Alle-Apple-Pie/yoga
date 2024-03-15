@@ -12,112 +12,145 @@
 #include <yoga/YGNode.h>
 #include <yoga/YGValue.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-YG_EXPORT void YGNodeCopyStyle(YGNodeRef dstNode, YGNodeConstRef srcNode);
+FBYG_EXPORT void FBYGNodeCopyStyle(
+    FBYGNodeRef dstNode,
+    FBYGNodeConstRef srcNode);
 
-YG_EXPORT void YGNodeStyleSetDirection(YGNodeRef node, YGDirection direction);
-YG_EXPORT YGDirection YGNodeStyleGetDirection(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetDirection(
+    FBYGNodeRef node,
+    FBYGDirection direction);
+FBYG_EXPORT FBYGDirection FBYGNodeStyleGetDirection(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetFlexDirection(
-    YGNodeRef node,
-    YGFlexDirection flexDirection);
-YG_EXPORT YGFlexDirection YGNodeStyleGetFlexDirection(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetFlexDirection(
+    FBYGNodeRef node,
+    FBYGFlexDirection flexDirection);
+FBYG_EXPORT FBYGFlexDirection
+FBYGNodeStyleGetFlexDirection(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetJustifyContent(
-    YGNodeRef node,
-    YGJustify justifyContent);
-YG_EXPORT YGJustify YGNodeStyleGetJustifyContent(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetJustifyContent(
+    FBYGNodeRef node,
+    FBYGJustify justifyContent);
+FBYG_EXPORT FBYGJustify FBYGNodeStyleGetJustifyContent(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetAlignContent(YGNodeRef node, YGAlign alignContent);
-YG_EXPORT YGAlign YGNodeStyleGetAlignContent(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetAlignContent(
+    FBYGNodeRef node,
+    FBYGAlign alignContent);
+FBYG_EXPORT FBYGAlign FBYGNodeStyleGetAlignContent(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetAlignItems(YGNodeRef node, YGAlign alignItems);
-YG_EXPORT YGAlign YGNodeStyleGetAlignItems(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetAlignItems(
+    FBYGNodeRef node,
+    FBYGAlign alignItems);
+FBYG_EXPORT FBYGAlign FBYGNodeStyleGetAlignItems(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetAlignSelf(YGNodeRef node, YGAlign alignSelf);
-YG_EXPORT YGAlign YGNodeStyleGetAlignSelf(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetAlignSelf(
+    FBYGNodeRef node,
+    FBYGAlign alignSelf);
+FBYG_EXPORT FBYGAlign FBYGNodeStyleGetAlignSelf(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetPositionType(
-    YGNodeRef node,
-    YGPositionType positionType);
-YG_EXPORT YGPositionType YGNodeStyleGetPositionType(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetPositionType(
+    FBYGNodeRef node,
+    FBYGPositionType positionType);
+FBYG_EXPORT FBYGPositionType
+FBYGNodeStyleGetPositionType(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetFlexWrap(YGNodeRef node, YGWrap flexWrap);
-YG_EXPORT YGWrap YGNodeStyleGetFlexWrap(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetFlexWrap(FBYGNodeRef node, FBYGWrap flexWrap);
+FBYG_EXPORT FBYGWrap FBYGNodeStyleGetFlexWrap(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetOverflow(YGNodeRef node, YGOverflow overflow);
-YG_EXPORT YGOverflow YGNodeStyleGetOverflow(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetOverflow(
+    FBYGNodeRef node,
+    FBYGOverflow overflow);
+FBYG_EXPORT FBYGOverflow FBYGNodeStyleGetOverflow(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetDisplay(YGNodeRef node, YGDisplay display);
-YG_EXPORT YGDisplay YGNodeStyleGetDisplay(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetDisplay(FBYGNodeRef node, FBYGDisplay display);
+FBYG_EXPORT FBYGDisplay FBYGNodeStyleGetDisplay(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetFlex(YGNodeRef node, float flex);
-YG_EXPORT float YGNodeStyleGetFlex(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetFlex(FBYGNodeRef node, float flex);
+FBYG_EXPORT float FBYGNodeStyleGetFlex(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetFlexGrow(YGNodeRef node, float flexGrow);
-YG_EXPORT float YGNodeStyleGetFlexGrow(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetFlexGrow(FBYGNodeRef node, float flexGrow);
+FBYG_EXPORT float FBYGNodeStyleGetFlexGrow(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetFlexShrink(YGNodeRef node, float flexShrink);
-YG_EXPORT float YGNodeStyleGetFlexShrink(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetFlexShrink(FBYGNodeRef node, float flexShrink);
+FBYG_EXPORT float FBYGNodeStyleGetFlexShrink(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetFlexBasis(YGNodeRef node, float flexBasis);
-YG_EXPORT void YGNodeStyleSetFlexBasisPercent(YGNodeRef node, float flexBasis);
-YG_EXPORT void YGNodeStyleSetFlexBasisAuto(YGNodeRef node);
-YG_EXPORT YGValue YGNodeStyleGetFlexBasis(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetFlexBasis(FBYGNodeRef node, float flexBasis);
+FBYG_EXPORT void FBYGNodeStyleSetFlexBasisPercent(
+    FBYGNodeRef node,
+    float flexBasis);
+FBYG_EXPORT void FBYGNodeStyleSetFlexBasisAuto(FBYGNodeRef node);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetFlexBasis(FBYGNodeConstRef node);
 
-YG_EXPORT void
-YGNodeStyleSetPosition(YGNodeRef node, YGEdge edge, float position);
-YG_EXPORT void
-YGNodeStyleSetPositionPercent(YGNodeRef node, YGEdge edge, float position);
-YG_EXPORT YGValue YGNodeStyleGetPosition(YGNodeConstRef node, YGEdge edge);
+FBYG_EXPORT void
+FBYGNodeStyleSetPosition(FBYGNodeRef node, FBYGEdge edge, float position);
+FBYG_EXPORT void FBYGNodeStyleSetPositionPercent(
+    FBYGNodeRef node,
+    FBYGEdge edge,
+    float position);
+FBYG_EXPORT FBYGValue
+FBYGNodeStyleGetPosition(FBYGNodeConstRef node, FBYGEdge edge);
 
-YG_EXPORT void YGNodeStyleSetMargin(YGNodeRef node, YGEdge edge, float margin);
-YG_EXPORT void
-YGNodeStyleSetMarginPercent(YGNodeRef node, YGEdge edge, float margin);
-YG_EXPORT void YGNodeStyleSetMarginAuto(YGNodeRef node, YGEdge edge);
-YG_EXPORT YGValue YGNodeStyleGetMargin(YGNodeConstRef node, YGEdge edge);
+FBYG_EXPORT void
+FBYGNodeStyleSetMargin(FBYGNodeRef node, FBYGEdge edge, float margin);
+FBYG_EXPORT void
+FBYGNodeStyleSetMarginPercent(FBYGNodeRef node, FBYGEdge edge, float margin);
+FBYG_EXPORT void FBYGNodeStyleSetMarginAuto(FBYGNodeRef node, FBYGEdge edge);
+FBYG_EXPORT FBYGValue
+FBYGNodeStyleGetMargin(FBYGNodeConstRef node, FBYGEdge edge);
 
-YG_EXPORT void
-YGNodeStyleSetPadding(YGNodeRef node, YGEdge edge, float padding);
-YG_EXPORT void
-YGNodeStyleSetPaddingPercent(YGNodeRef node, YGEdge edge, float padding);
-YG_EXPORT YGValue YGNodeStyleGetPadding(YGNodeConstRef node, YGEdge edge);
+FBYG_EXPORT void
+FBYGNodeStyleSetPadding(FBYGNodeRef node, FBYGEdge edge, float padding);
+FBYG_EXPORT void
+FBYGNodeStyleSetPaddingPercent(FBYGNodeRef node, FBYGEdge edge, float padding);
+FBYG_EXPORT FBYGValue
+FBYGNodeStyleGetPadding(FBYGNodeConstRef node, FBYGEdge edge);
 
-YG_EXPORT void YGNodeStyleSetBorder(YGNodeRef node, YGEdge edge, float border);
-YG_EXPORT float YGNodeStyleGetBorder(YGNodeConstRef node, YGEdge edge);
+FBYG_EXPORT void
+FBYGNodeStyleSetBorder(FBYGNodeRef node, FBYGEdge edge, float border);
+FBYG_EXPORT float FBYGNodeStyleGetBorder(FBYGNodeConstRef node, FBYGEdge edge);
 
-YG_EXPORT void
-YGNodeStyleSetGap(YGNodeRef node, YGGutter gutter, float gapLength);
-YG_EXPORT float YGNodeStyleGetGap(YGNodeConstRef node, YGGutter gutter);
+FBYG_EXPORT void
+FBYGNodeStyleSetGap(FBYGNodeRef node, FBYGGutter gutter, float gapLength);
+FBYG_EXPORT float FBYGNodeStyleGetGap(FBYGNodeConstRef node, FBYGGutter gutter);
 
-YG_EXPORT void YGNodeStyleSetWidth(YGNodeRef node, float width);
-YG_EXPORT void YGNodeStyleSetWidthPercent(YGNodeRef node, float width);
-YG_EXPORT void YGNodeStyleSetWidthAuto(YGNodeRef node);
-YG_EXPORT YGValue YGNodeStyleGetWidth(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetWidth(FBYGNodeRef node, float width);
+FBYG_EXPORT void FBYGNodeStyleSetWidthPercent(FBYGNodeRef node, float width);
+FBYG_EXPORT void FBYGNodeStyleSetWidthAuto(FBYGNodeRef node);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetWidth(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetHeight(YGNodeRef node, float height);
-YG_EXPORT void YGNodeStyleSetHeightPercent(YGNodeRef node, float height);
-YG_EXPORT void YGNodeStyleSetHeightAuto(YGNodeRef node);
-YG_EXPORT YGValue YGNodeStyleGetHeight(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetHeight(FBYGNodeRef node, float height);
+FBYG_EXPORT void FBYGNodeStyleSetHeightPercent(FBYGNodeRef node, float height);
+FBYG_EXPORT void FBYGNodeStyleSetHeightAuto(FBYGNodeRef node);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetHeight(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetMinWidth(YGNodeRef node, float minWidth);
-YG_EXPORT void YGNodeStyleSetMinWidthPercent(YGNodeRef node, float minWidth);
-YG_EXPORT YGValue YGNodeStyleGetMinWidth(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetMinWidth(FBYGNodeRef node, float minWidth);
+FBYG_EXPORT void FBYGNodeStyleSetMinWidthPercent(
+    FBYGNodeRef node,
+    float minWidth);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetMinWidth(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetMinHeight(YGNodeRef node, float minHeight);
-YG_EXPORT void YGNodeStyleSetMinHeightPercent(YGNodeRef node, float minHeight);
-YG_EXPORT YGValue YGNodeStyleGetMinHeight(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetMinHeight(FBYGNodeRef node, float minHeight);
+FBYG_EXPORT void FBYGNodeStyleSetMinHeightPercent(
+    FBYGNodeRef node,
+    float minHeight);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetMinHeight(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetMaxWidth(YGNodeRef node, float maxWidth);
-YG_EXPORT void YGNodeStyleSetMaxWidthPercent(YGNodeRef node, float maxWidth);
-YG_EXPORT YGValue YGNodeStyleGetMaxWidth(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetMaxWidth(FBYGNodeRef node, float maxWidth);
+FBYG_EXPORT void FBYGNodeStyleSetMaxWidthPercent(
+    FBYGNodeRef node,
+    float maxWidth);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetMaxWidth(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetMaxHeight(YGNodeRef node, float maxHeight);
-YG_EXPORT void YGNodeStyleSetMaxHeightPercent(YGNodeRef node, float maxHeight);
-YG_EXPORT YGValue YGNodeStyleGetMaxHeight(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetMaxHeight(FBYGNodeRef node, float maxHeight);
+FBYG_EXPORT void FBYGNodeStyleSetMaxHeightPercent(
+    FBYGNodeRef node,
+    float maxHeight);
+FBYG_EXPORT FBYGValue FBYGNodeStyleGetMaxHeight(FBYGNodeConstRef node);
 
-YG_EXPORT void YGNodeStyleSetAspectRatio(YGNodeRef node, float aspectRatio);
-YG_EXPORT float YGNodeStyleGetAspectRatio(YGNodeConstRef node);
+FBYG_EXPORT void FBYGNodeStyleSetAspectRatio(
+    FBYGNodeRef node,
+    float aspectRatio);
+FBYG_EXPORT float FBYGNodeStyleGetAspectRatio(FBYGNodeConstRef node);
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END

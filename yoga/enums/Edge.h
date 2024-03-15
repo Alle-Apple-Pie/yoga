@@ -13,18 +13,18 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Edge : uint8_t {
-  Left = YGEdgeLeft,
-  Top = YGEdgeTop,
-  Right = YGEdgeRight,
-  Bottom = YGEdgeBottom,
-  Start = YGEdgeStart,
-  End = YGEdgeEnd,
-  Horizontal = YGEdgeHorizontal,
-  Vertical = YGEdgeVertical,
-  All = YGEdgeAll,
+  Left = FBYGEdgeLeft,
+  Top = FBYGEdgeTop,
+  Right = FBYGEdgeRight,
+  Bottom = FBYGEdgeBottom,
+  Start = FBYGEdgeStart,
+  End = FBYGEdgeEnd,
+  Horizontal = FBYGEdgeHorizontal,
+  Vertical = FBYGEdgeVertical,
+  All = FBYGEdgeAll,
 };
 
 template <>
@@ -32,16 +32,16 @@ constexpr int32_t ordinalCount<Edge>() {
   return 9;
 }
 
-constexpr Edge scopedEnum(YGEdge unscoped) {
+constexpr Edge scopedEnum(FBYGEdge unscoped) {
   return static_cast<Edge>(unscoped);
 }
 
-constexpr YGEdge unscopedEnum(Edge scoped) {
-  return static_cast<YGEdge>(scoped);
+constexpr FBYGEdge unscopedEnum(Edge scoped) {
+  return static_cast<FBYGEdge>(scoped);
 }
 
 inline const char* toString(Edge e) {
-  return YGEdgeToString(unscopedEnum(e));
+  return FBYGEdgeToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

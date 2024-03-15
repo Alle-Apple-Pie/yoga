@@ -14,7 +14,7 @@
 
 #include <yoga/Yoga.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 constexpr bool isUndefined(std::floating_point auto value) {
   return value != value;
@@ -78,4 +78,4 @@ bool inexactEquals(
   return areEqual;
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

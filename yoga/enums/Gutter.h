@@ -13,12 +13,12 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Gutter : uint8_t {
-  Column = YGGutterColumn,
-  Row = YGGutterRow,
-  All = YGGutterAll,
+  Column = FBYGGutterColumn,
+  Row = FBYGGutterRow,
+  All = FBYGGutterAll,
 };
 
 template <>
@@ -26,16 +26,16 @@ constexpr int32_t ordinalCount<Gutter>() {
   return 3;
 }
 
-constexpr Gutter scopedEnum(YGGutter unscoped) {
+constexpr Gutter scopedEnum(FBYGGutter unscoped) {
   return static_cast<Gutter>(unscoped);
 }
 
-constexpr YGGutter unscopedEnum(Gutter scoped) {
-  return static_cast<YGGutter>(scoped);
+constexpr FBYGGutter unscopedEnum(Gutter scoped) {
+  return static_cast<FBYGGutter>(scoped);
 }
 
 inline const char* toString(Gutter e) {
-  return YGGutterToString(unscopedEnum(e));
+  return FBYGGutterToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

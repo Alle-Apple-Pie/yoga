@@ -13,18 +13,18 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Align : uint8_t {
-  Auto = YGAlignAuto,
-  FlexStart = YGAlignFlexStart,
-  Center = YGAlignCenter,
-  FlexEnd = YGAlignFlexEnd,
-  Stretch = YGAlignStretch,
-  Baseline = YGAlignBaseline,
-  SpaceBetween = YGAlignSpaceBetween,
-  SpaceAround = YGAlignSpaceAround,
-  SpaceEvenly = YGAlignSpaceEvenly,
+  Auto = FBYGAlignAuto,
+  FlexStart = FBYGAlignFlexStart,
+  Center = FBYGAlignCenter,
+  FlexEnd = FBYGAlignFlexEnd,
+  Stretch = FBYGAlignStretch,
+  Baseline = FBYGAlignBaseline,
+  SpaceBetween = FBYGAlignSpaceBetween,
+  SpaceAround = FBYGAlignSpaceAround,
+  SpaceEvenly = FBYGAlignSpaceEvenly,
 };
 
 template <>
@@ -32,16 +32,16 @@ constexpr int32_t ordinalCount<Align>() {
   return 9;
 }
 
-constexpr Align scopedEnum(YGAlign unscoped) {
+constexpr Align scopedEnum(FBYGAlign unscoped) {
   return static_cast<Align>(unscoped);
 }
 
-constexpr YGAlign unscopedEnum(Align scoped) {
-  return static_cast<YGAlign>(scoped);
+constexpr FBYGAlign unscopedEnum(Align scoped) {
+  return static_cast<FBYGAlign>(scoped);
 }
 
 inline const char* toString(Align e) {
-  return YGAlignToString(unscopedEnum(e));
+  return FBYGAlignToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

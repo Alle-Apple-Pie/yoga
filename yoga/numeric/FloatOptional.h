@@ -10,7 +10,7 @@
 #include <yoga/numeric/Comparison.h>
 #include <limits>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 struct FloatOptional {
  private:
@@ -20,7 +20,7 @@ struct FloatOptional {
   explicit constexpr FloatOptional(float value) : value_(value) {}
   constexpr FloatOptional() = default;
 
-  // returns the wrapped value, or a value x with YGIsUndefined(x) == true
+  // returns the wrapped value, or a value x with FBYGIsUndefined(x) == true
   constexpr float unwrap() const {
     return value_;
   }
@@ -90,4 +90,4 @@ inline bool inexactEquals(FloatOptional lhs, FloatOptional rhs) {
   return yoga::inexactEquals(lhs.unwrap(), rhs.unwrap());
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

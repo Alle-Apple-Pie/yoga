@@ -31,9 +31,9 @@
 #include <yoga/numeric/Comparison.h>
 #include <yoga/numeric/FloatOptional.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
-std::atomic<uint32_t> gCurrentGenerationCount(0);
+std::atomic<uint32_t> fbyggCurrentGenerationCount(0);
 
 static void constrainMaxSizeForMode(
     const yoga::Node* node,
@@ -120,8 +120,8 @@ static void computeFlexBasisForChild(
   } else {
     // Compute the flex basis and hypothetical main size (i.e. the clamped flex
     // basis).
-    childWidth = YGUndefined;
-    childHeight = YGUndefined;
+    childWidth = FBYGUndefined;
+    childHeight = FBYGUndefined;
     childWidthSizingMode = SizingMode::MaxContent;
     childHeightSizingMode = SizingMode::MaxContent;
 
@@ -267,10 +267,10 @@ static void measureNodeWithMeasureFunc(
       "Expected node to have custom measure function");
 
   if (widthSizingMode == SizingMode::MaxContent) {
-    availableWidth = YGUndefined;
+    availableWidth = FBYGUndefined;
   }
   if (heightSizingMode == SizingMode::MaxContent) {
-    availableHeight = YGUndefined;
+    availableHeight = FBYGUndefined;
   }
 
   const auto& layout = node->getLayout();
@@ -308,7 +308,7 @@ static void measureNodeWithMeasureFunc(
     Event::publish<Event::MeasureCallbackStart>(node);
 
     // Measure the text under the current constraints.
-    const YGSize measuredSize = node->measure(
+    const FBYGSize measuredSize = node->measure(
         innerWidth,
         measureMode(widthSizingMode),
         innerHeight,
@@ -490,7 +490,7 @@ static float computeFlexBasisForChildren(
     const uint32_t depth,
     const uint32_t generationCount) {
   float totalOuterFlexBasis = 0.0f;
-  YGNodeRef singleFlexChild = nullptr;
+  FBYGNodeRef singleFlexChild = nullptr;
   const auto& children = node->getChildren();
   SizingMode sizingModeMainDim =
       isRow(mainAxis) ? widthSizingMode : heightSizingMode;
@@ -1153,7 +1153,7 @@ static void justifyMainAxis(
 // Input parameters:
 //    - node: current node to be sized and laid out
 //    - availableWidth & availableHeight: available size to be used for sizing
-//      the node or YGUndefined if the size is not available; interpretation
+//      the node orFBYGUndefined if the size is not available; interpretation
 //      depends on layout flags
 //    - ownerDirection: the inline (text) direction within the owner
 //      (left-to-right or right-to-left)
@@ -2305,9 +2305,9 @@ void calculateLayout(
   // Increment the generation count. This will force the recursive routine to
   // visit all dirty nodes at least once. Subsequent visits will be skipped if
   // the input parameters don't change.
-  gCurrentGenerationCount.fetch_add(1, std::memory_order_relaxed);
+  fbyggCurrentGenerationCount.fetch_add(1, std::memory_order_relaxed);
   node->resolveDimension();
-  float width = YGUndefined;
+  float width = FBYGUndefined;
   SizingMode widthSizingMode = SizingMode::MaxContent;
   const auto& style = node->style();
   if (node->hasDefiniteLength(Dimension::Width, ownerWidth)) {
@@ -2328,7 +2328,7 @@ void calculateLayout(
                                                : SizingMode::StretchFit;
   }
 
-  float height = YGUndefined;
+  float height = FBYGUndefined;
   SizingMode heightSizingMode = SizingMode::MaxContent;
   if (node->hasDefiniteLength(Dimension::Height, ownerHeight)) {
     height =
@@ -2361,7 +2361,7 @@ void calculateLayout(
           LayoutPassReason::kInitial,
           markerData,
           0, // tree root
-          gCurrentGenerationCount.load(std::memory_order_relaxed))) {
+          fbyggCurrentGenerationCount.load(std::memory_order_relaxed))) {
     node->setPosition(
         node->getLayout().direction(), ownerWidth, ownerHeight, ownerWidth);
     roundLayoutResultsToPixelGrid(node, 0.0f, 0.0f);
@@ -2370,4 +2370,4 @@ void calculateLayout(
   Event::publish<Event::LayoutPassEnd>(node, {&markerData});
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

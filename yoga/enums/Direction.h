@@ -13,12 +13,12 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Direction : uint8_t {
-  Inherit = YGDirectionInherit,
-  LTR = YGDirectionLTR,
-  RTL = YGDirectionRTL,
+  Inherit = FBYGDirectionInherit,
+  LTR = FBYGDirectionLTR,
+  RTL = FBYGDirectionRTL,
 };
 
 template <>
@@ -26,16 +26,16 @@ constexpr int32_t ordinalCount<Direction>() {
   return 3;
 }
 
-constexpr Direction scopedEnum(YGDirection unscoped) {
+constexpr Direction scopedEnum(FBYGDirection unscoped) {
   return static_cast<Direction>(unscoped);
 }
 
-constexpr YGDirection unscopedEnum(Direction scoped) {
-  return static_cast<YGDirection>(scoped);
+constexpr FBYGDirection unscopedEnum(Direction scoped) {
+  return static_cast<FBYGDirection>(scoped);
 }
 
 inline const char* toString(Direction e) {
-  return YGDirectionToString(unscopedEnum(e));
+  return FBYGDirectionToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -13,12 +13,12 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Wrap : uint8_t {
-  NoWrap = YGWrapNoWrap,
-  Wrap = YGWrapWrap,
-  WrapReverse = YGWrapWrapReverse,
+  NoWrap = FBYGWrapNoWrap,
+  Wrap = FBYGWrapWrap,
+  WrapReverse = FBYGWrapWrapReverse,
 };
 
 template <>
@@ -26,16 +26,16 @@ constexpr int32_t ordinalCount<Wrap>() {
   return 3;
 }
 
-constexpr Wrap scopedEnum(YGWrap unscoped) {
+constexpr Wrap scopedEnum(FBYGWrap unscoped) {
   return static_cast<Wrap>(unscoped);
 }
 
-constexpr YGWrap unscopedEnum(Wrap scoped) {
-  return static_cast<YGWrap>(scoped);
+constexpr FBYGWrap unscopedEnum(Wrap scoped) {
+  return static_cast<FBYGWrap>(scoped);
 }
 
 inline const char* toString(Wrap e) {
-  return YGWrapToString(unscopedEnum(e));
+  return FBYGWrapToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

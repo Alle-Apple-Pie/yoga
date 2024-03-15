@@ -9,31 +9,33 @@
 #include <yoga/debug/AssertFatal.h>
 #include <yoga/debug/Log.h>
 
-using namespace facebook;
-using namespace facebook::yoga;
+using namespace facebookyg;
+using namespace facebookyg::yoga;
 
-YGConfigRef YGConfigNew(void) {
+FBYGConfigRef FBYGConfigNew(void) {
   return new yoga::Config(getDefaultLogger());
 }
 
-void YGConfigFree(const YGConfigRef config) {
+void FBYGConfigFree(const FBYGConfigRef config) {
   delete resolveRef(config);
 }
 
-YGConfigConstRef YGConfigGetDefault() {
+FBYGConfigConstRef FBYGConfigGetDefault() {
   return &yoga::Config::getDefault();
 }
 
-void YGConfigSetUseWebDefaults(const YGConfigRef config, const bool enabled) {
+void FBYGConfigSetUseWebDefaults(
+    const FBYGConfigRef config,
+    const bool enabled) {
   resolveRef(config)->setUseWebDefaults(enabled);
 }
 
-bool YGConfigGetUseWebDefaults(const YGConfigConstRef config) {
+bool FBYGConfigGetUseWebDefaults(const FBYGConfigConstRef config) {
   return resolveRef(config)->useWebDefaults();
 }
 
-void YGConfigSetPointScaleFactor(
-    const YGConfigRef config,
+void FBYGConfigSetPointScaleFactor(
+    const FBYGConfigRef config,
     const float pixelsInPoint) {
   yoga::assertFatalWithConfig(
       resolveRef(config),
@@ -43,19 +45,19 @@ void YGConfigSetPointScaleFactor(
   resolveRef(config)->setPointScaleFactor(pixelsInPoint);
 }
 
-float YGConfigGetPointScaleFactor(const YGConfigConstRef config) {
+float FBYGConfigGetPointScaleFactor(const FBYGConfigConstRef config) {
   return resolveRef(config)->getPointScaleFactor();
 }
 
-void YGConfigSetErrata(YGConfigRef config, YGErrata errata) {
+void FBYGConfigSetErrata(FBYGConfigRef config, FBYGErrata errata) {
   resolveRef(config)->setErrata(scopedEnum(errata));
 }
 
-YGErrata YGConfigGetErrata(YGConfigConstRef config) {
+FBYGErrata FBYGConfigGetErrata(FBYGConfigConstRef config) {
   return unscopedEnum(resolveRef(config)->getErrata());
 }
 
-void YGConfigSetLogger(const YGConfigRef config, YGLogger logger) {
+void FBYGConfigSetLogger(const FBYGConfigRef config, FBYGLogger logger) {
   if (logger != nullptr) {
     resolveRef(config)->setLogger(logger);
   } else {
@@ -63,30 +65,30 @@ void YGConfigSetLogger(const YGConfigRef config, YGLogger logger) {
   }
 }
 
-void YGConfigSetContext(const YGConfigRef config, void* context) {
+void FBYGConfigSetContext(const FBYGConfigRef config, void* context) {
   resolveRef(config)->setContext(context);
 }
 
-void* YGConfigGetContext(const YGConfigConstRef config) {
+void* FBYGConfigGetContext(const FBYGConfigConstRef config) {
   return resolveRef(config)->getContext();
 }
 
-void YGConfigSetExperimentalFeatureEnabled(
-    const YGConfigRef config,
-    const YGExperimentalFeature feature,
+void FBYGConfigSetExperimentalFeatureEnabled(
+    const FBYGConfigRef config,
+    const FBYGExperimentalFeature feature,
     const bool enabled) {
   resolveRef(config)->setExperimentalFeatureEnabled(
       scopedEnum(feature), enabled);
 }
 
-bool YGConfigIsExperimentalFeatureEnabled(
-    const YGConfigConstRef config,
-    const YGExperimentalFeature feature) {
+bool FBYGConfigIsExperimentalFeatureEnabled(
+    const FBYGConfigConstRef config,
+    const FBYGExperimentalFeature feature) {
   return resolveRef(config)->isExperimentalFeatureEnabled(scopedEnum(feature));
 }
 
-void YGConfigSetCloneNodeFunc(
-    const YGConfigRef config,
-    const YGCloneNodeFunc callback) {
+void FBYGConfigSetCloneNodeFunc(
+    const FBYGConfigRef config,
+    const FBYGCloneNodeFunc callback) {
   resolveRef(config)->setCloneNodeCallback(callback);
 }

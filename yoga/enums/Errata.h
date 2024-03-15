@@ -13,29 +13,29 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Errata : uint32_t {
-  None = YGErrataNone,
-  StretchFlexBasis = YGErrataStretchFlexBasis,
-  AbsolutePositioningIncorrect = YGErrataAbsolutePositioningIncorrect,
-  AbsolutePercentAgainstInnerSize = YGErrataAbsolutePercentAgainstInnerSize,
-  All = YGErrataAll,
-  Classic = YGErrataClassic,
+  None = FBYGErrataNone,
+  StretchFlexBasis = FBYGErrataStretchFlexBasis,
+  AbsolutePositioningIncorrect = FBYGErrataAbsolutePositioningIncorrect,
+  AbsolutePercentAgainstInnerSize = FBYGErrataAbsolutePercentAgainstInnerSize,
+  All = FBYGErrataAll,
+  Classic = FBYGErrataClassic,
 };
 
-YG_DEFINE_ENUM_FLAG_OPERATORS(Errata)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(Errata)
 
-constexpr Errata scopedEnum(YGErrata unscoped) {
+constexpr Errata scopedEnum(FBYGErrata unscoped) {
   return static_cast<Errata>(unscoped);
 }
 
-constexpr YGErrata unscopedEnum(Errata scoped) {
-  return static_cast<YGErrata>(scoped);
+constexpr FBYGErrata unscopedEnum(Errata scoped) {
+  return static_cast<FBYGErrata>(scoped);
 }
 
 inline const char* toString(Errata e) {
-  return YGErrataToString(unscopedEnum(e));
+  return FBYGErrataToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

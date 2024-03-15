@@ -17,7 +17,7 @@
 #include <yoga/node/CachedMeasurement.h>
 #include <yoga/numeric/FloatOptional.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 struct LayoutResults {
   // This value was chosen based on empirical data:
@@ -110,12 +110,12 @@ struct LayoutResults {
   Direction direction_ : bitCount<Direction>() = Direction::Inherit;
   bool hadOverflow_ : 1 = false;
 
-  std::array<float, 2> dimensions_ = {{YGUndefined, YGUndefined}};
-  std::array<float, 2> measuredDimensions_ = {{YGUndefined, YGUndefined}};
+  std::array<float, 2> dimensions_ = {{FBYGUndefined, FBYGUndefined}};
+  std::array<float, 2> measuredDimensions_ = {{FBYGUndefined, FBYGUndefined}};
   std::array<float, 4> position_ = {};
   std::array<float, 4> margin_ = {};
   std::array<float, 4> border_ = {};
   std::array<float, 4> padding_ = {};
 };
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

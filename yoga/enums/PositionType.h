@@ -13,12 +13,12 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class PositionType : uint8_t {
-  Static = YGPositionTypeStatic,
-  Relative = YGPositionTypeRelative,
-  Absolute = YGPositionTypeAbsolute,
+  Static = FBYGPositionTypeStatic,
+  Relative = FBYGPositionTypeRelative,
+  Absolute = FBYGPositionTypeAbsolute,
 };
 
 template <>
@@ -26,16 +26,16 @@ constexpr int32_t ordinalCount<PositionType>() {
   return 3;
 }
 
-constexpr PositionType scopedEnum(YGPositionType unscoped) {
+constexpr PositionType scopedEnum(FBYGPositionType unscoped) {
   return static_cast<PositionType>(unscoped);
 }
 
-constexpr YGPositionType unscopedEnum(PositionType scoped) {
-  return static_cast<YGPositionType>(scoped);
+constexpr FBYGPositionType unscopedEnum(PositionType scoped) {
+  return static_cast<FBYGPositionType>(scoped);
 }
 
 inline const char* toString(PositionType e) {
-  return YGPositionTypeToString(unscopedEnum(e));
+  return FBYGPositionTypeToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

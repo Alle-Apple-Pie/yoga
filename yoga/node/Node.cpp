@@ -13,7 +13,7 @@
 #include <yoga/node/Node.h>
 #include <yoga/numeric/Comparison.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 Node::Node() : Node{&Config::getDefault()} {}
 
@@ -48,7 +48,7 @@ Node::Node(Node&& node) {
   }
 }
 
-YGSize Node::measure(
+FBYGSize Node::measure(
     float width,
     MeasureMode widthMode,
     float height,
@@ -75,7 +75,7 @@ bool Node::isLayoutDimensionDefined(const FlexDirection axis) {
 
 // Setters
 
-void Node::setMeasureFunc(YGMeasureFunc measureFunc) {
+void Node::setMeasureFunc(FBYGMeasureFunc measureFunc) {
   if (measureFunc == nullptr) {
     // TODO: t18095186 Move nodeType to opt-in function and mark appropriate
     // places in Litho
@@ -359,4 +359,4 @@ void Node::reset() {
   *this = Node{getConfig()};
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

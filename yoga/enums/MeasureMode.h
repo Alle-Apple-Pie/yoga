@@ -13,12 +13,12 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class MeasureMode : uint8_t {
-  Undefined = YGMeasureModeUndefined,
-  Exactly = YGMeasureModeExactly,
-  AtMost = YGMeasureModeAtMost,
+  Undefined = FBYGMeasureModeUndefined,
+  Exactly = FBYGMeasureModeExactly,
+  AtMost = FBYGMeasureModeAtMost,
 };
 
 template <>
@@ -26,16 +26,16 @@ constexpr int32_t ordinalCount<MeasureMode>() {
   return 3;
 }
 
-constexpr MeasureMode scopedEnum(YGMeasureMode unscoped) {
+constexpr MeasureMode scopedEnum(FBYGMeasureMode unscoped) {
   return static_cast<MeasureMode>(unscoped);
 }
 
-constexpr YGMeasureMode unscopedEnum(MeasureMode scoped) {
-  return static_cast<YGMeasureMode>(scoped);
+constexpr FBYGMeasureMode unscopedEnum(MeasureMode scoped) {
+  return static_cast<FBYGMeasureMode>(scoped);
 }
 
 inline const char* toString(MeasureMode e) {
-  return YGMeasureModeToString(unscopedEnum(e));
+  return FBYGMeasureModeToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -9,10 +9,10 @@
 
 #include <yoga/algorithm/PixelGrid.h>
 
-using namespace facebook;
-using namespace facebook::yoga;
+using namespace facebookyg;
+using namespace facebookyg::yoga;
 
-float YGRoundValueToPixelGrid(
+float FBYGRoundValueToPixelGrid(
     const double value,
     const double pointScaleFactor,
     const bool forceCeil,

@@ -15,7 +15,7 @@
 #include <yoga/style/SmallValueBuffer.h>
 #include <yoga/style/StyleLength.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 #pragma pack(push)
 #pragma pack(1)
@@ -95,4 +95,4 @@ class StyleValueHandle {
 
 #pragma pack(pop)
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -13,17 +13,17 @@
 #include <yoga/YGEnums.h>
 #include <yoga/YGMacros.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
 /**
  * Rounds a point value to the nearest whole pixel, given a pointScaleFactor
  * describing pixel density.
  * @returns the rounded value in points
  */
-YG_EXPORT float YGRoundValueToPixelGrid(
+FBYG_EXPORT float FBYGRoundValueToPixelGrid(
     double value,
     double pointScaleFactor,
     bool forceCeil,
     bool forceFloor);
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END
