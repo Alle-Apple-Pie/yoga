@@ -17,8 +17,36 @@ function toMethodName(value) {
     return 'Percent';
   } else if (value.indexOf('AUTO') >= 0) {
     return 'Auto';
+  } else if (value.indexOf('MAX_CONTENT') >= 0) {
+    return 'MaxContent';
+  } else if (value.indexOf('FIT_CONTENT') >= 0) {
+    return 'FitContent';
+  } else if (value.indexOf('STRETCH') >= 0) {
+    return 'Stretch';
   }
   return '';
+}
+
+function keywordMethod(methodPrefix, nodeName, value) {
+  const methodSuffix = toMethodName(value);
+  if (
+    methodSuffix == 'Auto' ||
+    methodSuffix == 'MaxContent' ||
+    methodSuffix == 'FitContent' ||
+    methodSuffix == 'Stretch'
+  ) {
+    return nodeName + '.' + methodPrefix + methodSuffix + '();';
+  } else {
+    return (
+      nodeName +
+      '.' +
+      methodPrefix +
+      methodSuffix +
+      '(' +
+      toValueJava(value) +
+      'f);'
+    );
+  }
 }
 
 const JavaEmitter = function () {
@@ -55,6 +83,7 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
         'import org.junit.Test;',
         'import org.junit.runner.RunWith;',
         'import org.junit.runners.Parameterized;',
+        'import com.facebook.yoga.utils.TestUtils;',
         '',
         '@RunWith(Parameterized.class)',
         'public class YogaTest {',
@@ -177,11 +206,19 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
 
   YGDisplayFlex: {value: 'YogaDisplay.FLEX'},
   YGDisplayNone: {value: 'YogaDisplay.NONE'},
+  YGDisplayContents: {value: 'YogaDisplay.CONTENTS'},
   YGAuto: {value: 'YogaConstants.AUTO'},
 
   YGWrapNoWrap: {value: 'YogaWrap.NO_WRAP'},
   YGWrapWrap: {value: 'YogaWrap.WRAP'},
   YGWrapWrapReverse: {value: 'YogaWrap.WRAP_REVERSE'},
+
+  YGBoxSizingBorderBox: {value: 'YogaBoxSizing.BORDER_BOX'},
+  YGBoxSizingContentBox: {value: 'YogaBoxSizing.CONTENT_BOX'},
+
+  YGMaxContent: {value: 'MAX_CONTENT'},
+  YGFitContent: {value: 'FIT_CONTENT'},
+  YGStretch: {value: 'STRETCH'},
 
   YGNodeCalculateLayout: {
     value: function (node, dir, _experiments) {
@@ -269,14 +306,7 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
 
   YGNodeStyleSetFlexBasis: {
     value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setFlexBasis' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
+      this.push(keywordMethod('setFlexBasis', nodeName, value));
     },
   },
 
@@ -301,19 +331,6 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
   YGNodeStyleSetFlexWrap: {
     value: function (nodeName, value) {
       this.push(nodeName + '.setWrap(' + toValueJava(value) + ');');
-    },
-  },
-
-  YGNodeStyleSetHeight: {
-    value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setHeight' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
     },
   },
 
@@ -344,55 +361,39 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
     },
   },
 
+  YGNodeStyleSetHeight: {
+    value: function (nodeName, value) {
+      this.push(keywordMethod('setHeight', nodeName, value));
+    },
+  },
+
+  YGNodeStyleSetWidth: {
+    value: function (nodeName, value) {
+      this.push(keywordMethod('setWidth', nodeName, value));
+    },
+  },
+
   YGNodeStyleSetMaxHeight: {
     value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setMaxHeight' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
+      this.push(keywordMethod('setMaxHeight', nodeName, value));
     },
   },
 
   YGNodeStyleSetMaxWidth: {
     value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setMaxWidth' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
+      this.push(keywordMethod('setMaxWidth', nodeName, value));
     },
   },
 
   YGNodeStyleSetMinHeight: {
     value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setMinHeight' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
+      this.push(keywordMethod('setMinHeight', nodeName, value));
     },
   },
 
   YGNodeStyleSetMinWidth: {
     value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setMinWidth' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
+      this.push(keywordMethod('setMinWidth', nodeName, value));
     },
   },
 
@@ -419,15 +420,21 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
 
   YGNodeStyleSetPosition: {
     value: function (nodeName, edge, value) {
+      let valueStr = toValueJava(value);
+
+      if (valueStr == 'YogaConstants.AUTO') {
+        valueStr = '';
+      } else {
+        valueStr = ', ' + valueStr + 'f';
+      }
       this.push(
         nodeName +
           '.setPosition' +
           toMethodName(value) +
           '(' +
           edge +
-          ', ' +
-          toValueJava(value) +
-          'f);',
+          valueStr +
+          ');',
       );
     },
   },
@@ -435,19 +442,6 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
   YGNodeStyleSetPositionType: {
     value: function (nodeName, value) {
       this.push(nodeName + '.setPositionType(' + toValueJava(value) + ');');
-    },
-  },
-
-  YGNodeStyleSetWidth: {
-    value: function (nodeName, value) {
-      this.push(
-        nodeName +
-          '.setWidth' +
-          toMethodName(value) +
-          '(' +
-          toValueJava(value) +
-          'f);',
-      );
     },
   },
 
@@ -462,6 +456,21 @@ JavaEmitter.prototype = Object.create(Emitter.prototype, {
           ', ' +
           toValueJava(value) +
           'f);',
+      );
+    },
+  },
+
+  YGNodeStyleSetBoxSizing: {
+    value: function (nodeName, value) {
+      this.push(nodeName + '.setBoxSizing(' + toValueJava(value) + ');');
+    },
+  },
+
+  YGNodeSetMeasureFunc: {
+    value: function (nodeName, innerText, _) {
+      this.push(`${nodeName}.setData("${innerText}");`);
+      this.push(
+        `${nodeName}.setMeasureFunction(new TestUtils.intrinsicMeasureFunction());`,
       );
     },
   },

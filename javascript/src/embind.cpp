@@ -70,6 +70,7 @@ EMSCRIPTEN_BINDINGS(YOGA_LAYOUT) {
       .function("setPositionType", &Node::setPositionType)
       .function("setPosition", &Node::setPosition)
       .function("setPositionPercent", &Node::setPositionPercent)
+      .function("setPositionAuto", &Node::setPositionAuto)
 
       .function("setAlignContent", &Node::setAlignContent)
       .function("setAlignItems", &Node::setAlignItems)
@@ -89,25 +90,48 @@ EMSCRIPTEN_BINDINGS(YOGA_LAYOUT) {
       .function("setFlexBasis", &Node::setFlexBasis)
       .function("setFlexBasisPercent", &Node::setFlexBasisPercent)
       .function("setFlexBasisAuto", &Node::setFlexBasisAuto)
+      .function("setFlexBasisMaxContent", &Node::setFlexBasisMaxContent)
+      .function("setFlexBasisFitContent", &Node::setFlexBasisFitContent)
+      .function("setFlexBasisStretch", &Node::setFlexBasisStretch)
       .function("setFlexGrow", &Node::setFlexGrow)
       .function("setFlexShrink", &Node::setFlexShrink)
 
       .function("setWidth", &Node::setWidth)
       .function("setWidthPercent", &Node::setWidthPercent)
       .function("setWidthAuto", &Node::setWidthAuto)
+      .function("setWidthMaxContent", &Node::setWidthMaxContent)
+      .function("setWidthFitContent", &Node::setWidthFitContent)
+      .function("setWidthStretch", &Node::setWidthStretch)
       .function("setHeight", &Node::setHeight)
       .function("setHeightPercent", &Node::setHeightPercent)
       .function("setHeightAuto", &Node::setHeightAuto)
+      .function("setHeightMaxContent", &Node::setHeightMaxContent)
+      .function("setHeightFitContent", &Node::setHeightFitContent)
+      .function("setHeightStretch", &Node::setHeightStretch)
 
       .function("setMinWidth", &Node::setMinWidth)
       .function("setMinWidthPercent", &Node::setMinWidthPercent)
+      .function("setMinWidthMaxContent", &Node::setMinWidthMaxContent)
+      .function("setMinWidthFitContent", &Node::setMinWidthFitContent)
+      .function("setMinWidthStretch", &Node::setMinWidthStretch)
       .function("setMinHeight", &Node::setMinHeight)
       .function("setMinHeightPercent", &Node::setMinHeightPercent)
+      .function("setMinHeightMaxContent", &Node::setMinHeightMaxContent)
+      .function("setMinHeightFitContent", &Node::setMinHeightFitContent)
+      .function("setMinHeightStretch", &Node::setMinHeightStretch)
 
       .function("setMaxWidth", &Node::setMaxWidth)
       .function("setMaxWidthPercent", &Node::setMaxWidthPercent)
+      .function("setMaxWidthMaxContent", &Node::setMaxWidthMaxContent)
+      .function("setMaxWidthFitContent", &Node::setMaxWidthFitContent)
+      .function("setMaxWidthStretch", &Node::setMaxWidthStretch)
       .function("setMaxHeight", &Node::setMaxHeight)
       .function("setMaxHeightPercent", &Node::setMaxHeightPercent)
+      .function("setMaxHeightMaxContent", &Node::setMaxHeightMaxContent)
+      .function("setMaxHeightFitContent", &Node::setMaxHeightFitContent)
+      .function("setMaxHeightStretch", &Node::setMaxHeightStretch)
+
+      .function("setBoxSizing", &Node::setBoxSizing)
 
       .function("setAspectRatio", &Node::setAspectRatio)
 
@@ -116,6 +140,7 @@ EMSCRIPTEN_BINDINGS(YOGA_LAYOUT) {
       .function("setPadding", &Node::setPadding)
       .function("setPaddingPercent", &Node::setPaddingPercent)
       .function("setGap", &Node::setGap)
+      .function("setGapPercent", &Node::setGapPercent)
 
       .function("setDirection", &Node::setDirection)
 
@@ -143,6 +168,8 @@ EMSCRIPTEN_BINDINGS(YOGA_LAYOUT) {
 
       .function("getMaxWidth", &Node::getMaxWidth)
       .function("getMaxHeight", &Node::getMaxHeight)
+
+      .function("getBoxSizing", &Node::getBoxSizing)
 
       .function("getAspectRatio", &Node::getAspectRatio)
 
@@ -176,6 +203,9 @@ EMSCRIPTEN_BINDINGS(YOGA_LAYOUT) {
 
       .function("markDirty", &Node::markDirty)
       .function("isDirty", &Node::isDirty)
+
+      .function("markLayoutSeen", &Node::markLayoutSeen)
+      .function("hasNewLayout", &Node::hasNewLayout)
 
       .function("calculateLayout", &Node::calculateLayout)
 

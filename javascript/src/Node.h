@@ -76,6 +76,7 @@ class Node {
   void setPositionType(int positionType);
   void setPosition(int edge, double position);
   void setPositionPercent(int edge, double position);
+  void setPositionAuto(int edge);
 
   void setAlignContent(int alignContent);
   void setAlignItems(int alignItems);
@@ -96,25 +97,46 @@ class Node {
   void setFlexBasis(double flexBasis);
   void setFlexBasisPercent(double flexBasis);
   void setFlexBasisAuto();
+  void setFlexBasisMaxContent();
+  void setFlexBasisFitContent();
+  void setFlexBasisStretch();
   void setFlexGrow(double flexGrow);
   void setFlexShrink(double flexShrink);
 
   void setWidth(double width);
   void setWidthPercent(double width);
   void setWidthAuto();
+  void setWidthMaxContent();
+  void setWidthFitContent();
+  void setWidthStretch();
   void setHeight(double height);
   void setHeightPercent(double height);
   void setHeightAuto();
+  void setHeightMaxContent();
+  void setHeightFitContent();
+  void setHeightStretch();
 
   void setMinWidth(double minWidth);
   void setMinWidthPercent(double minWidth);
+  void setMinWidthMaxContent();
+  void setMinWidthFitContent();
+  void setMinWidthStretch();
   void setMinHeight(double minHeight);
   void setMinHeightPercent(double minHeight);
+  void setMinHeightMaxContent();
+  void setMinHeightFitContent();
+  void setMinHeightStretch();
 
   void setMaxWidth(double maxWidth);
   void setMaxWidthPercent(double maxWidth);
+  void setMaxWidthMaxContent();
+  void setMaxWidthFitContent();
+  void setMaxWidthStretch();
   void setMaxHeight(double maxHeight);
   void setMaxHeightPercent(double maxHeight);
+  void setMaxHeightMaxContent();
+  void setMaxHeightFitContent();
+  void setMaxHeightStretch();
 
   void setAspectRatio(double aspectRatio);
 
@@ -124,6 +146,9 @@ class Node {
   void setPaddingPercent(int edge, double padding);
 
   void setGap(int gutter, double gapLength);
+  void setGapPercent(int gutter, double gapLength);
+
+  void setBoxSizing(int boxSizing);
 
  public: // Style getters
   int getPositionType(void) const;
@@ -161,7 +186,9 @@ class Node {
 
   Value getPadding(int edge) const;
 
-  float getGap(int gutter);
+  Value getGap(int gutter) const;
+
+  int getBoxSizing(void) const;
 
  public: // Tree hierarchy mutators
   void insertChild(Node* child, unsigned index);
@@ -197,6 +224,8 @@ class Node {
  public: // Dirtiness accessors
   void markDirty(void);
   bool isDirty(void) const;
+  void markLayoutSeen();
+  bool hasNewLayout(void) const;
 
  public: // Layout mutators
   void calculateLayout(double width, double height, int direction);

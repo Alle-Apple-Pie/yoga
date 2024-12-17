@@ -19,6 +19,11 @@ export enum Align {
   SpaceEvenly = 8,
 }
 
+export enum BoxSizing {
+  BorderBox = 0,
+  ContentBox = 1,
+}
+
 export enum Dimension {
   Width = 0,
   Height = 1,
@@ -33,6 +38,7 @@ export enum Direction {
 export enum Display {
   Flex = 0,
   None = 1,
+  Contents = 2,
 }
 
 export enum Edge {
@@ -50,7 +56,7 @@ export enum Edge {
 export enum Errata {
   None = 0,
   StretchFlexBasis = 1,
-  AbsolutePositioningIncorrect = 2,
+  AbsolutePositionWithoutInsetsExcludesPadding = 2,
   AbsolutePercentAgainstInnerSize = 4,
   All = 2147483647,
   Classic = 2147483646,
@@ -119,6 +125,9 @@ export enum Unit {
   Point = 1,
   Percent = 2,
   Auto = 3,
+  MaxContent = 4,
+  FitContent = 5,
+  Stretch = 6,
 }
 
 export enum Wrap {
@@ -137,6 +146,8 @@ const constants = {
   ALIGN_SPACE_BETWEEN: Align.SpaceBetween,
   ALIGN_SPACE_AROUND: Align.SpaceAround,
   ALIGN_SPACE_EVENLY: Align.SpaceEvenly,
+  BOX_SIZING_BORDER_BOX: BoxSizing.BorderBox,
+  BOX_SIZING_CONTENT_BOX: BoxSizing.ContentBox,
   DIMENSION_WIDTH: Dimension.Width,
   DIMENSION_HEIGHT: Dimension.Height,
   DIRECTION_INHERIT: Direction.Inherit,
@@ -144,6 +155,7 @@ const constants = {
   DIRECTION_RTL: Direction.RTL,
   DISPLAY_FLEX: Display.Flex,
   DISPLAY_NONE: Display.None,
+  DISPLAY_CONTENTS: Display.Contents,
   EDGE_LEFT: Edge.Left,
   EDGE_TOP: Edge.Top,
   EDGE_RIGHT: Edge.Right,
@@ -155,7 +167,7 @@ const constants = {
   EDGE_ALL: Edge.All,
   ERRATA_NONE: Errata.None,
   ERRATA_STRETCH_FLEX_BASIS: Errata.StretchFlexBasis,
-  ERRATA_ABSOLUTE_POSITIONING_INCORRECT: Errata.AbsolutePositioningIncorrect,
+  ERRATA_ABSOLUTE_POSITION_WITHOUT_INSETS_EXCLUDES_PADDING: Errata.AbsolutePositionWithoutInsetsExcludesPadding,
   ERRATA_ABSOLUTE_PERCENT_AGAINST_INNER_SIZE: Errata.AbsolutePercentAgainstInnerSize,
   ERRATA_ALL: Errata.All,
   ERRATA_CLASSIC: Errata.Classic,
@@ -194,6 +206,9 @@ const constants = {
   UNIT_POINT: Unit.Point,
   UNIT_PERCENT: Unit.Percent,
   UNIT_AUTO: Unit.Auto,
+  UNIT_MAX_CONTENT: Unit.MaxContent,
+  UNIT_FIT_CONTENT: Unit.FitContent,
+  UNIT_STRETCH: Unit.Stretch,
   WRAP_NO_WRAP: Wrap.NoWrap,
   WRAP_WRAP: Wrap.Wrap,
   WRAP_WRAP_REVERSE: Wrap.WrapReverse,
