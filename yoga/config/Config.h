@@ -32,7 +32,7 @@ bool configUpdateInvalidatesLayout(
 
 class FBYG_EXPORT Config : public ::FBYGConfig {
  public:
-  Config(FBYGLogger logger);
+  explicit Config(FBYGLogger logger) : logger_{logger} {}
 
   void setUseWebDefaults(bool useWebDefaults);
   bool useWebDefaults() const;
@@ -69,8 +69,8 @@ class FBYG_EXPORT Config : public ::FBYGConfig {
   static const Config& getDefault();
 
  private:
-  FBYGCloneNodeFunc cloneNodeCallback_;
-  FBYGLogger logger_;
+  FBYGCloneNodeFunc cloneNodeCallback_{nullptr};
+  FBYGLogger logger_{};
 
   bool useWebDefaults_ : 1 = false;
 

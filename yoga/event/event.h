@@ -9,8 +9,8 @@
 
 #include <yoga/Yoga.h>
 
-#include <stdint.h>
 #include <array>
+#include <cstdint>
 #include <functional>
 #include <vector>
 
@@ -46,7 +46,7 @@ struct LayoutData {
       measureCallbackReasonsCount;
 };
 
-const char* LayoutPassReasonToString(const LayoutPassReason value);
+const char* LayoutPassReasonToString(LayoutPassReason value);
 
 struct FBYG_EXPORT Event {
   enum Type {
@@ -72,7 +72,7 @@ struct FBYG_EXPORT Event {
 
    public:
     template <Type E>
-    Data(const TypedData<E>& data) : data_{&data} {}
+    explicit Data(const TypedData<E>& data) : data_{&data} {}
 
     template <Type E>
     const TypedData<E>& get() const {
@@ -92,7 +92,10 @@ struct FBYG_EXPORT Event {
   }
 
  private:
-  static void publish(FBYGNodeConstRef, Type, const Data&);
+  static void publish(
+      FBYGNodeConstRef /*node*/,
+      Type /*eventType*/,
+      const Data& /*eventData*/);
 };
 
 template <>

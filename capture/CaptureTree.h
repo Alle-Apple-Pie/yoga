@@ -8,6 +8,8 @@
 #pragma once
 
 #include <filesystem>
+#include <unordered_map>
+#include <vector>
 
 #include <yoga/Yoga.h>
 
@@ -20,8 +22,11 @@ struct SerializedMeasureFunc {
   YGMeasureMode heightMode{YGMeasureModeUndefined};
   float outputWidth{0.0f};
   float outputHeight{0.0f};
-  std::chrono::steady_clock::duration::rep durationNs;
+  std::chrono::steady_clock::duration::rep durationNs{};
 };
+
+using SerializedMeasureFuncMap =
+    std::unordered_map<YGNodeConstRef, std::vector<SerializedMeasureFunc>>;
 
 void YGNodeCalculateLayoutWithCapture(
     YGNodeRef node,
@@ -31,6 +36,7 @@ void YGNodeCalculateLayoutWithCapture(
     const std::filesystem::path& path);
 
 void captureMeasureFunc(
+    YGNodeConstRef node,
     float width,
     YGMeasureMode widthMode,
     float height,
