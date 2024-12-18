@@ -214,13 +214,13 @@ class FBYG_EXPORT Node : public ::YGNode {
     nodeType_ = nodeType;
   }
 
-  void setMeasureFunc(YGMeasureFunc measureFunc);
+  void setMeasureFunc(FBYGMeasureFunc measureFunc);
 
-  void setBaselineFunc(YGBaselineFunc baseLineFunc) {
+  void setBaselineFunc(FBYGBaselineFunc baseLineFunc) {
     baselineFunc_ = baseLineFunc;
   }
 
-  void setDirtiedFunc(YGDirtiedFunc dirtiedFunc) {
+  void setDirtiedFunc(FBYGDirtiedFunc dirtiedFunc) {
     dirtiedFunc_ = dirtiedFunc;
   }
 

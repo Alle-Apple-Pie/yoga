@@ -30,7 +30,7 @@ constexpr int32_t ordinalCount<Unit>() {
   return 7;
 }
 
-constexpr Unit scopedEnum(YGUnit unscoped) {
+constexpr Unit scopedEnum(FBYGUnit unscoped) {
   return static_cast<Unit>(unscoped);
 }
 

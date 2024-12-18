@@ -66,7 +66,7 @@ FBYG_ENUM_DECL(
     FBYGErrataAbsolutePercentAgainstInnerSize = 4,
     FBYGErrataAll = 2147483647,
     FBYGErrataClassic = 2147483646)
-FBYG_DEFINE_ENUM_FLAG_OPERATORS(YGErrata)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(FBYGErrata)
 
 FBYG_ENUM_DECL(
     FBYGExperimentalFeature,

@@ -39,7 +39,7 @@ FBYG_EXPORT FBYGConfigRef FBYGConfigNew(void);
 /**
  * Frees the associated Yoga configuration.
  */
-FBYG_EXPORT void FBYGConfigFree(YGConfigRef config);
+FBYG_EXPORT void FBYGConfigFree(FBYGConfigRef config);
 
 /**
  * Returns the default config values set by Yoga.
@@ -52,12 +52,12 @@ FBYG_EXPORT FBYGConfigConstRef FBYGConfigGetDefault(void);
  * `UseWebDefaults` instructs Yoga to instead use a default style consistent
  * with the web.
  */
-FBYG_EXPORT void FBYGConfigSetUseWebDefaults(YGConfigRef config, bool enabled);
+FBYG_EXPORT void FBYGConfigSetUseWebDefaults(FBYGConfigRef config, bool enabled);
 
 /**
  * Whether the configuration is set to use web defaults.
  */
-FBYG_EXPORT bool FBYGConfigGetUseWebDefaults(YGConfigConstRef config);
+FBYG_EXPORT bool FBYGConfigGetUseWebDefaults(FBYGConfigConstRef config);
 
 /**
  * Yoga will by default round final layout positions and dimensions to the
@@ -73,7 +73,7 @@ FBYG_EXPORT void FBYGConfigSetPointScaleFactor(
 /**
  * Get the currently set point scale factor.
  */
-FBYG_EXPORT float FBYGConfigGetPointScaleFactor(YGConfigConstRef config);
+FBYG_EXPORT float FBYGConfigGetPointScaleFactor(FBYGConfigConstRef config);
 
 /**
  * Configures how Yoga balances W3C conformance vs compatibility with layouts
@@ -90,12 +90,12 @@ FBYG_EXPORT float FBYGConfigGetPointScaleFactor(YGConfigConstRef config);
  * 3. FBYGErrataAll: Match layout behaviors of Yoga 1.x, including
  * `UseLegacyStretchBehaviour`
  */
-FBYG_EXPORT void FBYGConfigSetErrata(YGConfigRef config, FBYGErrata errata);
+FBYG_EXPORT void FBYGConfigSetErrata(FBYGConfigRef config, FBYGErrata errata);
 
 /**
  * Get the currently set errata.
  */
-FBYG_EXPORT FBYGErrata FBYGConfigGetErrata(YGConfigConstRef config);
+FBYG_EXPORT FBYGErrata FBYGConfigGetErrata(FBYGConfigConstRef config);
 
 /**
  * Function pointer type for FBYGConfigSetLogger.
@@ -111,18 +111,18 @@ typedef int (*YGLogger)(
  * Set a custom log function for to use when logging diagnostics or fatal.
  * errors.
  */
-FBYG_EXPORT void FBYGConfigSetLogger(YGConfigRef config, FBYGLogger logger);
+FBYG_EXPORT void FBYGConfigSetLogger(FBYGConfigRef config, FBYGLogger logger);
 
 /**
  * Sets an arbitrary context pointer on the config which may be read from during
  * callbacks.
  */
-FBYG_EXPORT void FBYGConfigSetContext(YGConfigRef config, void* context);
+FBYG_EXPORT void FBYGConfigSetContext(FBYGConfigRef config, void* context);
 
 /**
  * Gets the currently set context.
  */
-FBYG_EXPORT void* FBYGConfigGetContext(YGConfigConstRef config);
+FBYG_EXPORT void* FBYGConfigGetContext(FBYGConfigConstRef config);
 
 /**
  * Function pointer type for FBYGConfigSetCloneNodeFunc.

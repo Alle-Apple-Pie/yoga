@@ -15,7 +15,7 @@ using namespace facebook::yoga;
 namespace {
 
 template <auto GetterT, auto SetterT, typename ValueT>
-void updateStyle(YGNodeRef node, ValueT value) {
+void updateStyle(FBYGNodeRef node, ValueT value) {
   auto& style = resolveRef(node)->style();
   if ((style.*GetterT)() != value) {
     (style.*SetterT)(value);
@@ -24,7 +24,7 @@ void updateStyle(YGNodeRef node, ValueT value) {
 }
 
 template <auto GetterT, auto SetterT, typename IdxT, typename ValueT>
-void updateStyle(YGNodeRef node, IdxT idx, ValueT value) {
+void updateStyle(FBYGNodeRef node, IdxT idx, ValueT value) {
   auto& style = resolveRef(node)->style();
   if ((style.*GetterT)(idx) != value) {
     (style.*SetterT)(idx, value);
@@ -34,7 +34,7 @@ void updateStyle(YGNodeRef node, IdxT idx, ValueT value) {
 
 } // namespace
 
-void FBYGNodeCopyStyle(YGNodeRef dstNode, FBYGNodeConstRef srcNode) {
+void FBYGNodeCopyStyle(FBYGNodeRef dstNode, FBYGNodeConstRef srcNode) {
   auto dst = resolveRef(dstNode);
   auto src = resolveRef(srcNode);
 
@@ -208,59 +208,59 @@ void FBYGNodeStyleSetFlexBasisStretch(const FBYGNodeRef node) {
 }
 
 FBYGValue FBYGNodeStyleGetFlexBasis(const FBYGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().flexBasis();
+  return (FBYGValue)resolveRef(node)->style().flexBasis();
 }
 
-void FBYGNodeStyleSetPosition(YGNodeRef node, FBYGEdge edge, float points) {
+void FBYGNodeStyleSetPosition(FBYGNodeRef node, FBYGEdge edge, float points) {
   updateStyle<&Style::position, &Style::setPosition>(
       node, scopedEnum(edge), StyleLength::points(points));
 }
 
-void FBYGNodeStyleSetPositionPercent(YGNodeRef node, FBYGEdge edge, float percent) {
+void FBYGNodeStyleSetPositionPercent(FBYGNodeRef node, FBYGEdge edge, float percent) {
   updateStyle<&Style::position, &Style::setPosition>(
       node, scopedEnum(edge), StyleLength::percent(percent));
 }
 
-void FBYGNodeStyleSetPositionAuto(YGNodeRef node, FBYGEdge edge) {
+void FBYGNodeStyleSetPositionAuto(FBYGNodeRef node, FBYGEdge edge) {
   updateStyle<&Style::position, &Style::setPosition>(
       node, scopedEnum(edge), StyleLength::ofAuto());
 }
 
-FBYGValue FBYGNodeStyleGetPosition(YGNodeConstRef node, FBYGEdge edge) {
-  return (YGValue)resolveRef(node)->style().position(scopedEnum(edge));
+FBYGValue FBYGNodeStyleGetPosition(FBYGNodeConstRef node, FBYGEdge edge) {
+  return (FBYGValue)resolveRef(node)->style().position(scopedEnum(edge));
 }
 
-void FBYGNodeStyleSetMargin(YGNodeRef node, FBYGEdge edge, float points) {
+void FBYGNodeStyleSetMargin(FBYGNodeRef node, FBYGEdge edge, float points) {
   updateStyle<&Style::margin, &Style::setMargin>(
       node, scopedEnum(edge), StyleLength::points(points));
 }
 
-void FBYGNodeStyleSetMarginPercent(YGNodeRef node, FBYGEdge edge, float percent) {
+void FBYGNodeStyleSetMarginPercent(FBYGNodeRef node, FBYGEdge edge, float percent) {
   updateStyle<&Style::margin, &Style::setMargin>(
       node, scopedEnum(edge), StyleLength::percent(percent));
 }
 
-void FBYGNodeStyleSetMarginAuto(YGNodeRef node, FBYGEdge edge) {
+void FBYGNodeStyleSetMarginAuto(FBYGNodeRef node, FBYGEdge edge) {
   updateStyle<&Style::margin, &Style::setMargin>(
       node, scopedEnum(edge), StyleLength::ofAuto());
 }
 
-FBYGValue FBYGNodeStyleGetMargin(YGNodeConstRef node, FBYGEdge edge) {
-  return (YGValue)resolveRef(node)->style().margin(scopedEnum(edge));
+FBYGValue FBYGNodeStyleGetMargin(FBYGNodeConstRef node, FBYGEdge edge) {
+  return (FBYGValue)resolveRef(node)->style().margin(scopedEnum(edge));
 }
 
-void FBYGNodeStyleSetPadding(YGNodeRef node, FBYGEdge edge, float points) {
+void FBYGNodeStyleSetPadding(FBYGNodeRef node, FBYGEdge edge, float points) {
   updateStyle<&Style::padding, &Style::setPadding>(
       node, scopedEnum(edge), StyleLength::points(points));
 }
 
-void FBYGNodeStyleSetPaddingPercent(YGNodeRef node, FBYGEdge edge, float percent) {
+void FBYGNodeStyleSetPaddingPercent(FBYGNodeRef node, FBYGEdge edge, float percent) {
   updateStyle<&Style::padding, &Style::setPadding>(
       node, scopedEnum(edge), StyleLength::percent(percent));
 }
 
-FBYGValue FBYGNodeStyleGetPadding(YGNodeConstRef node, FBYGEdge edge) {
-  return (YGValue)resolveRef(node)->style().padding(scopedEnum(edge));
+FBYGValue FBYGNodeStyleGetPadding(FBYGNodeConstRef node, FBYGEdge edge) {
+  return (FBYGValue)resolveRef(node)->style().padding(scopedEnum(edge));
 }
 
 void FBYGNodeStyleSetBorder(
@@ -288,13 +288,13 @@ void FBYGNodeStyleSetGap(
       node, scopedEnum(gutter), StyleLength::points(gapLength));
 }
 
-void FBYGNodeStyleSetGapPercent(YGNodeRef node, FBYGGutter gutter, float percent) {
+void FBYGNodeStyleSetGapPercent(FBYGNodeRef node, FBYGGutter gutter, float percent) {
   updateStyle<&Style::gap, &Style::setGap>(
       node, scopedEnum(gutter), StyleLength::percent(percent));
 }
 
 FBYGValue FBYGNodeStyleGetGap(const FBYGNodeConstRef node, const FBYGGutter gutter) {
-  return (YGValue)resolveRef(node)->style().gap(scopedEnum(gutter));
+  return (FBYGValue)resolveRef(node)->style().gap(scopedEnum(gutter));
 }
 
 void FBYGNodeStyleSetAspectRatio(const FBYGNodeRef node, const float aspectRatio) {
@@ -307,7 +307,7 @@ float FBYGNodeStyleGetAspectRatio(const FBYGNodeConstRef node) {
   return op.isUndefined() ? FBYGUndefined : op.unwrap();
 }
 
-void FBYGNodeStyleSetBoxSizing(YGNodeRef node, YGBoxSizing boxSizing) {
+void FBYGNodeStyleSetBoxSizing(FBYGNodeRef node, YGBoxSizing boxSizing) {
   updateStyle<&Style::boxSizing, &Style::setBoxSizing>(
       node, scopedEnum(boxSizing));
 }
@@ -316,72 +316,72 @@ YGBoxSizing FBYGNodeStyleGetBoxSizing(const FBYGNodeConstRef node) {
   return unscopedEnum(resolveRef(node)->style().boxSizing());
 }
 
-void FBYGNodeStyleSetWidth(YGNodeRef node, float points) {
+void FBYGNodeStyleSetWidth(FBYGNodeRef node, float points) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Width, StyleSizeLength::points(points));
 }
 
-void FBYGNodeStyleSetWidthPercent(YGNodeRef node, float percent) {
+void FBYGNodeStyleSetWidthPercent(FBYGNodeRef node, float percent) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Width, StyleSizeLength::percent(percent));
 }
 
-void FBYGNodeStyleSetWidthAuto(YGNodeRef node) {
+void FBYGNodeStyleSetWidthAuto(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Width, StyleSizeLength::ofAuto());
 }
 
-void FBYGNodeStyleSetWidthMaxContent(YGNodeRef node) {
+void FBYGNodeStyleSetWidthMaxContent(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Width, StyleSizeLength::ofMaxContent());
 }
 
-void FBYGNodeStyleSetWidthFitContent(YGNodeRef node) {
+void FBYGNodeStyleSetWidthFitContent(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Width, StyleSizeLength::ofFitContent());
 }
 
-void FBYGNodeStyleSetWidthStretch(YGNodeRef node) {
+void FBYGNodeStyleSetWidthStretch(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Width, StyleSizeLength::ofStretch());
 }
 
-FBYGValue FBYGNodeStyleGetWidth(YGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().dimension(Dimension::Width);
+FBYGValue FBYGNodeStyleGetWidth(FBYGNodeConstRef node) {
+  return (FBYGValue)resolveRef(node)->style().dimension(Dimension::Width);
 }
 
-void FBYGNodeStyleSetHeight(YGNodeRef node, float points) {
+void FBYGNodeStyleSetHeight(FBYGNodeRef node, float points) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Height, StyleSizeLength::points(points));
 }
 
-void FBYGNodeStyleSetHeightPercent(YGNodeRef node, float percent) {
+void FBYGNodeStyleSetHeightPercent(FBYGNodeRef node, float percent) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Height, StyleSizeLength::percent(percent));
 }
 
-void FBYGNodeStyleSetHeightAuto(YGNodeRef node) {
+void FBYGNodeStyleSetHeightAuto(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Height, StyleSizeLength::ofAuto());
 }
 
-void FBYGNodeStyleSetHeightMaxContent(YGNodeRef node) {
+void FBYGNodeStyleSetHeightMaxContent(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Height, StyleSizeLength::ofMaxContent());
 }
 
-void FBYGNodeStyleSetHeightFitContent(YGNodeRef node) {
+void FBYGNodeStyleSetHeightFitContent(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Height, StyleSizeLength::ofFitContent());
 }
 
-void FBYGNodeStyleSetHeightStretch(YGNodeRef node) {
+void FBYGNodeStyleSetHeightStretch(FBYGNodeRef node) {
   updateStyle<&Style::dimension, &Style::setDimension>(
       node, Dimension::Height, StyleSizeLength::ofStretch());
 }
 
-FBYGValue FBYGNodeStyleGetHeight(YGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().dimension(Dimension::Height);
+FBYGValue FBYGNodeStyleGetHeight(FBYGNodeConstRef node) {
+  return (FBYGValue)resolveRef(node)->style().dimension(Dimension::Height);
 }
 
 void FBYGNodeStyleSetMinWidth(const FBYGNodeRef node, const float minWidth) {
@@ -410,7 +410,7 @@ void FBYGNodeStyleSetMinWidthStretch(const FBYGNodeRef node) {
 }
 
 FBYGValue FBYGNodeStyleGetMinWidth(const FBYGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().minDimension(Dimension::Width);
+  return (FBYGValue)resolveRef(node)->style().minDimension(Dimension::Width);
 }
 
 void FBYGNodeStyleSetMinHeight(const FBYGNodeRef node, const float minHeight) {
@@ -441,7 +441,7 @@ void FBYGNodeStyleSetMinHeightStretch(const FBYGNodeRef node) {
 }
 
 FBYGValue FBYGNodeStyleGetMinHeight(const FBYGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().minDimension(Dimension::Height);
+  return (FBYGValue)resolveRef(node)->style().minDimension(Dimension::Height);
 }
 
 void FBYGNodeStyleSetMaxWidth(const FBYGNodeRef node, const float maxWidth) {
@@ -470,7 +470,7 @@ void FBYGNodeStyleSetMaxWidthStretch(const FBYGNodeRef node) {
 }
 
 FBYGValue FBYGNodeStyleGetMaxWidth(const FBYGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().maxDimension(Dimension::Width);
+  return (FBYGValue)resolveRef(node)->style().maxDimension(Dimension::Width);
 }
 
 void FBYGNodeStyleSetMaxHeight(const FBYGNodeRef node, const float maxHeight) {
@@ -501,5 +501,5 @@ void FBYGNodeStyleSetMaxHeightStretch(const FBYGNodeRef node) {
 }
 
 FBYGValue FBYGNodeStyleGetMaxHeight(const FBYGNodeConstRef node) {
-  return (YGValue)resolveRef(node)->style().maxDimension(Dimension::Height);
+  return (FBYGValue)resolveRef(node)->style().maxDimension(Dimension::Height);
 }

@@ -97,7 +97,7 @@ bool Node::isLayoutDimensionDefined(const FlexDirection axis) {
 
 // Setters
 
-void Node::setMeasureFunc(YGMeasureFunc measureFunc) {
+void Node::setMeasureFunc(FBYGMeasureFunc measureFunc) {
   if (measureFunc == nullptr) {
     // TODO: t18095186 Move nodeType to opt-in function and mark appropriate
     // places in Litho
