@@ -51,7 +51,7 @@ Node::Node(Node&& node) noexcept
   }
 }
 
-YGSize Node::measure(
+FBYGSize Node::measure(
     float availableWidth,
     MeasureMode widthMode,
     float availableHeight,

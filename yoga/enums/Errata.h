@@ -24,7 +24,7 @@ enum class Errata : uint32_t {
   Classic = FBYGErrataClassic,
 };
 
-YG_DEFINE_ENUM_FLAG_OPERATORS(Errata)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(Errata)
 
 constexpr Errata scopedEnum(YGErrata unscoped) {
   return static_cast<Errata>(unscoped);

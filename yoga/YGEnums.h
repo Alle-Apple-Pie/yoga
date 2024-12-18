@@ -10,9 +10,9 @@
 #pragma once
 #include <yoga/YGMacros.h>
 
-YG_EXTERN_C_BEGIN
+FBYG_EXTERN_C_BEGIN
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGAlign,
     FBYGAlignAuto,
     FBYGAlignFlexStart,
@@ -24,29 +24,29 @@ YG_ENUM_DECL(
     FBYGAlignSpaceAround,
     FBYGAlignSpaceEvenly)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     YGBoxSizing,
     YGBoxSizingBorderBox,
     YGBoxSizingContentBox)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGDimension,
     FBYGDimensionWidth,
     FBYGDimensionHeight)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGDirection,
     FBYGDirectionInherit,
     FBYGDirectionLTR,
     FBYGDirectionRTL)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGDisplay,
     FBYGDisplayFlex,
     FBYGDisplayNone,
     FBYGDisplayContents)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGEdge,
     FBYGEdgeLeft,
     FBYGEdgeTop,
@@ -58,7 +58,7 @@ YG_ENUM_DECL(
     FBYGEdgeVertical,
     FBYGEdgeAll)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGErrata,
     FBYGErrataNone = 0,
     FBYGErrataStretchFlexBasis = 1,
@@ -66,26 +66,26 @@ YG_ENUM_DECL(
     FBYGErrataAbsolutePercentAgainstInnerSize = 4,
     FBYGErrataAll = 2147483647,
     FBYGErrataClassic = 2147483646)
-YG_DEFINE_ENUM_FLAG_OPERATORS(YGErrata)
+FBYG_DEFINE_ENUM_FLAG_OPERATORS(YGErrata)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGExperimentalFeature,
     FBYGExperimentalFeatureWebFlexBasis)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGFlexDirection,
     FBYGFlexDirectionColumn,
     FBYGFlexDirectionColumnReverse,
     FBYGFlexDirectionRow,
     FBYGFlexDirectionRowReverse)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGGutter,
     FBYGGutterColumn,
     FBYGGutterRow,
     FBYGGutterAll)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGJustify,
     FBYGJustifyFlexStart,
     FBYGJustifyCenter,
@@ -94,7 +94,7 @@ YG_ENUM_DECL(
     FBYGJustifySpaceAround,
     FBYGJustifySpaceEvenly)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGLogLevel,
     FBYGLogLevelError,
     FBYGLogLevelWarn,
@@ -103,30 +103,30 @@ YG_ENUM_DECL(
     FBYGLogLevelVerbose,
     FBYGLogLevelFatal)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGMeasureMode,
     FBYGMeasureModeUndefined,
     FBYGMeasureModeExactly,
     FBYGMeasureModeAtMost)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGNodeType,
     FBYGNodeTypeDefault,
     FBYGNodeTypeText)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGOverflow,
     FBYGOverflowVisible,
     FBYGOverflowHidden,
     FBYGOverflowScroll)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGPositionType,
     FBYGPositionTypeStatic,
     FBYGPositionTypeRelative,
     FBYGPositionTypeAbsolute)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGUnit,
     FBYGUnitUndefined,
     FBYGUnitPoint,
@@ -136,10 +136,10 @@ YG_ENUM_DECL(
     FBYGUnitFitContent,
     FBYGUnitStretch)
 
-YG_ENUM_DECL(
+FBYG_ENUM_DECL(
     FBYGWrap,
     FBYGWrapNoWrap,
     FBYGWrapWrap,
     FBYGWrapWrapReverse)
 
-YG_EXTERN_C_END
+FBYG_EXTERN_C_END
