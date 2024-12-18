@@ -175,6 +175,7 @@ function checkDefaultValues() {
     {style: 'right', value: 'undefined'},
     {style: 'bottom', value: 'undefined'},
     {style: 'display', value: 'flex'},
+    {style: 'box-sizing', value: 'border-box'},
   ].forEach(item => {
     assert(
       isDefaultStyleValue(item.style, item.value),
@@ -193,7 +194,6 @@ function setupTestTree(
   index,
 ) {
   e.emitTestTreePrologue(nodeName);
-
   for (const style in node.style) {
     // Skip position info for root as it messes up tests
     if (
@@ -207,7 +207,6 @@ function setupTestTree(
     ) {
       continue;
     }
-
     if (!isDefaultStyleValue(style, node.style[style])) {
       switch (style) {
         case 'aspect-ratio':
@@ -520,12 +519,25 @@ function setupTestTree(
         case 'display':
           e.YGNodeStyleSetDisplay(nodeName, displayValue(e, node.style[style]));
           break;
+        case 'box-sizing':
+          e.YGNodeStyleSetBoxSizing(
+            nodeName,
+            boxSizingValue(e, node.style[style]),
+          );
       }
     }
   }
 
   if (parentName) {
     e.YGNodeInsertChild(parentName, nodeName, index);
+  }
+
+  if (node.innerText && node.children.length === 0) {
+    e.YGNodeSetMeasureFunc(
+      nodeName,
+      node.innerText,
+      flexDirectionValue(e, node.style['flex-direction']),
+    );
   }
 
   for (let i = 0; i < node.children.length; i++) {
@@ -646,6 +658,13 @@ function pointValue(e, value) {
       return e.YGAuto;
     case 'undefined':
       return e.YGUndefined;
+    case 'max-content':
+      return e.YGMaxContent;
+    case 'fit-content':
+      return e.YGFitContent;
+    case 'stretch':
+    case '-webkit-fill-available':
+      return e.YGStretch;
     default:
       return value;
   }
@@ -657,6 +676,17 @@ function displayValue(e, value) {
       return e.YGDisplayFlex;
     case 'none':
       return e.YGDisplayNone;
+    case 'contents':
+      return e.YGDisplayContents;
+  }
+}
+
+function boxSizingValue(e, value) {
+  switch (value) {
+    case 'border-box':
+      return e.YGBoxSizingBorderBox;
+    case 'content-box':
+      return e.YGBoxSizingContentBox;
   }
 }
 
@@ -723,6 +753,7 @@ function calculateTree(root, parentOffsetLeft, parentOffsetTop) {
         ? child.dataset.experiments.split(' ')
         : [],
       disabled: child.dataset.disabled === 'true',
+      innerText: child.innerText,
     };
 
     const size = getRoundedSize(child);
@@ -777,6 +808,7 @@ function getYogaStyle(node) {
     'row-gap',
     'display',
     'aspect-ratio',
+    'box-sizing',
   ].reduce((map, key) => {
     map[key] =
       node.style[key] || getComputedStyle(node, null).getPropertyValue(key);

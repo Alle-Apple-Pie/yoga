@@ -23,7 +23,7 @@ constexpr float FBYGUndefined = std::numeric_limits<float>::quiet_NaN();
 #define FBYGUndefined NAN
 #endif
 
-FBYG_EXTERN_C_BEGIN
+YG_EXTERN_C_BEGIN
 
 /**
  * Structure used to represent a dimension in a style.
@@ -36,24 +36,24 @@ typedef struct FBYGValue {
 /**
  * Constant for a dimension of "auto".
  */
-FBYG_EXPORT extern const FBYGValue FBYGValueAuto;
+YG_EXPORT extern const FBYGValue FBYGValueAuto;
 
 /**
  * Constant for a dimension which is not defined.
  */
-FBYG_EXPORT extern const FBYGValue FBYGValueUndefined;
+YG_EXPORT extern const FBYGValue FBYGValueUndefined;
 
 /**
  * Constant for a dimension that is zero-length.
  */
-FBYG_EXPORT extern const FBYGValue FBYGValueZero;
+YG_EXPORT extern const FBYGValue FBYGValueZero;
 
 /**
  * Whether a dimension represented as a float is defined.
  */
-FBYG_EXPORT bool FBYGFloatIsUndefined(float value);
+YG_EXPORT bool FBYGFloatIsUndefined(float value);
 
-FBYG_EXTERN_C_END
+YG_EXTERN_C_END
 
 // Equality operators for comparison of FBYGValue in C++
 #ifdef __cplusplus
@@ -65,6 +65,9 @@ inline bool operator==(const FBYGValue& lhs, const FBYGValue& rhs) {
   switch (lhs.unit) {
     case FBYGUnitUndefined:
     case FBYGUnitAuto:
+    case FBYGUnitFitContent:
+    case FBYGUnitMaxContent:
+    case FBYGUnitStretch:
       return true;
     case FBYGUnitPoint:
     case FBYGUnitPercent:

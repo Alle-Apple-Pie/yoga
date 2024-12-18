@@ -33,6 +33,16 @@ const char* FBYGAlignToString(const FBYGAlign value) {
   return "unknown";
 }
 
+const char* YGBoxSizingToString(const YGBoxSizing value) {
+  switch (value) {
+    case YGBoxSizingBorderBox:
+      return "border-box";
+    case YGBoxSizingContentBox:
+      return "content-box";
+  }
+  return "unknown";
+}
+
 const char* FBYGDimensionToString(const FBYGDimension value) {
   switch (value) {
     case FBYGDimensionWidth:
@@ -61,6 +71,8 @@ const char* FBYGDisplayToString(const FBYGDisplay value) {
       return "flex";
     case FBYGDisplayNone:
       return "none";
+    case FBYGDisplayContents:
+      return "contents";
   }
   return "unknown";
 }
@@ -95,8 +107,8 @@ const char* FBYGErrataToString(const FBYGErrata value) {
       return "none";
     case FBYGErrataStretchFlexBasis:
       return "stretch-flex-basis";
-    case FBYGErrataAbsolutePositioningIncorrect:
-      return "absolute-positioning-incorrect";
+    case FBYGErrataAbsolutePositionWithoutInsetsExcludesPadding:
+      return "absolute-position-without-insets-excludes-padding";
     case FBYGErrataAbsolutePercentAgainstInnerSize:
       return "absolute-percent-against-inner-size";
     case FBYGErrataAll:
@@ -233,6 +245,12 @@ const char* FBYGUnitToString(const FBYGUnit value) {
       return "percent";
     case FBYGUnitAuto:
       return "auto";
+    case FBYGUnitMaxContent:
+      return "max-content";
+    case FBYGUnitFitContent:
+      return "fit-content";
+    case FBYGUnitStretch:
+      return "stretch";
   }
   return "unknown";
 }

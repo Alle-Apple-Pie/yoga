@@ -12,6 +12,7 @@
 #include <vector>
 
 #include <yoga/Yoga.h>
+#include <yoga/node/LayoutableChildren.h>
 
 #include <yoga/config/Config.h>
 #include <yoga/enums/Dimension.h>
@@ -27,10 +28,11 @@
 // Tag struct used to form the opaque FBYGNodeRef for the public C API
 struct FBYGNode {};
 
-namespace facebookyg::yoga {
+namespace facebook::yoga {
 
-class FBYG_EXPORT Node : public ::FBYGNode {
+class FBYG_EXPORT Node : public ::YGNode {
  public:
+  using LayoutableChildren = yoga::LayoutableChildren<Node>;
   Node();
   explicit Node(const Config* config);
 
@@ -66,9 +68,9 @@ class FBYG_EXPORT Node : public ::FBYGNode {
   }
 
   FBYGSize measure(
-      float width,
+      float availableWidth,
       MeasureMode widthMode,
-      float height,
+      float availableHeight,
       MeasureMode heightMode);
 
   bool hasBaselineFunc() const noexcept {
@@ -86,7 +88,7 @@ class FBYG_EXPORT Node : public ::FBYGNode {
    * https://www.w3.org/TR/css-sizing-3/#definite
    */
   inline bool hasDefiniteLength(Dimension dimension, float ownerSize) {
-    auto usedValue = getResolvedDimension(dimension).resolve(ownerSize);
+    auto usedValue = getProcessedDimension(dimension).resolve(ownerSize);
     return usedValue.isDefined() && usedValue.unwrap() >= 0.0f;
   }
 
@@ -144,6 +146,24 @@ class FBYG_EXPORT Node : public ::FBYGNode {
     return children_.size();
   }
 
+  LayoutableChildren getLayoutChildren() const {
+    return LayoutableChildren(this);
+  }
+
+  size_t getLayoutChildCount() const {
+    if (contentsChildrenCount_ == 0) {
+      return children_.size();
+    } else {
+      size_t count = 0;
+      for (auto iter = getLayoutChildren().begin();
+           iter != getLayoutChildren().end();
+           iter++) {
+        count++;
+      }
+      return count;
+    }
+  }
+
   const Config* getConfig() const {
     return config_;
   }
@@ -152,12 +172,28 @@ class FBYG_EXPORT Node : public ::FBYGNode {
     return isDirty_;
   }
 
-  std::array<Style::Length, 2> getResolvedDimensions() const {
-    return resolvedDimensions_;
+  Style::SizeLength getProcessedDimension(Dimension dimension) const {
+    return processedDimensions_[static_cast<size_t>(dimension)];
   }
 
-  Style::Length getResolvedDimension(Dimension dimension) const {
-    return resolvedDimensions_[static_cast<size_t>(dimension)];
+  FloatOptional getResolvedDimension(
+      Direction direction,
+      Dimension dimension,
+      float referenceLength,
+      float ownerWidth) const {
+    FloatOptional value =
+        getProcessedDimension(dimension).resolve(referenceLength);
+    if (style_.boxSizing() == BoxSizing::BorderBox) {
+      return value;
+    }
+
+    FloatOptional dimensionPaddingAndBorder =
+        FloatOptional{style_.computePaddingAndBorderForDimension(
+            direction, dimension, ownerWidth)};
+
+    return value +
+        (dimensionPaddingAndBorder.isDefined() ? dimensionPaddingAndBorder
+                                               : FloatOptional{0.0});
   }
 
   // Setters
@@ -178,13 +214,13 @@ class FBYG_EXPORT Node : public ::FBYGNode {
     nodeType_ = nodeType;
   }
 
-  void setMeasureFunc(FBYGMeasureFunc measureFunc);
+  void setMeasureFunc(YGMeasureFunc measureFunc);
 
-  void setBaselineFunc(FBYGBaselineFunc baseLineFunc) {
+  void setBaselineFunc(YGBaselineFunc baseLineFunc) {
     baselineFunc_ = baseLineFunc;
   }
 
-  void setDirtiedFunc(FBYGDirtiedFunc dirtiedFunc) {
+  void setDirtiedFunc(YGDirtiedFunc dirtiedFunc) {
     dirtiedFunc_ = dirtiedFunc;
   }
 
@@ -223,21 +259,22 @@ class FBYG_EXPORT Node : public ::FBYGNode {
       uint32_t computedFlexBasisGeneration);
   void setLayoutMeasuredDimension(float measuredDimension, Dimension dimension);
   void setLayoutHadOverflow(bool hadOverflow);
-  void setLayoutDimension(float LengthValue, Dimension dimension);
+  void setLayoutDimension(float lengthValue, Dimension dimension);
   void setLayoutDirection(Direction direction);
   void setLayoutMargin(float margin, PhysicalEdge edge);
   void setLayoutBorder(float border, PhysicalEdge edge);
   void setLayoutPadding(float padding, PhysicalEdge edge);
   void setLayoutPosition(float position, PhysicalEdge edge);
-  void setPosition(
-      Direction direction,
-      float mainSize,
-      float crossSize,
-      float ownerWidth);
+  void setPosition(Direction direction, float ownerWidth, float ownerHeight);
 
   // Other methods
-  Style::Length resolveFlexBasisPtr() const;
-  void resolveDimension();
+  Style::SizeLength processFlexBasis() const;
+  FloatOptional resolveFlexBasis(
+      Direction direction,
+      FlexDirection flexDirection,
+      float referenceLength,
+      float ownerWidth) const;
+  void processDimensions();
   Direction resolveDirection(Direction ownerDirection);
   void clearChildren();
   /// Replaces the occurrences of oldChild with newChild
@@ -271,7 +308,7 @@ class FBYG_EXPORT Node : public ::FBYGNode {
 
   bool hasNewLayout_ : 1 = true;
   bool isReferenceBaseline_ : 1 = false;
-  bool isDirty_ : 1 = false;
+  bool isDirty_ : 1 = true;
   bool alwaysFormsContainingBlock_ : 1 = false;
   NodeType nodeType_ : bitCount<NodeType>() = NodeType::Default;
   void* context_ = nullptr;
@@ -281,11 +318,12 @@ class FBYG_EXPORT Node : public ::FBYGNode {
   Style style_;
   LayoutResults layout_;
   size_t lineIndex_ = 0;
+  size_t contentsChildrenCount_ = 0;
   Node* owner_ = nullptr;
   std::vector<Node*> children_;
   const Config* config_;
-  std::array<Style::Length, 2> resolvedDimensions_{
-      {value::undefined(), value::undefined()}};
+  std::array<Style::SizeLength, 2> processedDimensions_{
+      {StyleSizeLength::undefined(), StyleSizeLength::undefined()}};
 };
 
 inline Node* resolveRef(const FBYGNodeRef ref) {
@@ -296,4 +334,4 @@ inline const Node* resolveRef(const FBYGNodeConstRef ref) {
   return static_cast<const Node*>(ref);
 }
 
-} // namespace facebookyg::yoga
+} // namespace facebook::yoga

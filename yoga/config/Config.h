@@ -53,6 +53,8 @@ class FBYG_EXPORT Config : public ::FBYGConfig {
   void setContext(void* context);
   void* getContext() const;
 
+  uint32_t getVersion() const noexcept;
+
   void setLogger(FBYGLogger logger);
   void log(
       const yoga::Node* node,
@@ -74,6 +76,7 @@ class FBYG_EXPORT Config : public ::FBYGConfig {
 
   bool useWebDefaults_ : 1 = false;
 
+  uint32_t version_ = 0;
   ExperimentalFeatureSet experimentalFeatures_{};
   Errata errata_ = Errata::None;
   float pointScaleFactor_ = 1.0f;

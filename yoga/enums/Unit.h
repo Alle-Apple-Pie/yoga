@@ -13,30 +13,33 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebookyg::yoga {
+namespace facebook::yoga {
 
 enum class Unit : uint8_t {
   Undefined = FBYGUnitUndefined,
   Point = FBYGUnitPoint,
   Percent = FBYGUnitPercent,
   Auto = FBYGUnitAuto,
+  MaxContent = FBYGUnitMaxContent,
+  FitContent = FBYGUnitFitContent,
+  Stretch = FBYGUnitStretch,
 };
 
 template <>
 constexpr int32_t ordinalCount<Unit>() {
-  return 4;
+  return 7;
 }
 
-constexpr Unit scopedEnum(FBYGUnit unscoped) {
+constexpr Unit scopedEnum(YGUnit unscoped) {
   return static_cast<Unit>(unscoped);
 }
 
 constexpr FBYGUnit unscopedEnum(Unit scoped) {
-  return static_cast<FBYGUnit>(scoped);
+  return static_cast<YGUnit>(scoped);
 }
 
 inline const char* toString(Unit e) {
   return FBYGUnitToString(unscopedEnum(e));
 }
 
-} // namespace facebookyg::yoga
+} // namespace facebook::yoga

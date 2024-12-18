@@ -56,7 +56,7 @@ FBYG_EXPORT void FBYGNodeFreeRecursive(FBYGNodeRef node);
 /**
  * Frees the Yoga node without disconnecting it from its owner or children.
  * Allows garbage collecting Yoga nodes in parallel when the entire tree is
- * unrechable.
+ * unreachable.
  */
 FBYG_EXPORT void FBYGNodeFinalize(FBYGNodeRef node);
 
@@ -193,7 +193,7 @@ typedef struct FBYGSize {
 } FBYGSize;
 
 /**
- * Returns the computed dimensions of the node, following the contraints of
+ * Returns the computed dimensions of the node, following the constraints of
  * `widthMode` and `heightMode`:
  *
  * FBYGMeasureModeUndefined: The parent has not imposed any constraint on the
@@ -206,7 +206,7 @@ typedef struct FBYGSize {
  * child. The child is going to be given those bounds regardless of how big it
  * wants to be.
  *
- * @returns the size of the leaf node, measured under the given contraints.
+ * @returns the size of the leaf node, measured under the given constraints.
  */
 typedef FBYGSize (*FBYGMeasureFunc)(
     FBYGNodeConstRef node,
@@ -230,7 +230,7 @@ FBYG_EXPORT void FBYGNodeSetMeasureFunc(
 FBYG_EXPORT bool FBYGNodeHasMeasureFunc(FBYGNodeConstRef node);
 
 /**
- * @returns a defined offet to baseline (ascent).
+ * @returns a defined offset to baseline (ascent).
  */
 typedef float (
     *FBYGBaselineFunc)(FBYGNodeConstRef node, float width, float height);

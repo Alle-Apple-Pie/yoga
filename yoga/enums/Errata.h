@@ -13,29 +13,29 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebookyg::yoga {
+namespace facebook::yoga {
 
 enum class Errata : uint32_t {
   None = FBYGErrataNone,
   StretchFlexBasis = FBYGErrataStretchFlexBasis,
-  AbsolutePositioningIncorrect = FBYGErrataAbsolutePositioningIncorrect,
+  AbsolutePositionWithoutInsetsExcludesPadding = FBYGErrataAbsolutePositionWithoutInsetsExcludesPadding,
   AbsolutePercentAgainstInnerSize = FBYGErrataAbsolutePercentAgainstInnerSize,
   All = FBYGErrataAll,
   Classic = FBYGErrataClassic,
 };
 
-FBYG_DEFINE_ENUM_FLAG_OPERATORS(Errata)
+YG_DEFINE_ENUM_FLAG_OPERATORS(Errata)
 
-constexpr Errata scopedEnum(FBYGErrata unscoped) {
+constexpr Errata scopedEnum(YGErrata unscoped) {
   return static_cast<Errata>(unscoped);
 }
 
 constexpr FBYGErrata unscopedEnum(Errata scoped) {
-  return static_cast<FBYGErrata>(scoped);
+  return static_cast<YGErrata>(scoped);
 }
 
 inline const char* toString(Errata e) {
   return FBYGErrataToString(unscopedEnum(e));
 }
 
-} // namespace facebookyg::yoga
+} // namespace facebook::yoga
