@@ -13,7 +13,7 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class BoxSizing : uint8_t {
   BorderBox = YGBoxSizingBorderBox,
@@ -37,4 +37,4 @@ inline const char* toString(BoxSizing e) {
   return YGBoxSizingToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

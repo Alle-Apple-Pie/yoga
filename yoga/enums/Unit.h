@@ -13,7 +13,7 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Unit : uint8_t {
   Undefined = FBYGUnitUndefined,
@@ -35,11 +35,11 @@ constexpr Unit scopedEnum(FBYGUnit unscoped) {
 }
 
 constexpr FBYGUnit unscopedEnum(Unit scoped) {
-  return static_cast<YGUnit>(scoped);
+  return static_cast<FBYGUnit>(scoped);
 }
 
 inline const char* toString(Unit e) {
   return FBYGUnitToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

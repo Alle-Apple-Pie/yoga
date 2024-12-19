@@ -28,9 +28,9 @@
 // Tag struct used to form the opaque FBYGNodeRef for the public C API
 struct FBYGNode {};
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
-class FBYG_EXPORT Node : public ::YGNode {
+class FBYG_EXPORT Node : public ::FBYGNode {
  public:
   using LayoutableChildren = yoga::LayoutableChildren<Node>;
   Node();
@@ -334,4 +334,4 @@ inline const Node* resolveRef(const FBYGNodeConstRef ref) {
   return static_cast<const Node*>(ref);
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

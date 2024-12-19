@@ -13,7 +13,7 @@
 
 #include <yoga/enums/Display.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 class Node;
 
@@ -145,4 +145,4 @@ class LayoutableChildren {
   const T* node_;
 };
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

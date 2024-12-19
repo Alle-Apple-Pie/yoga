@@ -100,7 +100,7 @@ FBYG_EXPORT FBYGErrata FBYGConfigGetErrata(FBYGConfigConstRef config);
 /**
  * Function pointer type for FBYGConfigSetLogger.
  */
-typedef int (*YGLogger)(
+typedef int (*FBYGLogger)(
     FBYGConfigConstRef config,
     FBYGNodeConstRef node,
     FBYGLogLevel level,
@@ -127,7 +127,7 @@ FBYG_EXPORT void* FBYGConfigGetContext(FBYGConfigConstRef config);
 /**
  * Function pointer type for FBYGConfigSetCloneNodeFunc.
  */
-typedef FBYGNodeRef (*YGCloneNodeFunc)(
+typedef FBYGNodeRef (*FBYGCloneNodeFunc)(
     FBYGNodeConstRef oldNode,
     FBYGNodeConstRef owner,
     size_t childIndex);

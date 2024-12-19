@@ -13,7 +13,7 @@
 #include <yoga/YGEnums.h>
 #include <yoga/enums/YogaEnums.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 enum class Errata : uint32_t {
   None = FBYGErrataNone,
@@ -31,11 +31,11 @@ constexpr Errata scopedEnum(FBYGErrata unscoped) {
 }
 
 constexpr FBYGErrata unscopedEnum(Errata scoped) {
-  return static_cast<YGErrata>(scoped);
+  return static_cast<FBYGErrata>(scoped);
 }
 
 inline const char* toString(Errata e) {
   return FBYGErrataToString(unscopedEnum(e));
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

@@ -10,7 +10,7 @@
 #include <yoga/enums/Unit.h>
 #include <yoga/numeric/FloatOptional.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 /**
  * This class represents a CSS Value for sizes (e.g. width, height, min-width,
@@ -119,7 +119,7 @@ class StyleSizeLength {
 
   constexpr bool inexactEquals(const StyleSizeLength& other) const {
     return unit_ == other.unit_ &&
-        facebook::yoga::inexactEquals(value_, other.value_);
+        facebookyg::yoga::inexactEquals(value_, other.value_);
   }
 
  private:
@@ -136,4 +136,4 @@ inline bool inexactEquals(const StyleSizeLength& a, const StyleSizeLength& b) {
   return a.inexactEquals(b);
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

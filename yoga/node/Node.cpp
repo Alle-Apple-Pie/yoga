@@ -15,7 +15,7 @@
 #include <yoga/node/Node.h>
 #include <yoga/numeric/Comparison.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 Node::Node() : Node{&Config::getDefault()} {}
 
@@ -440,4 +440,4 @@ void Node::reset() {
   *this = Node{getConfig()};
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

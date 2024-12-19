@@ -10,7 +10,7 @@
 #include <yoga/enums/Unit.h>
 #include <yoga/numeric/FloatOptional.h>
 
-namespace facebook::yoga {
+namespace facebookyg::yoga {
 
 /**
  * Style::Length represents a CSS Value which may be one of:
@@ -94,7 +94,7 @@ class StyleLength {
 
   constexpr bool inexactEquals(const StyleLength& other) const {
     return unit_ == other.unit_ &&
-        facebook::yoga::inexactEquals(value_, other.value_);
+        facebookyg::yoga::inexactEquals(value_, other.value_);
   }
 
  private:
@@ -111,4 +111,4 @@ inline bool inexactEquals(const StyleLength& a, const StyleLength& b) {
   return a.inexactEquals(b);
 }
 
-} // namespace facebook::yoga
+} // namespace facebookyg::yoga

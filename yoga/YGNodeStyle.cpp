@@ -9,8 +9,8 @@
 #include <yoga/debug/AssertFatal.h>
 #include <yoga/node/Node.h>
 
-using namespace facebook;
-using namespace facebook::yoga;
+using namespace facebookyg;
+using namespace facebookyg::yoga;
 
 namespace {
 
@@ -277,7 +277,7 @@ float FBYGNodeStyleGetBorder(const FBYGNodeConstRef node, const FBYGEdge edge) {
     return FBYGUndefined;
   }
 
-  return static_cast<YGValue>(border).value;
+  return static_cast<FBYGValue>(border).value;
 }
 
 void FBYGNodeStyleSetGap(
